@@ -175,12 +175,32 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
 .footer{display:flex;justify-content:space-between;gap:25px;align-items:center}
 .footer strong{color:white}
 
+
+/* DEPOIMENTOS E CONTATO */
+.depoimentos,.contatos{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.depoimento,.contato{background:white;border-radius:22px;padding:30px;box-shadow:var(--sombra);border:1px solid #f0e8ea}
+.depoimento{position:relative}
+.depoimento::before{content:"“";position:absolute;right:22px;top:4px;font:700 72px Georgia,serif;color:var(--vinho-claro)}
+.depoimento .nota{display:inline-block;background:var(--vinho);color:white;border-radius:999px;padding:7px 13px;font-weight:900;margin-bottom:18px}
+.depoimento blockquote{margin:0 0 18px;font:18px/1.6 Georgia,"Times New Roman",serif;color:#433b3e}
+.depoimento .autor{color:var(--cinza);font-size:14px;font-weight:700}
+.contatos{max-width:980px;margin:auto}
+.contato{text-align:center;transition:transform .2s ease}
+.contato:hover{transform:translateY(-4px)}
+.contato .contato-icone{font-size:34px;margin-bottom:10px;color:var(--vinho);display:flex;justify-content:center;align-items:center}
+.contato-destaque .contato-icone{color:white}
+.contato h3{margin:0 0 6px;color:var(--vinho);font-size:19px}
+.contato p{margin:0;color:var(--cinza);font-size:14px}
+.contato-destaque{background:var(--vinho);color:white;border-color:var(--vinho)}
+.contato-destaque h3,.contato-destaque p{color:white}
+
 @media(max-width:850px){
     .menu a:not(.area-prof){display:none}
     .hero-grid,.sobre-grid,.metodo{grid-template-columns:1fr}
     .hero-foto{max-width:560px;margin:auto;width:100%}
     .cards{grid-template-columns:1fr}
     .premios{grid-template-columns:1fr}
+    .depoimentos,.contatos{grid-template-columns:1fr}
     .hero{min-height:auto}
 }
 @media(max-width:520px){
@@ -213,6 +233,8 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
       <a href="#formacao">Formação</a>
       <a href="#conquistas">Conquistas</a>
       <a href="#metodologia">Metodologia</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#contato">Contato</a>
       <a class="area-prof" href="https://corretor-gracy.onrender.com">🔐 Área da Professora</a>
     </nav>
   </div>
@@ -241,7 +263,7 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
     </div>
 
     <div class="hero-foto">
-      <img src="/img/profgracy.png" alt="Prof. Gracy">
+      <img src="img/profgracy.png" alt="Prof. Gracy">
     </div>
   </div>
 </section>
@@ -343,15 +365,17 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
     <div class="premios">
       <article class="premio">
         <div class="medalha">🥇</div>
-        <div class="lugar"><h2>1º lugar • Categoria Narrativa (Conto)</h2></div>
-        <strong>3º Concurso de Redação - Sicredi Centro-Sul MS/BA</strong>
+        <div class="lugar">1º lugar • Categoria Narrativa (Conto)</div>
+        <h3>3º Concurso de Redação</h3>
+        <p><strong>Sicredi Centro-Sul MS/BA</strong></p>
         <p><strong>Estudante orientada pela Prof. Gracy</strong></p>
         </article>
 
       <article class="premio">
         <div class="medalha">🥈</div>
-        <div class="lugar"><h2>2º lugar • Categoria Dissertação</h2></div>
-        <strong>2º Concurso de Redação - Sicredi Centro-Sul MS/BA</strong>
+        <div class="lugar">2º lugar • Categoria Dissertação</div>
+        <h3>2º Concurso de Redação</h3>
+        <p><strong>Sicredi Centro-Sul MS/BA</strong></p>
         <p><strong>Estudante orientada pela Prof. Gracy</strong></p>
       </article>
     </div>
@@ -377,6 +401,41 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
         <div class="metodo-ponto">✓ Atenção à norma escrita e à construção textual</div>
         <div class="metodo-ponto">✓ Correção como parte do processo de aprendizagem</div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="depoimentos">
+  <div class="container">
+    <div class="titulo-secao">
+      <span>Resultados que inspiram</span>
+      <h2>O que dizem os estudantes</h2>
+      <p>Mensagens de estudantes que compartilharam suas conquistas e experiências com a orientação da Prof. Gracy.</p>
+    </div>
+    <div class="depoimentos">
+      <article class="depoimento"><div class="nota">920 na Redação</div><blockquote>“Tirei 920! Obrigada por toda a ajuda. Você é uma professora incrível, admiro muito você. 💜”</blockquote><div class="autor">— Estudante orientada pela Prof. Gracy</div></article>
+      <article class="depoimento"><div class="nota">900 na Redação</div><blockquote>“Tirei 900! Obrigado por tudo, professora! Essa conquista também é sua!”</blockquote><div class="autor">— Estudante orientado pela Prof. Gracy</div></article>
+      <article class="depoimento"><div class="nota">900 na Redação</div><blockquote>“Fiquei muito feliz com essa nota por ser o primeiro ano que fiz ENEM. Sou extremamente grata por todo comprometimento, paciência e carinho nas aulas.”</blockquote><div class="autor">— Estudante orientada pela Prof. Gracy</div></article>
+    </div>
+  </div>
+</section>
+
+<section class="secao-branca" id="contato">
+  <div class="container">
+    <div class="titulo-secao">
+      <span>Entre em contato</span>
+      <h2>Fale com a Prof. Gracy</h2>
+      <p>Para informações sobre aulas de Língua Portuguesa, Redação e preparação para o ENEM.</p>
+    </div>
+    <div class="contatos">
+      <a class="contato" href="https://www.instagram.com/prof._gracy/" target="_blank" rel="noopener noreferrer"><div class="contato-icone"><svg viewBox="0 0 24 24" width="36" height="36" aria-hidden="true" fill="currentColor">
+<path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm10 2c1.66 0 3 1.34 3 3v10c0 1.66-1.34 3-3 3H7c-1.66 0-3-1.34-3-3V7c0-1.66 1.34-3 3-3h10zm.5 1.5a1.25 1.25 0 1 0 0 2.5 1.25 1.25 0 0 0 0-2.5zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+</svg></div><h3>Instagram</h3></a>
+      <a class="contato contato-destaque" href="https://wa.me/5567998123039?text=Ol%C3%A1%2C%20Prof.%20Gracy%21%20Conheci%20seu%20trabalho%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20de%20Portugu%C3%AAs%20e%20Reda%C3%A7%C3%A3o." target="_blank" rel="noopener noreferrer"><div class="contato-icone"><svg viewBox="0 0 24 24" width="36" height="36" aria-hidden="true" fill="currentColor">
+<path d="M20.52 3.48A11.82 11.82 0 0 0 12.08 0C5.53 0 .2 5.33.2 11.88c0 2.09.55 4.13 1.59 5.92L.1 24l6.35-1.66a11.86 11.86 0 0 0 5.63 1.43h.01c6.55 0 11.88-5.33 11.88-11.88 0-3.17-1.23-6.15-3.45-8.41zM12.09 21.77h-.01a9.83 9.83 0 0 1-5.01-1.37l-.36-.21-3.77.99 1.01-3.67-.24-.38a9.84 9.84 0 0 1-1.51-5.25C2.2 6.43 6.64 2 12.09 2a9.82 9.82 0 0 1 6.99 2.9 9.82 9.82 0 0 1 2.89 6.99c0 5.45-4.43 9.88-9.88 9.88zm5.42-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.25-.46-2.38-1.47a8.9 8.9 0 0 1-1.65-2.05c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.19 1.87.12.57-.08 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z"/>
+</svg></div><h3>WhatsApp</h3></a>
+      <a class="contato" href="mailto:prof.gracy2026@gmail.com"><div class="contato-icone">✉️</div><h3>E-mail</h3></a>
     </div>
   </div>
 </section>
