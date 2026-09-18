@@ -3,29 +3,403 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Prof. Gracy</title>
+<meta name="description" content="Prof. Gracy — Língua Portuguesa, Redação e preparação para o ENEM.">
+<title>Prof. Gracy | Português e Redação</title>
+
 <style>
-* { box-sizing: border-box; }
-html, body { margin: 0; width: 100%; min-height: 100%; }
-body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    padding: 20px;
+:root{
+    --vinho:#7c1d2f;
+    --vinho-escuro:#591321;
+    --vinho-claro:#f5e9ec;
+    --dourado:#c69a55;
+    --creme:#fbf8f4;
+    --texto:#282428;
+    --cinza:#6d686b;
+    --branco:#ffffff;
+    --sombra:0 14px 40px rgba(70,25,35,.10);
 }
-img {
-    display: block;
-    max-width: 100%;
-    max-height: 95vh;
-    width: auto;
-    height: auto;
-    object-fit: contain;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    color:var(--texto);
+    background:var(--creme);
+    line-height:1.65;
+}
+a{text-decoration:none;color:inherit}
+.container{width:min(1120px,calc(100% - 36px));margin:auto}
+
+/* TOPO */
+header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.96);
+    border-bottom:1px solid #eee;
+    backdrop-filter:blur(10px);
+}
+.nav{
+    min-height:76px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.marca{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--vinho);font-size:21px}
+.marca-selo{
+    width:42px;height:42px;border-radius:50%;
+    display:grid;place-items:center;
+    background:var(--vinho);color:white;font-family:Georgia,serif;font-size:20px;
+}
+.menu{display:flex;align-items:center;gap:24px;font-size:14px;font-weight:700}
+.menu a:hover{color:var(--vinho)}
+.area-prof{
+    background:var(--vinho);color:white!important;
+    padding:11px 16px;border-radius:999px;
+    box-shadow:0 8px 20px rgba(124,29,47,.18);
+}
+.area-prof:hover{background:var(--vinho-escuro)}
+
+/* HERO */
+.hero{
+    min-height:610px;
+    display:flex;align-items:center;
+    background:
+      radial-gradient(circle at 85% 15%,rgba(198,154,85,.14),transparent 30%),
+      linear-gradient(135deg,#fff 0%,#fbf6f3 55%,#f4e5e9 100%);
+    overflow:hidden;
+}
+.hero-grid{
+    display:grid;grid-template-columns:1.08fr .92fr;gap:60px;align-items:center;
+    padding:72px 0;
+}
+.eyebrow{
+    color:var(--vinho);font-weight:800;letter-spacing:2px;
+    text-transform:uppercase;font-size:12px;margin-bottom:16px;
+}
+h1{
+    font-family:Georgia,"Times New Roman",serif;
+    color:var(--vinho-escuro);
+    font-size:clamp(48px,7vw,78px);
+    line-height:.98;margin:0 0 20px;
+}
+.hero h2{font-size:22px;margin:0 0 20px;font-weight:600;color:#4e4549}
+.frase{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:23px;font-style:italic;color:var(--vinho);
+    border-left:4px solid var(--dourado);padding-left:18px;margin:28px 0;
+}
+.hero p{max-width:650px;color:var(--cinza);font-size:17px}
+.hero-acoes{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    padding:13px 20px;border-radius:10px;font-weight:800;
+}
+.btn-principal{background:var(--vinho);color:white}
+.btn-secundario{border:1px solid #d9c8cd;background:white;color:var(--vinho)}
+.hero-foto{
+    background:white;border-radius:32px;padding:18px;
+    box-shadow:var(--sombra);position:relative;
+}
+.hero-foto img{
+    display:block;width:100%;height:470px;object-fit:contain;
+    border-radius:22px;background:#fff;
+}
+.hero-foto::after{
+    content:"Prof. Gracy";position:absolute;right:-10px;bottom:28px;
+    background:var(--vinho);color:white;padding:12px 20px;border-radius:10px;
+    font-family:Georgia,serif;font-size:20px;
+}
+
+/* SEÇÕES */
+section{padding:88px 0}
+.secao-branca{background:white}
+.titulo-secao{text-align:center;max-width:760px;margin:0 auto 48px}
+.titulo-secao span{color:var(--dourado);font-weight:800;text-transform:uppercase;letter-spacing:2px;font-size:12px}
+.titulo-secao h2{
+    font-family:Georgia,serif;color:var(--vinho);
+    font-size:38px;line-height:1.15;margin:9px 0 12px;
+}
+.titulo-secao p{color:var(--cinza);margin:0}
+
+.sobre-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:55px;align-items:center}
+.sobre-destaque{
+    background:var(--vinho);color:white;border-radius:24px;padding:38px;
+    box-shadow:var(--sombra)
+}
+.sobre-destaque .numero{font:700 64px Georgia,serif;color:#f2d7a9;line-height:1}
+.sobre-destaque h3{font:700 28px Georgia,serif;margin:10px 0}
+.sobre-texto h2{font:700 38px Georgia,serif;color:var(--vinho);margin-top:0}
+.sobre-texto p{color:var(--cinza)}
+
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{
+    background:white;border-radius:18px;padding:28px;
+    box-shadow:var(--sombra);border:1px solid #f0e8ea;
+}
+.card .icone{font-size:28px;margin-bottom:14px}
+.card h3{color:var(--vinho);margin:0 0 10px;font-size:19px}
+.card p{margin:0;color:var(--cinza)}
+
+.formacao-lista{max-width:850px;margin:auto;display:grid;gap:18px}
+.formacao-item{
+    background:white;border-left:5px solid var(--vinho);
+    border-radius:14px;padding:22px 24px;box-shadow:var(--sombra)
+}
+.formacao-item small{color:var(--dourado);font-weight:800;text-transform:uppercase;letter-spacing:1px}
+.formacao-item h3{margin:5px 0;color:var(--vinho)}
+.formacao-item p{margin:0;color:var(--cinza)}
+
+.premios{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.premio{
+    position:relative;background:white;border-radius:22px;padding:32px;
+    box-shadow:var(--sombra);overflow:hidden;border-top:5px solid var(--dourado)
+}
+.premio .medalha{font-size:42px}
+.premio .lugar{font-size:13px;color:var(--vinho);font-weight:900;letter-spacing:1.5px;text-transform:uppercase}
+.premio h3{font-family:Georgia,"Times New Roman",serif;font-size:25px;font-weight:700;line-height:1.2;color:var(--vinho);margin:7px 0 12px}
+.premio p{color:var(--cinza);margin:6px 0}
+.premio strong{color:var(--texto)}
+
+.metodo{
+    background:linear-gradient(135deg,var(--vinho-escuro),var(--vinho));
+    color:white;border-radius:28px;padding:48px;
+    display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center
+}
+.metodo h2{font:700 38px Georgia,serif;margin:0 0 14px}
+.metodo p{color:#f5e8eb}
+.metodo-pontos{display:grid;gap:13px}
+.metodo-ponto{background:rgba(255,255,255,.1);padding:15px 17px;border-radius:12px}
+
+.cta{text-align:center}
+.cta h2{font:700 40px Georgia,serif;color:var(--vinho);margin:0 0 14px}
+.cta p{color:var(--cinza);max-width:680px;margin:0 auto 28px}
+
+footer{background:#2e171d;color:#eadde0;padding:34px 0}
+.footer{display:flex;justify-content:space-between;gap:25px;align-items:center}
+.footer strong{color:white}
+
+@media(max-width:850px){
+    .menu a:not(.area-prof){display:none}
+    .hero-grid,.sobre-grid,.metodo{grid-template-columns:1fr}
+    .hero-foto{max-width:560px;margin:auto;width:100%}
+    .cards{grid-template-columns:1fr}
+    .premios{grid-template-columns:1fr}
+    .hero{min-height:auto}
+}
+@media(max-width:520px){
+    .container{width:min(100% - 24px,1120px)}
+    .nav{min-height:68px}
+    .marca{font-size:17px}
+    .marca-selo{width:36px;height:36px}
+    .area-prof{padding:9px 12px;font-size:12px}
+    .hero-grid{padding:48px 0;gap:35px}
+    .hero-foto img{height:330px}
+    section{padding:64px 0}
+    .titulo-secao h2,.sobre-texto h2,.metodo h2,.cta h2{font-size:31px}
+    .metodo{padding:30px 22px}
+    .footer{flex-direction:column;text-align:center}
 }
 </style>
 </head>
+
 <body>
-    <img src="gracy.png" alt="Prof. Gracy">
+
+<header>
+  <div class="container nav">
+    <a class="marca" href="#inicio">
+      <span class="marca-selo">G</span>
+      <span>Prof. Gracy</span>
+    </a>
+
+    <nav class="menu">
+      <a href="#sobre">Sobre</a>
+      <a href="#formacao">Formação</a>
+      <a href="#conquistas">Conquistas</a>
+      <a href="#metodologia">Metodologia</a>
+      <a class="area-prof" href="https://corretor-gracy.onrender.com">🔐 Área da Professora</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">Língua Portuguesa • Redação • ENEM</div>
+      <h1>Prof.<br>Gracy</h1>
+      <h2>Ensino de Português e produção textual com conhecimento, orientação e propósito.</h2>
+
+      <div class="frase">“Escrever é comunicar ideias e transformar vidas.”</div>
+
+      <p>
+        Uma trajetória dedicada à Língua Portuguesa, à leitura, ao letramento e ao
+        desenvolvimento da escrita, acompanhando estudantes na construção de textos
+        mais claros, consistentes e autorais.
+      </p>
+
+      <div class="hero-acoes">
+        <a class="btn btn-principal" href="#sobre">Conheça a trajetória</a>
+        <a class="btn btn-secundario" href="#conquistas">Ver conquistas</a>
+      </div>
+    </div>
+
+    <div class="hero-foto">
+      <img src="/img/profgracy.png" alt="Prof. Gracy">
+    </div>
+  </div>
+</section>
+
+<section class="secao-branca" id="sobre">
+  <div class="container sobre-grid">
+    <div class="sobre-destaque">
+      <div class="numero">Letras</div>
+      <h3>Formação e ensino caminhando juntos.</h3>
+      <p>
+        Atuação voltada à Língua Portuguesa, à literatura, ao letramento e,
+        especialmente, ao desenvolvimento da produção textual.
+      </p>
+    </div>
+
+    <div class="sobre-texto">
+      <div class="eyebrow">Sobre a professora</div>
+      <h2>Conhecimento que se transforma em aprendizagem.</h2>
+      <p>
+        Gracielly Francisca da Cunha Montandon, a <strong>Prof. Gracy</strong>,
+        é graduada em Letras pela Universidade Federal da Grande Dourados (UFGD).
+        Sua trajetória acadêmica reúne estudos e atividades nas áreas de Língua
+        Portuguesa, Literatura Brasileira, Literatura Comparada, letramento e ensino.
+      </p>
+      <p>
+        Em sala de aula, a escrita ocupa um lugar especial: compreender o que o
+        estudante quer dizer, ajudá-lo a organizar suas ideias e desenvolver
+        autonomia para comunicar-se cada vez melhor.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="formacao">
+  <div class="container">
+    <div class="titulo-secao">
+      <span>Trajetória</span>
+      <h2>Formação acadêmica</h2>
+      <p>Uma base construída entre linguagem, literatura, leitura e escrita.</p>
+    </div>
+
+    <div class="formacao-lista">
+      <div class="formacao-item">
+        <small>2006 — 2010</small>
+        <h3>Graduação em Letras — UFGD</h3>
+        <p>Universidade Federal da Grande Dourados, com formação ligada à Língua Portuguesa, Literatura Brasileira e Literatura Comparada.</p>
+      </div>
+
+      <div class="formacao-item">
+        <small>Formação acadêmica</small>
+        <h3>Letramento, leitura e produção escrita</h3>
+        <p>Participação em projetos e atividades acadêmicas voltadas ao letramento e ao ensino da Língua Portuguesa.</p>
+      </div>
+
+      <div class="formacao-item">
+        <small>Desenvolvimento profissional</small>
+        <h3>Congressos, seminários e oficinas</h3>
+        <p>Participação em atividades de formação relacionadas à linguagem, literatura e práticas de ensino.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="secao-branca">
+  <div class="container">
+    <div class="titulo-secao">
+      <span>Áreas de atuação</span>
+      <h2>Ensinar a língua para transformar a escrita.</h2>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <div class="icone">✍️</div>
+        <h3>Redação</h3>
+        <p>Produção textual, argumentação, organização de ideias, coesão e desenvolvimento da escrita.</p>
+      </div>
+      <div class="card">
+        <div class="icone">📚</div>
+        <h3>Língua Portuguesa</h3>
+        <p>Estudo da língua e de seus recursos com atenção ao uso consciente da norma escrita.</p>
+      </div>
+      <div class="card">
+        <div class="icone">🎯</div>
+        <h3>Preparação para o ENEM</h3>
+        <p>Orientação da produção textual com atenção às competências avaliadas na redação do ENEM.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="conquistas">
+  <div class="container">
+    <div class="titulo-secao">
+      <span>Resultados que contam histórias</span>
+      <h2>Conquistas e reconhecimentos</h2>
+      <p>Resultados de estudantes acompanhados pela Prof. Gracy em concursos de redação.</p>
+    </div>
+
+    <div class="premios">
+      <article class="premio">
+        <div class="medalha">🥇</div>
+        <div class="lugar"><h2>1º lugar • Categoria Narrativa (Conto)</h2></div>
+        <strong>3º Concurso de Redação - Sicredi Centro-Sul MS/BA</strong>
+        <p><strong>Estudante orientada pela Prof. Gracy</strong></p>
+        </article>
+
+      <article class="premio">
+        <div class="medalha">🥈</div>
+        <div class="lugar"><h2>2º lugar • Categoria Dissertação</h2></div>
+        <strong>2º Concurso de Redação - Sicredi Centro-Sul MS/BA</strong>
+        <p><strong>Estudante orientada pela Prof. Gracy</strong></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="secao-branca" id="metodologia">
+  <div class="container">
+    <div class="metodo">
+      <div>
+        <div class="eyebrow" style="color:#f2d7a9">Metodologia</div>
+        <h2>Escrever também é aprender a pensar.</h2>
+        <p>
+          A correção não termina na nota. O objetivo é mostrar ao estudante onde
+          seu texto funciona, onde pode avançar e como transformar a revisão em
+          aprendizagem.
+        </p>
+      </div>
+
+      <div class="metodo-pontos">
+        <div class="metodo-ponto">✓ Leitura atenta e orientação individualizada</div>
+        <div class="metodo-ponto">✓ Desenvolvimento da argumentação e da autoria</div>
+        <div class="metodo-ponto">✓ Atenção à norma escrita e à construção textual</div>
+        <div class="metodo-ponto">✓ Correção como parte do processo de aprendizagem</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container cta">
+    <div class="eyebrow">Prof. Gracy</div>
+    <h2>Comunicar ideias. Desenvolver a escrita. Transformar vidas.</h2>
+    <p>
+      Este espaço reúne a trajetória profissional, a formação e os resultados
+      construídos ao longo do trabalho com Língua Portuguesa e Redação.
+    </p>
+    <a class="btn btn-principal" href="#inicio">Voltar ao início ↑</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer">
+    <div><strong>Prof. Gracy</strong><br>Português • Redação • ENEM</div>
+    <div>© 2026 Prof. Gracy. Todos os direitos reservados.</div>
+  </div>
+</footer>
+
 </body>
 </html>
