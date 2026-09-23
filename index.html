@@ -527,12 +527,71 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!container || !paginacao) return;
 
-    const depoimentos = Array.from(
+    let depoimentos = Array.from(
         container.querySelectorAll(".depoimento")
     );
 
     let paginaAtual = 0;
     let intervalo;
+
+async function carregarDepoimentosDoSite() {
+    try {
+        const resposta = await fetch(
+            "https://corretor-gracy.onrender.com/api/depoimentos-publicos"
+        );
+
+        if (!resposta.ok) return;
+
+        const dados = await resposta.json();
+
+        if (
+            !dados.ok ||
+            !Array.isArray(dados.depoimentos) ||
+            dados.depoimentos.length === 0
+        ) {
+            return;
+        }
+
+        container.innerHTML = "";
+
+dados.depoimentos.forEach((item) => {
+    const card = document.createElement("article");
+    card.className = "depoimento";
+
+    const nota = document.createElement("div");
+    nota.className = "nota";
+    nota.textContent = `${item.nota} na Redação`;
+
+    const texto = document.createElement("blockquote");
+    texto.textContent = `“${item.texto}”`;
+
+    const autor = document.createElement("div");
+    autor.className = "autor";
+    autor.textContent =
+        `— ${item.autor || "Estudante orientada pela Prof. Gracy"}`;
+
+    card.appendChild(nota);
+    card.appendChild(texto);
+    card.appendChild(autor);
+
+    container.appendChild(card);
+});
+
+depoimentos = Array.from(
+    container.querySelectorAll(".depoimento")
+);
+
+paginaAtual = 0;
+mostrarPagina(0);
+iniciarAutomatico();
+
+
+    } catch (erro) {
+        console.log(
+            "Usando depoimentos locais como segurança."
+        );
+    }
+}
 
     function quantidadePorPagina() {
         return window.innerWidth <= 768 ? 1 : 3;
@@ -611,9 +670,10 @@ document.addEventListener("DOMContentLoaded", function () {
         iniciarAutomatico();
     });
 
-    mostrarPagina(0);
-    iniciarAutomatico();
-});
+	mostrarPagina(0);
+	iniciarAutomatico();
+	carregarDepoimentosDoSite();
+    });
 </script>
 </body>
 </html>
