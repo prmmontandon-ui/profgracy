@@ -180,10 +180,54 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
 .depoimentos,.contatos{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 .depoimento,.contato{background:white;border-radius:22px;padding:30px;box-shadow:var(--sombra);border:1px solid #f0e8ea}
 .depoimento{position:relative}
+.depoimento{
+    animation: aparecerDepoimento .45s ease;
+}
+
+@keyframes aparecerDepoimento{
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
 .depoimento::before{content:"“";position:absolute;right:22px;top:4px;font:700 72px Georgia,serif;color:var(--vinho-claro)}
 .depoimento .nota{display:inline-block;background:var(--vinho);color:white;border-radius:999px;padding:7px 13px;font-weight:900;margin-bottom:18px}
 .depoimento blockquote{margin:0 0 18px;font:18px/1.6 Georgia,"Times New Roman",serif;color:#433b3e}
 .depoimento .autor{color:var(--cinza);font-size:14px;font-weight:700}
+/* NAVEGAÇÃO DOS DEPOIMENTOS */
+.depoimentos-paginacao{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin-top:28px;
+}
+
+.depoimentos-paginacao button{
+    width:11px;
+    height:11px;
+    padding:0;
+    border:0;
+    border-radius:50%;
+    background:#d8c8cc;
+    cursor:pointer;
+    transition:all .25s ease;
+}
+
+.depoimentos-paginacao button:hover{
+    transform:scale(1.2);
+    background:var(--vinho-claro);
+}
+
+.depoimentos-paginacao button.ativo{
+    width:14px;
+    height:14px;
+    background:var(--vinho);
+}
 .contatos{max-width:980px;margin:auto}
 .contato{text-align:center;transition:transform .2s ease}
 .contato:hover{transform:translateY(-4px)}
@@ -313,15 +357,15 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
       </div>
 
       <div class="formacao-item">
-        <small>Formação acadêmica</small>
-        <h3>Letramento, leitura e produção escrita</h3>
-        <p>Participação em projetos e atividades acadêmicas voltadas ao letramento e ao ensino da Língua Portuguesa.</p>
+        <small>2012</small>
+        <h3>Ética e Valores de Cidadania na Escola — USP</h3>
+        <p>Introdução ao curso de pós-graduação: Ética e Valores de Cidadania na Escola, pela Universidade de São Paulo (USP).</p>
       </div>
 
       <div class="formacao-item">
-        <small>Desenvolvimento profissional</small>
-        <h3>Congressos, seminários e oficinas</h3>
-        <p>Participação em atividades de formação relacionadas à linguagem, literatura e práticas de ensino.</p>
+        <small>2019</small>
+        <h3>Pós-graduação em Neuropedagogia na Educação</h3>
+        <p>Grupo Rhema Educação.</p>
       </div>
     </div>
   </div>
@@ -417,7 +461,25 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
       <article class="depoimento"><div class="nota">920 na Redação</div><blockquote>“Tirei 920! Obrigada por toda a ajuda. Você é uma professora incrível, admiro muito você. 💜”</blockquote><div class="autor">— Estudante orientada pela Prof. Gracy</div></article>
       <article class="depoimento"><div class="nota">900 na Redação</div><blockquote>“Tirei 900! Obrigado por tudo, professora! Essa conquista também é sua!”</blockquote><div class="autor">— Estudante orientado pela Prof. Gracy</div></article>
       <article class="depoimento"><div class="nota">900 na Redação</div><blockquote>“Fiquei muito feliz com essa nota por ser o primeiro ano que fiz ENEM. Sou extremamente grata por todo comprometimento, paciência e carinho nas aulas.”</blockquote><div class="autor">— Estudante orientada pela Prof. Gracy</div></article>
-    </div>
+   <article class="depoimento">
+  <div class="nota">920 na Redação</div>
+  <blockquote>“920 na redação, a primeira! Todo o conhecimento que eu carrego tem uma pontinha de cada professor que passou na minha vida, inclusive você. Você é maravilhosa, obrigada por tudo. ❤️”</blockquote>
+  <div class="autor">— Estudante orientada pela Prof. Gracy</div>
+</article>
+
+<article class="depoimento">
+  <div class="nota">940 na Redação</div>
+  <blockquote>“Você é minha maior inspiração. Obrigada pelo apoio. 💗”</blockquote>
+  <div class="autor">— Estudante orientada pela Prof. Gracy</div>
+</article>
+
+<article class="depoimento">
+  <div class="nota">920 na Redação</div>
+  <blockquote>“Sua didática é excelente e, além de tudo, demonstra um amor e uma preocupação muito grandes com seus alunos. Pessoas como você fizeram a escola parecer uma segunda casa, uma segunda família. Nunca vou te esquecer. Obrigada por todo o apoio e muito conselho durante o ano. ❤️”</blockquote>
+  <div class="autor">— Estudante orientada pela Prof. Gracy</div>
+</article>
+</div>
+<div class="depoimentos-paginacao" id="depoimentosPaginacao"></div>
   </div>
 </section>
 
@@ -438,7 +500,7 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
       <a class="contato" href="mailto:prof.gracy2026@gmail.com"><div class="contato-icone">✉️</div><h3>E-mail</h3></a>
     </div>
   </div>
-</section>
+10:39 22/09/2026
 
 <section>
   <div class="container cta">
@@ -459,6 +521,100 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
     <div>© 2026 Prof. Gracy. Todos os direitos reservados.</div>
   </div>
 </footer>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const container = document.querySelector(".depoimentos");
+    const paginacao = document.getElementById("depoimentosPaginacao");
 
+    if (!container || !paginacao) return;
+
+    const depoimentos = Array.from(
+        container.querySelectorAll(".depoimento")
+    );
+
+    let paginaAtual = 0;
+    let intervalo;
+
+    function quantidadePorPagina() {
+        return window.innerWidth <= 768 ? 1 : 3;
+    }
+
+    function totalPaginas() {
+        return Math.ceil(
+            depoimentos.length / quantidadePorPagina()
+        );
+    }
+
+    function mostrarPagina(pagina) {
+        const total = totalPaginas();
+
+        if (pagina >= total) pagina = 0;
+        if (pagina < 0) pagina = total - 1;
+
+        paginaAtual = pagina;
+
+        const porPagina = quantidadePorPagina();
+        const inicio = paginaAtual * porPagina;
+        const fim = inicio + porPagina;
+
+        depoimentos.forEach((depoimento, indice) => {
+            depoimento.style.display =
+                indice >= inicio && indice < fim ? "" : "none";
+        });
+
+        criarBolinhas();
+    }
+
+    function criarBolinhas() {
+        paginacao.innerHTML = "";
+
+        const total = totalPaginas();
+
+        for (let i = 0; i < total; i++) {
+            const bolinha = document.createElement("button");
+
+            bolinha.type = "button";
+            bolinha.setAttribute(
+                "aria-label",
+                `Mostrar grupo ${i + 1} de depoimentos`
+            );
+
+            bolinha.classList.toggle(
+                "ativo",
+                i === paginaAtual
+            );
+
+            bolinha.addEventListener("click", function () {
+                mostrarPagina(i);
+                iniciarAutomatico();
+            });
+
+            paginacao.appendChild(bolinha);
+        }
+
+        paginacao.style.display =
+            total > 1 ? "flex" : "none";
+    }
+
+    function iniciarAutomatico() {
+        clearInterval(intervalo);
+
+        if (totalPaginas() <= 1) return;
+
+        intervalo = setInterval(() => {
+            mostrarPagina(paginaAtual + 1);
+        }, 5000);
+    }
+
+    window.addEventListener("resize", function () {
+        paginaAtual = 0;
+        mostrarPagina(0);
+        iniciarAutomatico();
+    });
+
+    mostrarPagina(0);
+    iniciarAutomatico();
+});
+</script>
 </body>
 </html>
