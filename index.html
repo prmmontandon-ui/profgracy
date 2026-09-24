@@ -195,6 +195,7 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
     }
 }
 .depoimento::before{content:"“";position:absolute;right:22px;top:4px;font:700 72px Georgia,serif;color:var(--vinho-claro)}
+.depoimento .processo{display:block;color:var(--vinho);font-size:13px;font-weight:900;text-transform:uppercase;letter-spacing:.7px;margin-bottom:7px}
 .depoimento .nota{display:inline-block;background:var(--vinho);color:white;border-radius:999px;padding:7px 13px;font-weight:900;margin-bottom:18px}
 .depoimento blockquote{margin:0 0 18px;font:18px/1.6 Georgia,"Times New Roman",serif;color:#433b3e}
 .depoimento .autor{color:var(--cinza);font-size:14px;font-weight:700}
@@ -558,6 +559,10 @@ dados.depoimentos.forEach((item) => {
     const card = document.createElement("article");
     card.className = "depoimento";
 
+    const processo = document.createElement("div");
+    processo.className = "processo";
+    processo.textContent = item.processo || "";
+
     const nota = document.createElement("div");
     nota.className = "nota";
     nota.textContent = `${item.nota} na Redação`;
@@ -570,6 +575,7 @@ dados.depoimentos.forEach((item) => {
     autor.textContent =
         `— ${item.autor || "Estudante orientada pela Prof. Gracy"}`;
 
+	card.appendChild(processo);
     card.appendChild(nota);
     card.appendChild(texto);
     card.appendChild(autor);
