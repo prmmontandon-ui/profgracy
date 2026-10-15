@@ -296,6 +296,16 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
 @media(max-width:850px){.menu a.repertorio-menu{display:inline}}
 @media(max-width:768px){.repertorio-capa{height:440px}.repertorio-grid{grid-template-columns:1fr}.repertorio-modal{padding:12px}.repertorio-imagem{max-height:calc(100dvh - 150px)}.menu a.repertorio-menu{font-size:12px}}
 
+
+/* Materiais gratuitos */
+.materiais-cartao{max-width:800px;margin:0 auto;background:#fff;border:1px solid #efdee2;border-radius:22px;padding:28px;display:flex;align-items:center;gap:25px;box-shadow:var(--sombra)}
+.materiais-icone{width:86px;height:100px;flex:0 0 86px;border-radius:15px;background:#f7ecef;display:flex;align-items:center;justify-content:center;font-size:43px}
+.materiais-detalhes{flex:1}
+.materiais-detalhes h3{color:var(--vinho);margin:0 0 8px;font-size:23px}
+.materiais-detalhes p{margin:0 0 16px;color:var(--cinza);line-height:1.65}
+.materiais-baixar{display:inline-block;background:var(--vinho);color:white!important;border-radius:12px;padding:12px 21px;font-weight:700;text-decoration:none;transition:transform .2s ease}
+.materiais-baixar:hover{transform:translateY(-2px)}
+@media(max-width:600px){.materiais-cartao{flex-direction:column;align-items:flex-start;padding:22px}.materiais-icone{height:70px;width:70px;flex-basis:auto}}
 </style>
 </head>
 
@@ -314,6 +324,7 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
       <a href="#conquistas">Conquistas</a>
       <a href="#metodologia">Metodologia</a>
        <a class="repertorio-menu" href="#repertorio">Repertórios</a>
+      <a href="#materiais">Materiais gratuitos</a>
       <a href="#depoimentos">Depoimentos</a>
       <a href="#contato">Contato</a>
       <a class="area-prof" href="https://corretor-gracy.onrender.com">🔐 Área da Professora</a>
@@ -585,6 +596,24 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
     <div class="repertorio-navegacao"><button type="button" class="repertorio-seta" id="repertorioAnterior" aria-label="Arte anterior">← Anterior</button><span class="repertorio-contador" id="repertorioContador" aria-live="polite">1 / 8</span><button type="button" class="repertorio-seta" id="repertorioProximo" aria-label="Próxima arte">Próxima →</button></div>
   </div>
 </div>
+
+<section class="secao-branca" id="materiais">
+  <div class="container">
+    <div class="titulo-secao">
+      <span>Para estudar e praticar</span>
+      <h2>Materiais Gratuitos</h2>
+      <p>Recursos preparados pela Prof. Gracy para ajudar você a treinar sua redação.</p>
+    </div>
+    <div class="materiais-cartao">
+      <div class="materiais-icone" aria-hidden="true">📄</div>
+      <div class="materiais-detalhes">
+        <h3>Folha de Redação — Prof. Gracy</h3>
+        <p>Modelo com 30 linhas para escrever sua redação e quadros de avaliação com critérios do ENEM e da UFGD. Baixe gratuitamente e imprima para praticar.</p>
+        <a class="materiais-baixar" href="materiais/Folha_Redacao_Prof_Gracy.pdf" download="Folha_Redacao_Prof_Gracy.pdf" type="application/pdf">⬇ Baixar folha de redação (PDF)</a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="depoimentos">
   <div class="container">
