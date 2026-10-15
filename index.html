@@ -261,6 +261,34 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
     .metodo{padding:30px 22px}
     .footer{flex-direction:column;text-align:center}
 }
+
+/* REPERTÓRIO CULTURAL */
+.repertorio-filtros{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:-14px 0 30px}
+.repertorio-filtro{border:1px solid #dccbd0;background:#fff;color:var(--vinho);padding:10px 19px;border-radius:999px;font:700 14px Arial,sans-serif;cursor:pointer;transition:.2s}
+.repertorio-filtro:hover,.repertorio-filtro.ativo{background:var(--vinho);color:white;border-color:var(--vinho)}
+.repertorio-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.repertorio-card{background:white;border:1px solid #f0e8ea;border-radius:20px;overflow:hidden;box-shadow:var(--sombra)}
+.repertorio-capa{width:100%;aspect-ratio:4/4;object-fit:cover;object-position:top;display:block;background:#f5e9ec}
+.repertorio-conteudo{padding:22px}
+.repertorio-tipo{display:inline-block;color:var(--vinho);background:var(--vinho-claro);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:800}
+.repertorio-conteudo h3{font:700 24px Georgia,serif;color:var(--vinho);margin:12px 0 5px}
+.repertorio-autor{color:var(--cinza);font-size:14px;margin:0 0 12px}
+.repertorio-temas{font-size:14px;color:var(--cinza);margin:0 0 18px}
+.repertorio-abrir{border:0;background:var(--vinho);color:white;border-radius:10px;padding:11px 16px;font:700 14px Arial,sans-serif;cursor:pointer}
+.repertorio-abrir:hover{background:var(--vinho-escuro)}
+.repertorio-vazio{text-align:center;color:var(--cinza);padding:34px 18px;background:white;border:1px dashed #d9c8cd;border-radius:16px;max-width:680px;margin:0 auto}
+.repertorio-modal[hidden],.repertorio-vazio[hidden],.repertorio-card[hidden]{display:none!important}
+.repertorio-modal{position:fixed;inset:0;z-index:100;background:rgba(35,17,22,.87);display:flex;align-items:center;justify-content:center;padding:22px}
+.repertorio-janela{width:min(100%,660px);max-height:95vh;display:flex;flex-direction:column;align-items:center;gap:12px;color:white}
+.repertorio-modal-topo{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.repertorio-modal-topo strong{font:700 19px Georgia,serif}
+.repertorio-fechar,.repertorio-seta{background:#fff;color:var(--vinho);border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer}
+.repertorio-imagem{max-width:100%;max-height:72vh;object-fit:contain;border-radius:12px;background:white}
+.repertorio-navegacao{display:flex;align-items:center;justify-content:center;gap:18px}
+.repertorio-contador{font-size:14px;font-weight:700;min-width:55px;text-align:center}
+@media(max-width:850px){.repertorio-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.menu a.repertorio-menu{display:inline}}
+@media(max-width:600px){.repertorio-grid{grid-template-columns:1fr}.repertorio-modal{padding:12px}.repertorio-imagem{max-height:75vh}.menu a.repertorio-menu{font-size:12px}}
+
 </style>
 </head>
 
@@ -278,6 +306,7 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
       <a href="#formacao">Formação</a>
       <a href="#conquistas">Conquistas</a>
       <a href="#metodologia">Metodologia</a>
+       <a class="repertorio-menu" href="#repertorio">Repertórios</a>
       <a href="#depoimentos">Depoimentos</a>
       <a href="#contato">Contato</a>
       <a class="area-prof" href="https://corretor-gracy.onrender.com">🔐 Área da Professora</a>
@@ -450,6 +479,44 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
   </div>
 </section>
 
+
+
+<!-- REPERTÓRIO CULTURAL -->
+<section class="secao-branca" id="repertorio">
+  <div class="container">
+    <div class="titulo-secao">
+      <span>Conhecimento para além da sala de aula</span>
+      <h2>Repertório Cultural</h2>
+      <p>Livros, filmes e séries para ampliar seu olhar sobre o mundo e enriquecer sua argumentação.</p>
+    </div>
+    <div class="repertorio-filtros" role="group" aria-label="Filtrar repertórios">
+      <button class="repertorio-filtro ativo" type="button" data-filtro="todos" aria-pressed="true">Todos</button>
+      <button class="repertorio-filtro" type="button" data-filtro="livro" aria-pressed="false">📚 Livros</button>
+      <button class="repertorio-filtro" type="button" data-filtro="filme" aria-pressed="false">🎬 Filmes</button>
+      <button class="repertorio-filtro" type="button" data-filtro="serie" aria-pressed="false">📺 Séries</button>
+    </div>
+    <div class="repertorio-grid" id="repertorioGrid">
+      <article class="repertorio-card" data-categoria="livro">
+        <img class="repertorio-capa" src="repertorios/a-hora-da-estrela/01.jpg" alt="Arte de abertura de A Hora da Estrela, por Prof. Gracy" loading="lazy">
+        <div class="repertorio-conteudo">
+          <span class="repertorio-tipo">Livro</span>
+          <h3>A Hora da Estrela</h3>
+          <p class="repertorio-autor">Clarice Lispector</p>
+          <p class="repertorio-temas">Identidade, desigualdade e invisibilidade social.</p>
+          <button type="button" class="repertorio-abrir" data-obra="estrela">Ver as 8 artes →</button>
+        </div>
+      </article>
+    </div>
+    <p class="repertorio-vazio" id="repertorioVazio" hidden>Novos repertórios desta categoria serão publicados em breve. ✨</p>
+  </div>
+</section>
+<div class="repertorio-modal" id="repertorioModal" role="dialog" aria-modal="true" aria-label="Artes do repertório cultural" hidden>
+  <div class="repertorio-janela">
+    <div class="repertorio-modal-topo"><strong id="repertorioTitulo">A Hora da Estrela</strong><button type="button" class="repertorio-fechar" id="repertorioFechar" aria-label="Fechar repertório">✕ Fechar</button></div>
+    <img class="repertorio-imagem" id="repertorioImagem" alt="Arte 1 de 8 de A Hora da Estrela">
+    <div class="repertorio-navegacao"><button type="button" class="repertorio-seta" id="repertorioAnterior" aria-label="Arte anterior">← Anterior</button><span class="repertorio-contador" id="repertorioContador" aria-live="polite">1 / 8</span><button type="button" class="repertorio-seta" id="repertorioProximo" aria-label="Próxima arte">Próxima →</button></div>
+  </div>
+</div>
 
 <section id="depoimentos">
   <div class="container">
@@ -680,6 +747,58 @@ iniciarAutomatico();
 	iniciarAutomatico();
 	carregarDepoimentosDoSite();
     });
+</script>
+
+<script>
+(function(){
+  const filtros=document.querySelectorAll('.repertorio-filtro');
+  const cards=document.querySelectorAll('.repertorio-card');
+  const vazio=document.getElementById('repertorioVazio');
+  filtros.forEach(botao=>botao.addEventListener('click',()=>{
+    filtros.forEach(b=>{b.classList.toggle('ativo',b===botao);b.setAttribute('aria-pressed',String(b===botao));});
+    let quantidade=0;
+    cards.forEach(card=>{const mostrar=botao.dataset.filtro==='todos'||card.dataset.categoria===botao.dataset.filtro;card.hidden=!mostrar;if(mostrar)quantidade++;});
+    vazio.hidden=quantidade>0;
+  }));
+  const obras={estrela:{titulo:'A Hora da Estrela',pasta:'repertorios/a-hora-da-estrela',total:8}};
+  const modal=document.getElementById('repertorioModal');
+  const imagem=document.getElementById('repertorioImagem');
+  const contador=document.getElementById('repertorioContador');
+  let obra=null,indice=0,ultimoFoco=null;
+  function mostrar(){
+    imagem.src=obra.pasta+'/'+String(indice+1).padStart(2,'0')+'.jpg';
+    imagem.alt='Arte '+(indice+1)+' de '+obra.total+' de '+obra.titulo;
+    contador.textContent=(indice+1)+' / '+obra.total;
+  }
+  document.querySelectorAll('.repertorio-abrir').forEach(botao=>botao.addEventListener('click',()=>{
+    obra=obras[botao.dataset.obra];if(!obra)return;
+    ultimoFoco=botao;indice=0;
+    document.getElementById('repertorioTitulo').textContent=obra.titulo;
+    mostrar();modal.hidden=false;document.body.style.overflow='hidden';
+    document.getElementById('repertorioFechar').focus();
+  }));
+  function fechar(){modal.hidden=true;document.body.style.overflow='';if(ultimoFoco)ultimoFoco.focus();}
+  function mover(n){if(!obra)return;indice=(indice+n+obra.total)%obra.total;mostrar();}
+  document.getElementById('repertorioFechar').addEventListener('click',fechar);
+  document.getElementById('repertorioAnterior').addEventListener('click',()=>mover(-1));
+  document.getElementById('repertorioProximo').addEventListener('click',()=>mover(1));
+  modal.addEventListener('click',e=>{if(e.target===modal)fechar();});
+  document.addEventListener('keydown',e=>{
+    if(modal.hidden)return;
+    if(e.key==='Escape')fechar();
+    if(e.key==='ArrowLeft')mover(-1);
+    if(e.key==='ArrowRight')mover(1);
+    if(e.key==='Tab'){
+      const botoes=Array.from(modal.querySelectorAll('button'));
+      const atual=botoes.indexOf(document.activeElement);
+      if(e.shiftKey&&atual===0){e.preventDefault();botoes[botoes.length-1].focus();}
+      else if(!e.shiftKey&&atual===botoes.length-1){e.preventDefault();botoes[0].focus();}
+    }
+  });
+  let toqueX=null;
+  imagem.addEventListener('touchstart',e=>{toqueX=e.changedTouches[0].screenX;},{passive:true});
+  imagem.addEventListener('touchend',e=>{if(toqueX===null)return;const delta=e.changedTouches[0].screenX-toqueX;if(Math.abs(delta)>45)mover(delta<0?1:-1);toqueX=null;},{passive:true});
+})();
 </script>
 </body>
 </html>
