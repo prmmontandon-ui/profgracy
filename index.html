@@ -506,6 +506,46 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
           <button type="button" class="repertorio-abrir" data-obra="estrela">Ver as 8 artes →</button>
         </div>
       </article>
+      <article class="repertorio-card" data-categoria="livro">
+        <img class="repertorio-capa" src="repertorios/extraordinario/01.jpg" alt="Arte de abertura de Extraordinário, por Prof. Gracy" loading="lazy">
+        <div class="repertorio-conteudo">
+          <span class="repertorio-tipo">Livro</span>
+          <h3>Extraordinário</h3>
+          <p class="repertorio-autor">R. J. Palacio</p>
+          <p class="repertorio-temas">Empatia, respeito às diferenças e inclusão.</p>
+          <button type="button" class="repertorio-abrir" data-obra="extraordinario">Ver as 8 artes →</button>
+        </div>
+      </article>
+      <article class="repertorio-card" data-categoria="livro">
+        <img class="repertorio-capa" src="repertorios/fahrenheit-451/01.jpg" alt="Arte de abertura de Fahrenheit 451, por Prof. Gracy" loading="lazy">
+        <div class="repertorio-conteudo">
+          <span class="repertorio-tipo">Livro</span>
+          <h3>Fahrenheit 451</h3>
+          <p class="repertorio-autor">Ray Bradbury</p>
+          <p class="repertorio-temas">Censura, acesso ao conhecimento e pensamento crítico.</p>
+          <button type="button" class="repertorio-abrir" data-obra="fahrenheit-451">Ver as 8 artes →</button>
+        </div>
+      </article>
+      <article class="repertorio-card" data-categoria="livro">
+        <img class="repertorio-capa" src="repertorios/menino-pijama-listrado/01.jpg" alt="Arte de abertura de O Menino do Pijama Listrado, por Prof. Gracy" loading="lazy">
+        <div class="repertorio-conteudo">
+          <span class="repertorio-tipo">Livro</span>
+          <h3>O Menino do Pijama Listrado</h3>
+          <p class="repertorio-autor">John Boyne</p>
+          <p class="repertorio-temas">Preconceito, autoritarismo e desumanização.</p>
+          <button type="button" class="repertorio-abrir" data-obra="menino-pijama-listrado">Ver as 9 artes →</button>
+        </div>
+      </article>
+      <article class="repertorio-card" data-categoria="livro">
+        <img class="repertorio-capa" src="repertorios/vidas-secas/01.jpg" alt="Arte de abertura de Vidas Secas, por Prof. Gracy" loading="lazy">
+        <div class="repertorio-conteudo">
+          <span class="repertorio-tipo">Livro</span>
+          <h3>Vidas Secas</h3>
+          <p class="repertorio-autor">Graciliano Ramos</p>
+          <p class="repertorio-temas">Desigualdade, migração e vulnerabilidade social.</p>
+          <button type="button" class="repertorio-abrir" data-obra="vidas-secas">Ver as 8 artes →</button>
+        </div>
+      </article>
     </div>
     <p class="repertorio-vazio" id="repertorioVazio" hidden>Novos repertórios desta categoria serão publicados em breve. ✨</p>
   </div>
@@ -760,7 +800,13 @@ iniciarAutomatico();
     cards.forEach(card=>{const mostrar=botao.dataset.filtro==='todos'||card.dataset.categoria===botao.dataset.filtro;card.hidden=!mostrar;if(mostrar)quantidade++;});
     vazio.hidden=quantidade>0;
   }));
-  const obras={estrela:{titulo:'A Hora da Estrela',pasta:'repertorios/a-hora-da-estrela',total:8}};
+  const obras={
+    estrela:{titulo:'A Hora da Estrela',pasta:'repertorios/a-hora-da-estrela',total:8},
+    'extraordinario':{titulo:'Extraordinário',pasta:'repertorios/extraordinario',total:8},
+    'fahrenheit-451':{titulo:'Fahrenheit 451',pasta:'repertorios/fahrenheit-451',total:8},
+    'menino-pijama-listrado':{titulo:'O Menino do Pijama Listrado',pasta:'repertorios/menino-pijama-listrado',total:9},
+    'vidas-secas':{titulo:'Vidas Secas',pasta:'repertorios/vidas-secas',total:8}
+  };
   const modal=document.getElementById('repertorioModal');
   const imagem=document.getElementById('repertorioImagem');
   const contador=document.getElementById('repertorioContador');
