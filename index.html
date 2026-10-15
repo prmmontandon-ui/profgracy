@@ -268,7 +268,7 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
 .repertorio-filtro:hover,.repertorio-filtro.ativo{background:var(--vinho);color:white;border-color:var(--vinho)}
 .repertorio-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
 .repertorio-card{background:white;border:1px solid #f0e8ea;border-radius:20px;overflow:hidden;box-shadow:var(--sombra)}
-.repertorio-capa{width:100%;aspect-ratio:4/4;object-fit:cover;object-position:top;display:block;background:#f5e9ec}
+.repertorio-capa{width:100%;height:390px;object-fit:contain;object-position:center;display:block;background:#f5e9ec}
 .repertorio-conteudo{padding:22px}
 .repertorio-tipo{display:inline-block;color:var(--vinho);background:var(--vinho-claro);border-radius:999px;padding:4px 12px;font-size:12px;font-weight:800}
 .repertorio-conteudo h3{font:700 24px Georgia,serif;color:var(--vinho);margin:12px 0 5px}
@@ -279,15 +279,15 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
 .repertorio-vazio{text-align:center;color:var(--cinza);padding:34px 18px;background:white;border:1px dashed #d9c8cd;border-radius:16px;max-width:680px;margin:0 auto}
 .repertorio-modal[hidden],.repertorio-vazio[hidden],.repertorio-card[hidden]{display:none!important}
 .repertorio-modal{position:fixed;inset:0;z-index:100;background:rgba(35,17,22,.87);display:flex;align-items:center;justify-content:center;padding:22px}
-.repertorio-janela{width:min(100%,660px);max-height:95vh;display:flex;flex-direction:column;align-items:center;gap:12px;color:white}
+.repertorio-janela{width:min(100%,660px);max-height:calc(100dvh - 32px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:white}
 .repertorio-modal-topo{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .repertorio-modal-topo strong{font:700 19px Georgia,serif}
 .repertorio-fechar,.repertorio-seta{background:#fff;color:var(--vinho);border:0;border-radius:10px;padding:10px 14px;font-weight:800;cursor:pointer}
-.repertorio-imagem{max-width:100%;max-height:72vh;object-fit:contain;border-radius:12px;background:white}
+.repertorio-imagem{display:block;max-width:100%;max-height:calc(100dvh - 160px);width:auto;height:auto;object-fit:contain;border-radius:12px;background:white}
 .repertorio-navegacao{display:flex;align-items:center;justify-content:center;gap:18px}
 .repertorio-contador{font-size:14px;font-weight:700;min-width:55px;text-align:center}
 @media(max-width:850px){.repertorio-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.menu a.repertorio-menu{display:inline}}
-@media(max-width:600px){.repertorio-grid{grid-template-columns:1fr}.repertorio-modal{padding:12px}.repertorio-imagem{max-height:75vh}.menu a.repertorio-menu{font-size:12px}}
+@media(max-width:600px){.repertorio-grid{grid-template-columns:1fr}.repertorio-modal{padding:12px}.repertorio-imagem{max-height:calc(100dvh - 150px)}.menu a.repertorio-menu{font-size:12px}}
 
 </style>
 </head>
