@@ -553,6 +553,26 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
           <button type="button" class="repertorio-abrir" data-obra="vidas-secas">Ver as 8 artes →</button>
         </div>
       </article>
+      <article class="repertorio-card" data-categoria="filme">
+        <img class="repertorio-capa" src="repertorios/o-show-de-truman/01.jpg" alt="O Show de Truman — Repertório Cultural Prof. Gracy" loading="lazy">
+        <div class="repertorio-conteudo">
+          <span class="repertorio-tipo">Filme</span>
+          <h3>O Show de Truman</h3>
+          <p class="repertorio-autor">Peter Weir · 1998</p>
+          <p class="repertorio-temas">Privacidade, manipulação da mídia e liberdade.</p>
+          <button type="button" class="repertorio-abrir" data-obra="o-show-de-truman">Ver as 8 artes →</button>
+        </div>
+      </article>
+      <article class="repertorio-card" data-categoria="serie">
+        <img class="repertorio-capa" src="repertorios/o-mentalista/01.jpg" alt="O Mentalista — Repertório Cultural Prof. Gracy" loading="lazy">
+        <div class="repertorio-conteudo">
+          <span class="repertorio-tipo">Série</span>
+          <h3>O Mentalista</h3>
+          <p class="repertorio-autor">The Mentalist · 2008–2015</p>
+          <p class="repertorio-temas">Pensamento crítico, ética, justiça e comportamento humano.</p>
+          <button type="button" class="repertorio-abrir" data-obra="o-mentalista">Ver as 8 artes →</button>
+        </div>
+      </article>
     </div>
     <div class="repertorio-paginacao" id="repertorioPaginacao" aria-label="Páginas de repertórios"></div>
     <p class="repertorio-vazio" id="repertorioVazio" hidden>Novos repertórios desta categoria serão publicados em breve. ✨</p>
@@ -849,7 +869,9 @@ iniciarAutomatico();
     'extraordinario':{titulo:'Extraordinário',pasta:'repertorios/extraordinario',total:8},
     'fahrenheit-451':{titulo:'Fahrenheit 451',pasta:'repertorios/fahrenheit-451',total:8},
     'menino-pijama-listrado':{titulo:'O Menino do Pijama Listrado',pasta:'repertorios/menino-pijama-listrado',total:9},
-    'vidas-secas':{titulo:'Vidas Secas',pasta:'repertorios/vidas-secas',total:8}
+    'vidas-secas':{titulo:'Vidas Secas',pasta:'repertorios/vidas-secas',total:8},
+    'o-show-de-truman':{titulo:'O Show de Truman',pasta:'repertorios/o-show-de-truman',total:8},
+    'o-mentalista':{titulo:'O Mentalista',pasta:'repertorios/o-mentalista',total:8}
   };
   const modal=document.getElementById('repertorioModal');
   const imagem=document.getElementById('repertorioImagem');
