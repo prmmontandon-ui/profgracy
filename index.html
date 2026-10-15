@@ -47,7 +47,11 @@ header{
     display:grid;place-items:center;
     background:var(--vinho);color:white;font-family:Georgia,serif;font-size:20px;
 }
-.menu{display:flex;align-items:center;gap:24px;font-size:14px;font-weight:700}
+.menu{display:flex;align-items:center;gap:clamp(8px,1vw,14px);font-size:13px;font-weight:700;flex-wrap:nowrap;white-space:nowrap}
+.nav{gap:14px}
+.marca{flex-shrink:0;white-space:nowrap;font-size:19px}
+.marca-selo{flex-shrink:0}
+.area-prof{white-space:nowrap;font-size:12px;padding:10px 13px}
 .menu a:hover{color:var(--vinho)}
 .area-prof{
     background:var(--vinho);color:white!important;
@@ -239,6 +243,12 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
 .contato-destaque{background:var(--vinho);color:white;border-color:var(--vinho)}
 .contato-destaque h3,.contato-destaque p{color:white}
 
+@media(min-width:851px) and (max-width:1120px){
+ .menu{gap:8px;font-size:12px}
+ .marca{font-size:17px;gap:8px}
+ .marca-selo{width:36px;height:36px}
+ .area-prof{font-size:11px;padding:9px 10px}
+}
 @media(max-width:850px){
     .menu a:not(.area-prof){display:none}
     .hero-grid,.sobre-grid,.metodo{grid-template-columns:1fr}
