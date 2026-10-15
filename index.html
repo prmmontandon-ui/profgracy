@@ -503,50 +503,50 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
       <button class="repertorio-filtro" type="button" data-filtro="serie" aria-pressed="false">📺 Séries</button>
     </div>
     <div class="repertorio-grid" id="repertorioGrid">
-      <article class="repertorio-card" data-categoria="livro">
+      <article class="repertorio-card" data-categoria="livro filme">
         <img class="repertorio-capa" src="repertorios/a-hora-da-estrela/01.jpg" alt="Arte de abertura de A Hora da Estrela, por Prof. Gracy" loading="lazy">
         <div class="repertorio-conteudo">
-          <span class="repertorio-tipo">Livro</span>
+          <span class="repertorio-tipo">Livro · Filme</span>
           <h3>A Hora da Estrela</h3>
           <p class="repertorio-autor">Clarice Lispector</p>
           <p class="repertorio-temas">Identidade, desigualdade e invisibilidade social.</p>
           <button type="button" class="repertorio-abrir" data-obra="estrela">Ver as 8 artes →</button>
         </div>
       </article>
-      <article class="repertorio-card" data-categoria="livro">
+      <article class="repertorio-card" data-categoria="livro filme">
         <img class="repertorio-capa" src="repertorios/extraordinario/01.jpg" alt="Arte de abertura de Extraordinário, por Prof. Gracy" loading="lazy">
         <div class="repertorio-conteudo">
-          <span class="repertorio-tipo">Livro</span>
+          <span class="repertorio-tipo">Livro · Filme</span>
           <h3>Extraordinário</h3>
           <p class="repertorio-autor">R. J. Palacio</p>
           <p class="repertorio-temas">Empatia, respeito às diferenças e inclusão.</p>
           <button type="button" class="repertorio-abrir" data-obra="extraordinario">Ver as 8 artes →</button>
         </div>
       </article>
-      <article class="repertorio-card" data-categoria="livro">
+      <article class="repertorio-card" data-categoria="livro filme">
         <img class="repertorio-capa" src="repertorios/fahrenheit-451/01.jpg" alt="Arte de abertura de Fahrenheit 451, por Prof. Gracy" loading="lazy">
         <div class="repertorio-conteudo">
-          <span class="repertorio-tipo">Livro</span>
+          <span class="repertorio-tipo">Livro · Filme</span>
           <h3>Fahrenheit 451</h3>
           <p class="repertorio-autor">Ray Bradbury</p>
           <p class="repertorio-temas">Censura, acesso ao conhecimento e pensamento crítico.</p>
           <button type="button" class="repertorio-abrir" data-obra="fahrenheit-451">Ver as 8 artes →</button>
         </div>
       </article>
-      <article class="repertorio-card" data-categoria="livro">
+      <article class="repertorio-card" data-categoria="livro filme">
         <img class="repertorio-capa" src="repertorios/menino-pijama-listrado/01.jpg" alt="Arte de abertura de O Menino do Pijama Listrado, por Prof. Gracy" loading="lazy">
         <div class="repertorio-conteudo">
-          <span class="repertorio-tipo">Livro</span>
+          <span class="repertorio-tipo">Livro · Filme</span>
           <h3>O Menino do Pijama Listrado</h3>
           <p class="repertorio-autor">John Boyne</p>
           <p class="repertorio-temas">Preconceito, autoritarismo e desumanização.</p>
           <button type="button" class="repertorio-abrir" data-obra="menino-pijama-listrado">Ver as 9 artes →</button>
         </div>
       </article>
-      <article class="repertorio-card" data-categoria="livro">
+      <article class="repertorio-card" data-categoria="livro filme">
         <img class="repertorio-capa" src="repertorios/vidas-secas/01.jpg" alt="Arte de abertura de Vidas Secas, por Prof. Gracy" loading="lazy">
         <div class="repertorio-conteudo">
-          <span class="repertorio-tipo">Livro</span>
+          <span class="repertorio-tipo">Livro · Filme</span>
           <h3>Vidas Secas</h3>
           <p class="repertorio-autor">Graciliano Ramos</p>
           <p class="repertorio-temas">Desigualdade, migração e vulnerabilidade social.</p>
@@ -805,7 +805,7 @@ iniciarAutomatico();
   const paginacao=document.getElementById('repertorioPaginacao');
   let filtroAtual='todos',paginaAtual=0,intervaloRepertorios=null;
   function porPagina(){return window.innerWidth<=768?1:3;}
-  function elegiveis(){return cards.filter(card=>filtroAtual==='todos'||card.dataset.categoria===filtroAtual);}
+  function elegiveis(){return cards.filter(card=>filtroAtual==='todos'||card.dataset.categoria.split(/\s+/).includes(filtroAtual));}
   function mostrarPaginaRepertorios(pagina){
     const lista=elegiveis();
     const total=Math.ceil(lista.length/porPagina());
