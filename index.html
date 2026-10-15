@@ -263,6 +263,12 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
 }
 
 /* REPERTÓRIO CULTURAL */
+.repertorio-paginacao{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:28px}
+.repertorio-paginacao button{width:11px;height:11px;padding:0;border:0;border-radius:50%;background:#d8c8cc;cursor:pointer;transition:all .25s ease}
+.repertorio-paginacao button:hover{transform:scale(1.2);background:var(--vinho-claro)}
+.repertorio-paginacao button.ativo{width:14px;height:14px;background:var(--vinho)}
+.repertorio-card{animation:aparecerDepoimento .45s ease}
+
 .repertorio-filtros{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:-14px 0 30px}
 .repertorio-filtro{border:1px solid #dccbd0;background:#fff;color:var(--vinho);padding:10px 19px;border-radius:999px;font:700 14px Arial,sans-serif;cursor:pointer;transition:.2s}
 .repertorio-filtro:hover,.repertorio-filtro.ativo{background:var(--vinho);color:white;border-color:var(--vinho)}
@@ -287,8 +293,8 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
 .repertorio-imagem{display:block;max-width:100%;max-height:calc(100dvh - 160px);width:auto;height:auto;object-fit:contain;border-radius:12px;background:white}
 .repertorio-navegacao{display:flex;align-items:center;justify-content:center;gap:18px}
 .repertorio-contador{font-size:14px;font-weight:700;min-width:55px;text-align:center}
-@media(max-width:850px){.repertorio-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.menu a.repertorio-menu{display:inline}}
-@media(max-width:600px){.repertorio-capa{height:440px}.repertorio-grid{grid-template-columns:1fr}.repertorio-modal{padding:12px}.repertorio-imagem{max-height:calc(100dvh - 150px)}.menu a.repertorio-menu{font-size:12px}}
+@media(max-width:850px){.menu a.repertorio-menu{display:inline}}
+@media(max-width:768px){.repertorio-capa{height:440px}.repertorio-grid{grid-template-columns:1fr}.repertorio-modal{padding:12px}.repertorio-imagem{max-height:calc(100dvh - 150px)}.menu a.repertorio-menu{font-size:12px}}
 
 </style>
 </head>
@@ -548,6 +554,7 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
         </div>
       </article>
     </div>
+    <div class="repertorio-paginacao" id="repertorioPaginacao" aria-label="Páginas de repertórios"></div>
     <p class="repertorio-vazio" id="repertorioVazio" hidden>Novos repertórios desta categoria serão publicados em breve. ✨</p>
   </div>
 </section>
@@ -793,14 +800,50 @@ iniciarAutomatico();
 <script>
 (function(){
   const filtros=document.querySelectorAll('.repertorio-filtro');
-  const cards=document.querySelectorAll('.repertorio-card');
+  const cards=Array.from(document.querySelectorAll('.repertorio-card'));
   const vazio=document.getElementById('repertorioVazio');
+  const paginacao=document.getElementById('repertorioPaginacao');
+  let filtroAtual='todos',paginaAtual=0,intervaloRepertorios=null;
+  function porPagina(){return window.innerWidth<=768?1:3;}
+  function elegiveis(){return cards.filter(card=>filtroAtual==='todos'||card.dataset.categoria===filtroAtual);}
+  function mostrarPaginaRepertorios(pagina){
+    const lista=elegiveis();
+    const total=Math.ceil(lista.length/porPagina());
+    paginaAtual=total?((pagina%total)+total)%total:0;
+    const inicio=paginaAtual*porPagina();
+    cards.forEach(card=>{card.hidden=true;});
+    lista.slice(inicio,inicio+porPagina()).forEach(card=>{card.hidden=false;});
+    vazio.hidden=lista.length>0;
+    paginacao.innerHTML='';
+    for(let i=0;i<total;i++){
+      const bolinha=document.createElement('button');
+      bolinha.type='button';
+      bolinha.classList.toggle('ativo',i===paginaAtual);
+      bolinha.setAttribute('aria-label','Mostrar página '+(i+1)+' de repertórios');
+      bolinha.setAttribute('aria-current',i===paginaAtual?'page':'false');
+      bolinha.addEventListener('click',()=>{mostrarPaginaRepertorios(i);iniciarRepertorios();});
+      paginacao.appendChild(bolinha);
+    }
+    paginacao.style.display=total>1?'flex':'none';
+  }
+  function iniciarRepertorios(){
+    clearInterval(intervaloRepertorios);
+    if(Math.ceil(elegiveis().length/porPagina())<=1||!modal.hidden)return;
+    intervaloRepertorios=setInterval(()=>{
+      if(document.hidden||!modal.hidden)return;
+      mostrarPaginaRepertorios(paginaAtual+1);
+    },5000);
+  }
   filtros.forEach(botao=>botao.addEventListener('click',()=>{
+    filtroAtual=botao.dataset.filtro;
     filtros.forEach(b=>{b.classList.toggle('ativo',b===botao);b.setAttribute('aria-pressed',String(b===botao));});
-    let quantidade=0;
-    cards.forEach(card=>{const mostrar=botao.dataset.filtro==='todos'||card.dataset.categoria===botao.dataset.filtro;card.hidden=!mostrar;if(mostrar)quantidade++;});
-    vazio.hidden=quantidade>0;
+    mostrarPaginaRepertorios(0);iniciarRepertorios();
   }));
+  let larguraMobile=window.innerWidth<=768;
+  window.addEventListener('resize',()=>{
+    const nova=window.innerWidth<=768;
+    if(nova!==larguraMobile){larguraMobile=nova;mostrarPaginaRepertorios(0);iniciarRepertorios();}
+  });
   const obras={
     estrela:{titulo:'A Hora da Estrela',pasta:'repertorios/a-hora-da-estrela',total:8},
     'extraordinario':{titulo:'Extraordinário',pasta:'repertorios/extraordinario',total:8},
@@ -822,9 +865,10 @@ iniciarAutomatico();
     ultimoFoco=botao;indice=0;
     document.getElementById('repertorioTitulo').textContent=obra.titulo;
     mostrar();modal.hidden=false;document.body.style.overflow='hidden';
+    clearInterval(intervaloRepertorios);
     document.getElementById('repertorioFechar').focus();
   }));
-  function fechar(){modal.hidden=true;document.body.style.overflow='';if(ultimoFoco)ultimoFoco.focus();}
+  function fechar(){modal.hidden=true;document.body.style.overflow='';if(ultimoFoco)ultimoFoco.focus();iniciarRepertorios();}
   function mover(n){if(!obra)return;indice=(indice+n+obra.total)%obra.total;mostrar();}
   document.getElementById('repertorioFechar').addEventListener('click',fechar);
   document.getElementById('repertorioAnterior').addEventListener('click',()=>mover(-1));
@@ -842,6 +886,7 @@ iniciarAutomatico();
       else if(!e.shiftKey&&atual===botoes.length-1){e.preventDefault();botoes[0].focus();}
     }
   });
+  mostrarPaginaRepertorios(0);iniciarRepertorios();
   let toqueX=null;
   imagem.addEventListener('touchstart',e=>{toqueX=e.changedTouches[0].screenX;},{passive:true});
   imagem.addEventListener('touchend',e=>{if(toqueX===null)return;const delta=e.changedTouches[0].screenX-toqueX;if(Math.abs(delta)>45)mover(delta<0?1:-1);toqueX=null;},{passive:true});
