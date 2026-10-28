@@ -317,6 +317,26 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
 .jogos-destaque small{color:#f7e3e8}
 @media(max-width:768px){.jogos-vitrine{grid-template-columns:1fr;padding:24px}.jogos-vitrine h3{font-size:26px}}
 @media(max-width:850px){.menu a.jogos-menu{display:inline}}
+/* MENU RESPONSIVO — preserva a marca e evita transbordamento */
+.nav{min-width:0}
+.menu{min-width:0;justify-content:flex-end}
+@media(max-width:1250px) and (min-width:851px){
+  .menu a[href="#formacao"],
+  .menu a[href="#conquistas"],
+  .menu a[href="#metodologia"]{display:none}
+}
+@media(max-width:850px){
+  .menu a.repertorio-menu{display:none}
+  .menu a.jogos-menu{display:inline}
+}
+@media(max-width:520px){
+  .nav{gap:8px}
+  .marca{font-size:16px;gap:7px}
+  .menu{gap:6px}
+  .menu a.jogos-menu{font-size:12px}
+  .area-prof{font-size:11px;padding:8px 10px}
+}
+
 /* Materiais gratuitos */
 .materiais-cartao{max-width:800px;margin:0 auto;background:#fff;border:1px solid #efdee2;border-radius:22px;padding:28px;display:flex;align-items:center;gap:25px;box-shadow:var(--sombra)}
 .materiais-icone{width:86px;height:100px;flex:0 0 86px;border-radius:15px;background:#f7ecef;display:flex;align-items:center;justify-content:center;font-size:43px}
@@ -344,7 +364,7 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
       <a href="#conquistas">Conquistas</a>
       <a href="#metodologia">Metodologia</a>
        <a class="repertorio-menu" href="#repertorio">Repertórios</a>
-      <a class="jogos-menu" href="jogos.html">🎮 Jogos</a>
+      <a class="jogos-menu" href="jogos.html">Jogos</a>
        <a href="#materiais">Materiais gratuitos</a>
       <a href="#depoimentos">Depoimentos</a>
       <a href="#contato">Contato</a>
