@@ -29,19 +29,19 @@ textarea{width:100%;min-height:170px;resize:vertical;border:1px solid #d9c6cd;bo
 .preview{background:#fbf8f4;border:1px dashed #c8abb6;border-radius:12px;padding:16px;white-space:pre-wrap;min-height:180px}
 .mini{font-size:13px;color:var(--muted)}.stage{display:flex;gap:9px;padding:11px 0;border-bottom:1px solid #f1e7eb;align-items:center}.stage b{width:28px;height:28px;display:grid;place-items:center;background:#f5e9ed;border-radius:50%;color:var(--wine)}
 .stage.active{font-weight:900;color:var(--wine)}.stage.done b{background:#e0f2e9;color:var(--green)}
-.score{font-size:30px;font-weight:900;color:var(--wine)}.hidden{display:none!important}
+.score{font-size:30px;font-weight:900;color:var(--wine)}.hidden{display:none!important}.mode-picker{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}.mode{border:2px solid var(--line);background:#fff;border-radius:16px;padding:15px;text-align:left;flex:1;min-width:230px}.mode strong{display:block;color:var(--wine);font-size:18px}.mode small{display:block;color:var(--muted);margin-top:4px}.mode.active{border-color:var(--wine);background:#fff3f6}.hint{background:#fff8e8;border:1px solid #efd59d;border-radius:12px;padding:13px;margin:12px 0}.review-item{border-bottom:1px solid var(--line);padding:13px 0}.review-item strong{color:var(--wine)}
 @media(max-width:800px){.layout{grid-template-columns:1fr}.hero .emoji{display:none}.panel{padding:18px}}
 </style></head>
 <body>
 <header><div class="brand">Prof. Gracy<small>Português • Redação • ENEM</small></div><div><a class="back" href="jogos.html">← Central de Jogos</a> <a class="back" href="index.html">Voltar ao site</a></div></header>
 <main>
 <div class="hero"><div><div class="badge">Novo desafio • nível avançado</div><h1>🧪 Laboratório da Redação</h1><p>Construa uma redação argumentativa, etapa por etapa. Aqui não adianta escolher a resposta mais comprida. 😉</p></div><div class="emoji">📝🔬</div></div>
-<div class="toolbar"><span class="chip" id="points">⭐ 0 pontos</span><span class="chip" id="stageCount">Etapa 1/5</span><span class="chip" id="quality">🎯 Qualidade: em construção</span></div>
+<div class="mode-picker" role="group" aria-label="Escolha o modo de jogo"><button type="button" class="mode active" id="modeLearn"><strong>🌱 Modo Aprendiz</strong><small>Dicas, novas tentativas e explicação a cada desafio.</small></button><button type="button" class="mode" id="modeExam"><strong>🎓 Modo ENEM</strong><small>Sem dicas e sem respostas durante a partida. Correção no final.</small></button></div><div class="toolbar"><span class="chip" id="points">⭐ 0 pontos</span><span class="chip" id="stageCount">Etapa 1/5</span><span class="chip" id="quality">🎯 Qualidade: em construção</span></div>
 <div class="layout"><section class="panel">
 <div class="step" id="kicker">Etapa 1</div><h2 id="title"></h2><p class="muted" id="description"></p><div class="progress"><div id="bar"></div></div>
-<div class="task" id="task"></div><div id="answer"></div>
+<div class="task" id="task"></div><div id="answer"></div><div class="hint hidden" id="hint"></div>
 <div class="feedback hidden" id="feedback" role="status" aria-live="polite"></div>
-<div class="controls"><button class="primary" id="check">Analisar decisão</button><button class="primary hidden" id="next">Próxima etapa →</button><button class="secondary" id="reset">Reiniciar laboratório</button></div>
+<div class="controls"><button class="secondary" id="showHint">💡 Pedir dica</button><button class="primary" id="check">Analisar decisão</button><button class="primary hidden" id="next">Próxima etapa →</button><button class="secondary" id="reset">Reiniciar laboratório</button></div>
 </section><aside class="panel"><h3>📄 Sua redação em construção</h3><div class="preview" id="draft">Seu texto aparecerá aqui conforme você avança.</div><p class="mini">Tema da atividade: Os desafios para combater a desinformação digital no Brasil.</p><h3>Trilha de aprendizagem</h3><div id="stages"></div><p class="mini">As análises são pedagógicas e baseadas em critérios definidos para este jogo. Não substituem a correção humana da Prof. Gracy.</p></aside></div>
 </main>
 <script>
@@ -103,7 +103,7 @@ options:[
 why:'Agente e ação não bastam necessariamente para uma intervenção completa; e conectivos não corrigem lacunas de raciocínio. Coerência depende das relações de sentido.',
 draft:''}
 ];
-let stage=0,score=0,selection=[],confirmed=false,completed=[],finished=false;
+let stage=0,score=0,selection=[],confirmed=false,completed=[],finished=false,mode="learn",attempts=0,results=[];
 const total=tasks.length;
 function shuffle(arr){for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
 function render(){
@@ -111,7 +111,7 @@ function render(){
  $('kicker').textContent='ETAPA '+(stage+1)+' DE '+total;
  $('title').textContent=t.title;$('description').textContent=t.desc;$('task').textContent=t.prompt;
  $('stageCount').textContent='Etapa '+(stage+1)+'/'+total;$('bar').style.width=((stage)/total*100)+'%';
- $('feedback').className='feedback hidden';$('next').classList.add('hidden');$('check').classList.remove('hidden');
+ $('feedback').className='feedback hidden';$('hint').classList.add('hidden');$('next').classList.add('hidden');$('check').classList.remove('hidden');$('showHint').classList.toggle('hidden',mode==='exam');$('check').textContent=mode==='exam'?'Registrar resposta':'Analisar decisão';attempts=0;
  $('answer').innerHTML='';
  if(t.kind==='sequence'){
    const guide=document.createElement('p');guide.className='mini';guide.textContent='Toque nos trechos para adicioná-los à sequência. Toque em um trecho selecionado para removê-lo.';$('answer').append(guide);
@@ -135,23 +135,37 @@ function updateSequence(){
 function renderAside(){
  $('points').textContent='⭐ '+score+' pontos';
  $('quality').textContent='🎯 Etapas concluídas: '+completed.length+'/'+total;
- $('draft').textContent=completed.length?completed.map(x=>tasks[x].draft).filter(Boolean).join('\n\n'):'Seu texto aparecerá aqui conforme você avança.';
+ $('draft').textContent=(mode==='exam'&&!finished)?'Sua redação-modelo será revelada após o resultado.':completed.length?completed.map(x=>tasks[x].draft).filter(Boolean).join('\n\n'):'Seu texto aparecerá aqui conforme você avança.';
  $('stages').innerHTML='';
  tasks.forEach((t,i)=>{const d=document.createElement('div');d.className='stage '+(completed.includes(i)?'done':i===stage?'active':'');const b=document.createElement('b');b.textContent=completed.includes(i)?'✓':i+1;d.append(b,document.createTextNode(t.title));$('stages').append(d)});
+}
+function isCorrect(t){
+ if(t.kind==='single')return selection[0]===t.correct;
+ if(t.kind==='sequence')return JSON.stringify(selection)===JSON.stringify(t.correct);
+ return JSON.stringify(selection.slice().sort((a,b)=>a-b))===JSON.stringify(t.correct.slice().sort((a,b)=>a-b));
 }
 function check(){
  if(confirmed)return;
  const t=tasks[stage];
- if(t.kind==='single'&&selection.length!==1||t.kind==='multi'&&selection.length!==t.correct.length||t.kind==='sequence'&&selection.length!==t.pieces.length){
-   $('feedback').className='feedback bad';$('feedback').textContent=t.kind==='multi'?'Selecione exatamente '+t.correct.length+' alternativas.':'Complete sua resposta antes de analisar.';return;
+ if((t.kind==='single'&&selection.length!==1)||(t.kind==='multi'&&selection.length!==t.correct.length)||(t.kind==='sequence'&&selection.length!==t.pieces.length)){
+  $('feedback').className='feedback bad';$('feedback').textContent=t.kind==='multi'?'Selecione exatamente '+t.correct.length+' alternativas.':'Complete sua resposta antes de continuar.';return;
  }
- const good=t.kind==='single'?selection[0]===t.correct:JSON.stringify(selection.slice().sort())===JSON.stringify(t.correct.slice().sort());
- const correct=t.kind==='sequence'?JSON.stringify(selection)===JSON.stringify(t.correct):good;
- confirmed=true;let earned=correct?200:0;score+=earned;
+ const correct=isCorrect(t);attempts++;
+ if(mode==='learn'&&!correct&&attempts<3){
+  $('feedback').className='feedback bad';$('feedback').textContent='Ainda não! Releia o enunciado e tente outra vez. Você tem '+(3-attempts)+' tentativa(s) nesta etapa. Use a dica se precisar.';
+  return;
+ }
+ confirmed=true;
+ const earned=correct?(mode==='learn'&&attempts>1?100:200):0;
+ score+=earned;results.push({index:stage,correct,attempts,earned});
  if(!completed.includes(stage))completed.push(stage);
- $('feedback').className='feedback'+(correct?'':' bad');
- $('feedback').textContent=(correct?'✓ Excelente análise! +200 pontos. ':'✕ Essa decisão precisa de revisão. +0 pontos. ')+t.why;
- $('check').classList.add('hidden');$('next').classList.remove('hidden');$('next').textContent=stage===total-1?'Ver resultado →':'Próxima etapa →';
+ if(mode==='exam'){
+  $('feedback').className='feedback';$('feedback').textContent='Resposta registrada. A correção e as explicações serão mostradas somente no resultado final.';
+ }else{
+  $('feedback').className='feedback'+(correct?'':' bad');
+  $('feedback').textContent=(correct?'✓ Boa análise! +'+earned+' pontos. ':'✕ Você chegou ao limite de tentativas. +0 pontos. ')+t.why;
+ }
+ $('check').classList.add('hidden');$('showHint').classList.add('hidden');$('next').classList.remove('hidden');$('next').textContent=stage===total-1?'Ver resultado →':'Próxima etapa →';
  renderAside();
 }
 function next(){
@@ -164,10 +178,21 @@ function finish(){
  $('title').textContent=score>=800?'Excelente trabalho!':'Sua redação está em evolução!';
  $('description').textContent='Você concluiu as cinco etapas do laboratório.';
  $('task').textContent='Pontuação final: '+score+' de 1000 pontos. '+(score===1000?'Você dominou os desafios desta atividade.':'Revise as explicações e tente novamente para aperfeiçoar suas decisões.');
- $('answer').innerHTML='';$('feedback').classList.add('hidden');$('check').classList.add('hidden');$('next').classList.add('hidden');
+ $('answer').innerHTML='';$('feedback').classList.add('hidden');$('hint').classList.add('hidden');$('showHint').classList.add('hidden');$('check').classList.add('hidden');$('next').classList.add('hidden');
+ const review=document.createElement('div');review.style.marginTop='20px';
+ const heading=document.createElement('h3');heading.textContent='📋 Correção por etapa';review.append(heading);
+ results.forEach(r=>{const d=document.createElement('div');d.className='review-item';const h=document.createElement('strong');h.textContent=(r.correct?'✓ ':'✕ ')+tasks[r.index].title+' — '+r.earned+' pontos';const p=document.createElement('p');p.textContent=tasks[r.index].why;d.append(h,p);review.append(d)});
+ $('answer').append(review);renderAside();
  $('stageCount').textContent='5/5 concluídas';$('quality').textContent='🏆 Resultado: '+score+'/1000';
 }
-function reset(){stage=0;score=0;selection=[];confirmed=false;completed=[];finished=false;render()}
+function reset(){stage=0;score=0;selection=[];confirmed=false;completed=[];finished=false;attempts=0;results=[];render()}
+function setMode(m){mode=m;$('modeLearn').classList.toggle('active',m==='learn');$('modeExam').classList.toggle('active',m==='exam');reset()}
+$('modeLearn').addEventListener('click',()=>setMode('learn'));
+$('modeExam').addEventListener('click',()=>setMode('exam'));
+$('showHint').addEventListener('click',()=>{
+ const hints=['Procure uma tese que antecipe dois eixos de desenvolvimento.','Comece pela ideia central, explique o mecanismo, mostre a consequência e feche o raciocínio.','A melhor alternativa explica uma analogia sem fazer generalizações.','Procure agente, ação, meio e finalidade; desconfie de medidas vagas ou que violem direitos.','Pergunte-se: conectivo substitui raciocínio? E agente + ação bastam?'];
+ $('hint').textContent='💡 '+hints[stage];$('hint').classList.remove('hidden');
+});
 $('check').addEventListener('click',check);$('next').addEventListener('click',next);$('reset').addEventListener('click',reset);render();
 })();
 </script></body></html>
