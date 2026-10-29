@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Laboratório da Redação | Prof. Gracy</title>
+<style>
+:root{--wine:#791d39;--dark:#501327;--gold:#d3a55e;--cream:#fff9f4;--ink:#30232a;--muted:#77676e;--line:#ead8df;--green:#176b51}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#fffaf5,#f6eaf0);font:16px/1.55 system-ui,Arial;color:var(--ink)}
+button,a{font:inherit}button{cursor:pointer;border:0}a{color:inherit;text-decoration:none}
+header{background:#fff;border-bottom:1px solid var(--line);padding:16px max(18px,calc((100% - 1160px)/2));display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{font-weight:900;color:var(--wine);font-size:20px}.brand small{display:block;color:var(--muted);font-weight:500;font-size:12px}
+.back{border:1px solid var(--line);border-radius:12px;padding:10px 15px;font-weight:700}
+main{max-width:1160px;margin:0 auto;padding:28px 18px 70px}
+.hero{background:linear-gradient(115deg,var(--dark),var(--wine));border-radius:24px;color:#fff;padding:28px;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.hero h1{font:700 clamp(28px,4vw,44px) Georgia;margin:4px 0 8px}.hero p{margin:0;color:#f7e6eb}.hero .emoji{font-size:68px}
+.badge{color:#ffdf9b;font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase}
+.toolbar{display:flex;flex-wrap:wrap;gap:9px;margin:22px 0}.chip{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 13px;font-weight:800;color:var(--wine)}
+.layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(270px,.8fr);gap:18px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 14px 35px #5b20300a}
+h2{font:700 29px Georgia;color:var(--wine);margin:4px 0 12px}h3{color:var(--wine);margin:0 0 10px}
+p{margin-top:7px}.muted{color:var(--muted)}.step{font-size:12px;font-weight:900;color:var(--wine);letter-spacing:1px;text-transform:uppercase}
+.progress{height:11px;border-radius:99px;background:#f0e4e8;overflow:hidden;margin:13px 0 20px}.progress>div{height:100%;background:linear-gradient(90deg,var(--gold),var(--wine));transition:width .3s}
+.task{background:#fff8ee;border-left:4px solid var(--gold);padding:15px;border-radius:12px;margin:18px 0}
+.option{width:100%;text-align:left;background:#fff;border:1px solid #e5d8dc;border-radius:12px;padding:13px 15px;margin:7px 0;display:flex;align-items:flex-start;gap:12px}
+.option:hover{border-color:var(--wine)}.option.selected{background:#f8ebef;border:2px solid var(--wine);padding:12px 14px}.option .mark{flex:none;border:1px solid #d8c3cb;width:24px;height:24px;border-radius:7px;text-align:center;font-weight:900}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:19px}.primary{background:var(--wine);color:#fff;padding:12px 19px;border-radius:11px;font-weight:800}.secondary{background:#fff;border:1px solid var(--line);color:var(--wine);padding:12px 17px;border-radius:11px;font-weight:800}
+button:disabled{opacity:.5;cursor:not-allowed}.feedback{padding:16px;border-radius:13px;background:#f0f7f2;border:1px solid #c8e1d2;margin-top:16px}.feedback.bad{background:#fff2ed;border-color:#f0c9b9}
+.sequence{display:grid;gap:9px}.sequence button{text-align:left;padding:12px;background:#fff;border:1px solid var(--line);border-radius:11px}.sequence button.chosen{background:#f7e9ee;border-color:var(--wine)}
+.sequence-list{background:#f8f1f3;border-radius:12px;padding:13px;min-height:60px;margin:10px 0}.sequence-list div{padding:5px 0}
+textarea{width:100%;min-height:170px;resize:vertical;border:1px solid #d9c6cd;border-radius:12px;padding:14px;font:inherit;color:var(--ink)}
+.preview{background:#fbf8f4;border:1px dashed #c8abb6;border-radius:12px;padding:16px;white-space:pre-wrap;min-height:180px}
+.mini{font-size:13px;color:var(--muted)}.stage{display:flex;gap:9px;padding:11px 0;border-bottom:1px solid #f1e7eb;align-items:center}.stage b{width:28px;height:28px;display:grid;place-items:center;background:#f5e9ed;border-radius:50%;color:var(--wine)}
+.stage.active{font-weight:900;color:var(--wine)}.stage.done b{background:#e0f2e9;color:var(--green)}
+.score{font-size:30px;font-weight:900;color:var(--wine)}.hidden{display:none!important}
+@media(max-width:800px){.layout{grid-template-columns:1fr}.hero .emoji{display:none}.panel{padding:18px}}
+</style></head>
+<body>
+<header><div class="brand">Prof. Gracy<small>Português • Redação • ENEM</small></div><div><a class="back" href="jogos.html">← Central de Jogos</a> <a class="back" href="index.html">Voltar ao site</a></div></header>
+<main>
+<div class="hero"><div><div class="badge">Novo desafio • nível avançado</div><h1>🧪 Laboratório da Redação</h1><p>Construa uma redação argumentativa, etapa por etapa. Aqui não adianta escolher a resposta mais comprida. 😉</p></div><div class="emoji">📝🔬</div></div>
+<div class="toolbar"><span class="chip" id="points">⭐ 0 pontos</span><span class="chip" id="stageCount">Etapa 1/5</span><span class="chip" id="quality">🎯 Qualidade: em construção</span></div>
+<div class="layout"><section class="panel">
+<div class="step" id="kicker">Etapa 1</div><h2 id="title"></h2><p class="muted" id="description"></p><div class="progress"><div id="bar"></div></div>
+<div class="task" id="task"></div><div id="answer"></div>
+<div class="feedback hidden" id="feedback" role="status" aria-live="polite"></div>
+<div class="controls"><button class="primary" id="check">Analisar decisão</button><button class="primary hidden" id="next">Próxima etapa →</button><button class="secondary" id="reset">Reiniciar laboratório</button></div>
+</section><aside class="panel"><h3>📄 Sua redação em construção</h3><div class="preview" id="draft">Seu texto aparecerá aqui conforme você avança.</div><p class="mini">Tema da atividade: Os desafios para combater a desinformação digital no Brasil.</p><h3>Trilha de aprendizagem</h3><div id="stages"></div><p class="mini">As análises são pedagógicas e baseadas em critérios definidos para este jogo. Não substituem a correção humana da Prof. Gracy.</p></aside></div>
+</main>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id);
+const theme='Os desafios para combater a desinformação digital no Brasil';
+const tasks=[
+{title:'Construa uma tese defensável',desc:'Introdução • contexto, posicionamento e recorte',kind:'single',
+prompt:'Uma redação sobre desinformação precisa apresentar uma tese que permita desenvolver dois argumentos. Qual proposta oferece o melhor caminho?',
+options:[
+'A desinformação existe no Brasil e causa muitos problemas.',
+'A circulação de notícias falsas é preocupante, sobretudo na internet.',
+'A desinformação é um fenômeno complexo que precisa ser combatido.',
+'A fragilidade da educação midiática e a baixa responsabilização de plataformas favorecem a disseminação da desinformação no país.'
+],correct:3,
+why:'Uma tese produtiva não se limita a constatar o problema: delimita causas que podem orientar os dois desenvolvimentos. O tamanho da frase não é critério de correção.',
+draft:'Embora as redes digitais ampliem o acesso à informação, a circulação de conteúdos falsos compromete o debate público brasileiro. Nesse cenário, a fragilidade da educação midiática e a insuficiente responsabilização das plataformas contribuem para a permanência do problema.'},
+{title:'Organize o primeiro desenvolvimento',desc:'Desenvolvimento 1 • encadeamento lógico',kind:'sequence',
+prompt:'Clique nos quatro trechos na ordem que constrói um argumento: tópico frasal → explicação → consequência → fechamento.',
+pieces:[
+'Por isso, fortalecer a leitura crítica de conteúdos digitais é indispensável à formação cidadã.',
+'Sem instrumentos para verificar fontes e identificar manipulações, parte da população compartilha mensagens enganosas.',
+'A insuficiência da educação midiática favorece a propagação de notícias falsas.',
+'Esse comportamento amplia o alcance da desinformação e dificulta decisões fundamentadas.'
+],correct:[2,1,3,0],
+why:'O parágrafo progride de uma afirmação central para o mecanismo causal, apresenta a consequência e conclui retomando o argumento.',
+draft:'A insuficiência da educação midiática favorece a propagação de notícias falsas. Sem instrumentos para verificar fontes e identificar manipulações, parte da população compartilha mensagens enganosas. Esse comportamento amplia o alcance da desinformação e dificulta decisões fundamentadas. Por isso, fortalecer a leitura crítica de conteúdos digitais é indispensável à formação cidadã.'},
+{title:'Use repertório de modo produtivo',desc:'Desenvolvimento 2 • pertinência e análise',kind:'single',
+prompt:'Um estudante quer usar o filme “O Show de Truman” para discutir o papel das plataformas na formação de percepções. Qual aplicação é mais consistente?',
+options:[
+'O filme mostra uma vida mediada por informações controladas; por analogia, ambientes digitais que priorizam engajamento podem restringir o contato com perspectivas diversas, o que exige transparência na curadoria de conteúdos.',
+'“O Show de Truman” é um filme famoso e, portanto, comprova que a internet manipula todas as pessoas.',
+'No filme, Truman vive em um cenário artificial; logo, toda informação publicada nas redes é falsa.',
+'Como o protagonista é observado, a obra demonstra que os usuários sempre acreditam em qualquer notícia.'
+],correct:0,
+why:'O repertório é produtivo quando se explicita a relação entre a obra, o mecanismo discutido e a tese. Uma analogia não é prova literal nem autoriza generalizações.',
+draft:'Além disso, a organização dos ambientes digitais pode influenciar a circulação de conteúdos enganosos. Em “O Show de Truman”, a percepção do protagonista é moldada por informações controladas. De modo análogo, plataformas que privilegiam o engajamento sem transparência podem limitar o contato com perspectivas diversas e favorecer a difusão de conteúdos distorcidos. Assim, a falta de critérios claros de circulação informacional agrava o problema.'},
+{title:'Monte uma intervenção completa',desc:'Conclusão • agente, ação, meio, finalidade e detalhamento',kind:'multi',
+prompt:'Selecione exatamente TRÊS medidas que, em conjunto, tornam a proposta mais concreta e coerente com os argumentos desenvolvidos.',
+options:[
+'O poder público deve resolver a desinformação para que ela deixe de existir.',
+'O Ministério da Educação, em parceria com redes de ensino, deve incorporar oficinas de verificação de fontes às atividades escolares, com formação docente e materiais práticos.',
+'As pessoas precisam pensar melhor antes de compartilhar mensagens.',
+'Órgãos reguladores competentes devem exigir transparência dos critérios de recomendação das plataformas, com relatórios públicos e fiscalização conforme a legislação.',
+'Essas medidas visam ampliar a leitura crítica e reduzir a circulação de conteúdos enganosos, respeitando a liberdade de expressão.',
+'É necessário proibir imediatamente qualquer conteúdo considerado duvidoso.'
+],correct:[1,3,4],
+why:'A proposta articula agentes, ações, meios e finalidades, com detalhamento e respeito aos direitos humanos. Medidas vagas ou censura indiscriminada não resolvem o problema.',
+draft:'Portanto, o Ministério da Educação, em parceria com redes de ensino, deve promover oficinas de verificação de fontes, mediante formação docente e materiais práticos. Paralelamente, órgãos reguladores competentes devem fiscalizar a transparência dos critérios de recomendação das plataformas, conforme a legislação. Essas ações buscam ampliar a leitura crítica e reduzir a circulação de conteúdos enganosos, respeitando a liberdade de expressão.'},
+{title:'Revisão crítica da redação',desc:'Revisão final • detectar falhas argumentativas',kind:'multi',
+prompt:'Leia as afirmações abaixo e selecione exatamente DUAS que representam problemas reais a evitar na revisão.',
+options:[
+'Um repertório pode ser pertinente sem mencionar diretamente o Brasil, desde que a relação com o tema seja explicada.',
+'Uma conclusão com agente e ação é sempre completa, mesmo sem indicar meios ou finalidade.',
+'Usar conectivos garante, por si só, que os argumentos tenham coerência lógica.',
+'Uma tese que antecipa dois eixos argumentativos pode orientar a progressão do texto.',
+'Uma analogia cultural deve ser interpretada, não tratada como prova estatística.'
+],correct:[1,2],
+why:'Agente e ação não bastam necessariamente para uma intervenção completa; e conectivos não corrigem lacunas de raciocínio. Coerência depende das relações de sentido.',
+draft:''}
+];
+let stage=0,score=0,selection=[],confirmed=false,completed=[],finished=false;
+const total=tasks.length;
+function shuffle(arr){for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
+function render(){
+ const t=tasks[stage];confirmed=false;selection=[];
+ $('kicker').textContent='ETAPA '+(stage+1)+' DE '+total;
+ $('title').textContent=t.title;$('description').textContent=t.desc;$('task').textContent=t.prompt;
+ $('stageCount').textContent='Etapa '+(stage+1)+'/'+total;$('bar').style.width=((stage)/total*100)+'%';
+ $('feedback').className='feedback hidden';$('next').classList.add('hidden');$('check').classList.remove('hidden');
+ $('answer').innerHTML='';
+ if(t.kind==='sequence'){
+   const guide=document.createElement('p');guide.className='mini';guide.textContent='Toque nos trechos para adicioná-los à sequência. Toque em um trecho selecionado para removê-lo.';$('answer').append(guide);
+   const chosen=document.createElement('div');chosen.className='sequence-list';chosen.id='chosen';$('answer').append(chosen);
+   const choices=document.createElement('div');choices.className='sequence';choices.id='choices';$('answer').append(choices);
+   t.pieces.forEach((p,i)=>{const b=document.createElement('button');b.type='button';b.textContent=p;b.dataset.index=i;b.addEventListener('click',()=>{if(confirmed)return;selection.includes(i)?selection=selection.filter(x=>x!==i):selection.push(i);updateSequence()});choices.append(b)});
+   updateSequence();
+ }else{
+   const shuffled=shuffle(t.options.map((text,i)=>({text,i})));
+   shuffled.forEach(({text,i})=>{const b=document.createElement('button');b.type='button';b.className='option';b.dataset.index=i;b.innerHTML='<span class="mark"></span><span></span>';b.lastElementChild.textContent=text;b.addEventListener('click',()=>{if(confirmed)return;if(t.kind==='single')selection=[i];else selection=selection.includes(i)?selection.filter(x=>x!==i):[...selection,i];updateOptions()});$('answer').append(b)});
+ }
+ renderAside();
+}
+function updateOptions(){document.querySelectorAll('.option').forEach(b=>{const yes=selection.includes(+b.dataset.index);b.classList.toggle('selected',yes);b.firstElementChild.textContent=yes?'✓':''})}
+function updateSequence(){
+ const c=$('chosen');c.innerHTML='';
+ if(!selection.length)c.textContent='Sua sequência aparecerá aqui.';
+ selection.forEach((idx,i)=>{const d=document.createElement('div');d.textContent=(i+1)+'. '+tasks[stage].pieces[idx];c.append(d)});
+ document.querySelectorAll('#choices button').forEach(b=>b.classList.toggle('chosen',selection.includes(+b.dataset.index)));
+}
+function renderAside(){
+ $('points').textContent='⭐ '+score+' pontos';
+ $('quality').textContent='🎯 Etapas concluídas: '+completed.length+'/'+total;
+ $('draft').textContent=completed.length?completed.map(x=>tasks[x].draft).filter(Boolean).join('\n\n'):'Seu texto aparecerá aqui conforme você avança.';
+ $('stages').innerHTML='';
+ tasks.forEach((t,i)=>{const d=document.createElement('div');d.className='stage '+(completed.includes(i)?'done':i===stage?'active':'');const b=document.createElement('b');b.textContent=completed.includes(i)?'✓':i+1;d.append(b,document.createTextNode(t.title));$('stages').append(d)});
+}
+function check(){
+ if(confirmed)return;
+ const t=tasks[stage];
+ if(t.kind==='single'&&selection.length!==1||t.kind==='multi'&&selection.length!==t.correct.length||t.kind==='sequence'&&selection.length!==t.pieces.length){
+   $('feedback').className='feedback bad';$('feedback').textContent=t.kind==='multi'?'Selecione exatamente '+t.correct.length+' alternativas.':'Complete sua resposta antes de analisar.';return;
+ }
+ const good=t.kind==='single'?selection[0]===t.correct:JSON.stringify(selection.slice().sort())===JSON.stringify(t.correct.slice().sort());
+ const correct=t.kind==='sequence'?JSON.stringify(selection)===JSON.stringify(t.correct):good;
+ confirmed=true;let earned=correct?200:0;score+=earned;
+ if(!completed.includes(stage))completed.push(stage);
+ $('feedback').className='feedback'+(correct?'':' bad');
+ $('feedback').textContent=(correct?'✓ Excelente análise! +200 pontos. ':'✕ Essa decisão precisa de revisão. +0 pontos. ')+t.why;
+ $('check').classList.add('hidden');$('next').classList.remove('hidden');$('next').textContent=stage===total-1?'Ver resultado →':'Próxima etapa →';
+ renderAside();
+}
+function next(){
+ if(!confirmed)return;
+ if(stage<total-1){stage++;render();return}
+ finish();
+}
+function finish(){
+ finished=true;$('bar').style.width='100%';$('kicker').textContent='LABORATÓRIO CONCLUÍDO';
+ $('title').textContent=score>=800?'Excelente trabalho!':'Sua redação está em evolução!';
+ $('description').textContent='Você concluiu as cinco etapas do laboratório.';
+ $('task').textContent='Pontuação final: '+score+' de 1000 pontos. '+(score===1000?'Você dominou os desafios desta atividade.':'Revise as explicações e tente novamente para aperfeiçoar suas decisões.');
+ $('answer').innerHTML='';$('feedback').classList.add('hidden');$('check').classList.add('hidden');$('next').classList.add('hidden');
+ $('stageCount').textContent='5/5 concluídas';$('quality').textContent='🏆 Resultado: '+score+'/1000';
+}
+function reset(){stage=0;score=0;selection=[];confirmed=false;completed=[];finished=false;render()}
+$('check').addEventListener('click',check);$('next').addEventListener('click',next);$('reset').addEventListener('click',reset);render();
+})();
+</script></body></html>
