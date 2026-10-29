@@ -36,77 +36,81 @@ textarea{width:100%;min-height:170px;resize:vertical;border:1px solid #d9c6cd;bo
 <header><div class="brand">Prof. Gracy<small>Português • Redação • ENEM</small></div><div><a class="back" href="jogos.html">← Central de Jogos</a> <a class="back" href="index.html">Voltar ao site</a></div></header>
 <main>
 <div class="hero"><div><div class="badge">Novo desafio • nível avançado</div><h1>🧪 Laboratório da Redação</h1><p>Construa uma redação argumentativa, etapa por etapa. Aqui não adianta escolher a resposta mais comprida. 😉</p></div><div class="emoji">📝🔬</div></div>
-<div class="mode-picker" role="group" aria-label="Escolha o modo de jogo"><button type="button" class="mode active" id="modeLearn"><strong>🌱 Modo Aprendiz</strong><small>Dicas, novas tentativas e explicação a cada desafio.</small></button><button type="button" class="mode" id="modeExam"><strong>🎓 Modo ENEM</strong><small>Sem dicas e sem respostas durante a partida. Correção no final.</small></button></div><div class="toolbar"><span class="chip" id="points">⭐ 0 pontos</span><span class="chip" id="stageCount">Etapa 1/5</span><span class="chip" id="quality">🎯 Qualidade: em construção</span></div>
-<div class="layout"><section class="panel">
+<section class="panel" style="margin-top:20px;background:#fffdf9"><div class="step">BANCO DE TEMAS OFICIAIS • ENEM REGULAR 2016–2025</div><h2 style="margin:7px 0">🎲 Sorteio do tema</h2><p class="muted">Cada sorteio escolhe um tema real do ENEM. As cinco etapas são adaptadas ao assunto escolhido.</p><div id="themePicked" class="task" aria-live="polite">Clique para descobrir seu tema!</div><button class="primary" type="button" id="drawTheme">🎲 Sortear tema e iniciar</button><p class="mini">Novo sorteio reinicia a partida. As atividades são autorais e não reproduzem questões oficiais.</p></section>
+<div class="mode-picker" role="group" aria-label="Escolha o modo de jogo"><button type="button" class="mode active" id="modeLearn"><strong>🌱 Modo Aprendiz</strong><small>Dicas, novas tentativas e explicação a cada desafio.</small></button><button type="button" class="mode" id="modeExam"><strong>🎓 Modo ENEM</strong><small>Sem dicas e sem respostas durante a partida. Correção no final.</small></button></div><div class="toolbar hidden" id="gameToolbar"><span class="chip" id="points">⭐ 0 pontos</span><span class="chip" id="stageCount">Etapa 1/5</span><span class="chip" id="quality">🎯 Qualidade: em construção</span></div>
+<div class="layout hidden" id="gameLayout"><section class="panel">
 <div class="step" id="kicker">Etapa 1</div><h2 id="title"></h2><p class="muted" id="description"></p><div class="progress"><div id="bar"></div></div>
 <div class="task" id="task"></div><div id="answer"></div><div class="hint hidden" id="hint"></div>
 <div class="feedback hidden" id="feedback" role="status" aria-live="polite"></div>
 <div class="controls"><button class="secondary" id="showHint">💡 Pedir dica</button><button class="primary" id="check">Analisar decisão</button><button class="primary hidden" id="next">Próxima etapa →</button><button class="secondary" id="reset">Reiniciar laboratório</button></div>
-</section><aside class="panel"><h3>📄 Sua redação em construção</h3><div class="preview" id="draft">Seu texto aparecerá aqui conforme você avança.</div><p class="mini">Tema da atividade: Os desafios para combater a desinformação digital no Brasil.</p><h3>Trilha de aprendizagem</h3><div id="stages"></div><p class="mini">As análises são pedagógicas e baseadas em critérios definidos para este jogo. Não substituem a correção humana da Prof. Gracy.</p></aside></div>
+</section><aside class="panel"><h3>📄 Sua redação em construção</h3><div class="preview" id="draft">Seu texto aparecerá aqui conforme você avança.</div><p class="mini"><strong id="themeLabel">Tema ainda não sorteado.</strong></p><h3>Trilha de aprendizagem</h3><div id="stages"></div><p class="mini">As análises são pedagógicas e baseadas em critérios definidos para este jogo. Não substituem a correção humana da Prof. Gracy.</p></aside></div>
 </main>
 <script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id);
-const theme='Os desafios para combater a desinformação digital no Brasil';
-const tasks=[
-{title:'Construa uma tese defensável',desc:'Introdução • contexto, posicionamento e recorte',kind:'single',
-prompt:'Uma redação sobre desinformação precisa apresentar uma tese que permita desenvolver dois argumentos. Qual proposta oferece o melhor caminho?',
-options:[
-'A desinformação existe no Brasil e causa muitos problemas.',
-'A circulação de notícias falsas é preocupante, sobretudo na internet.',
-'A desinformação é um fenômeno complexo que precisa ser combatido.',
-'A fragilidade da educação midiática e a baixa responsabilização de plataformas favorecem a disseminação da desinformação no país.'
-],correct:3,
-why:'Uma tese produtiva não se limita a constatar o problema: delimita causas que podem orientar os dois desenvolvimentos. O tamanho da frase não é critério de correção.',
-draft:'Embora as redes digitais ampliem o acesso à informação, a circulação de conteúdos falsos compromete o debate público brasileiro. Nesse cenário, a fragilidade da educação midiática e a insuficiente responsabilização das plataformas contribuem para a permanência do problema.'},
-{title:'Organize o primeiro desenvolvimento',desc:'Desenvolvimento 1 • encadeamento lógico',kind:'sequence',
-prompt:'Clique nos quatro trechos na ordem que constrói um argumento: tópico frasal → explicação → consequência → fechamento.',
-pieces:[
-'Por isso, fortalecer a leitura crítica de conteúdos digitais é indispensável à formação cidadã.',
-'Sem instrumentos para verificar fontes e identificar manipulações, parte da população compartilha mensagens enganosas.',
-'A insuficiência da educação midiática favorece a propagação de notícias falsas.',
-'Esse comportamento amplia o alcance da desinformação e dificulta decisões fundamentadas.'
-],correct:[2,1,3,0],
-why:'O parágrafo progride de uma afirmação central para o mecanismo causal, apresenta a consequência e conclui retomando o argumento.',
-draft:'A insuficiência da educação midiática favorece a propagação de notícias falsas. Sem instrumentos para verificar fontes e identificar manipulações, parte da população compartilha mensagens enganosas. Esse comportamento amplia o alcance da desinformação e dificulta decisões fundamentadas. Por isso, fortalecer a leitura crítica de conteúdos digitais é indispensável à formação cidadã.'},
-{title:'Use repertório de modo produtivo',desc:'Desenvolvimento 2 • pertinência e análise',kind:'single',
-prompt:'Um estudante quer usar o filme “O Show de Truman” para discutir o papel das plataformas na formação de percepções. Qual aplicação é mais consistente?',
-options:[
-'O filme mostra uma vida mediada por informações controladas; por analogia, ambientes digitais que priorizam engajamento podem restringir o contato com perspectivas diversas, o que exige transparência na curadoria de conteúdos.',
-'“O Show de Truman” é um filme famoso e, portanto, comprova que a internet manipula todas as pessoas.',
-'No filme, Truman vive em um cenário artificial; logo, toda informação publicada nas redes é falsa.',
-'Como o protagonista é observado, a obra demonstra que os usuários sempre acreditam em qualquer notícia.'
-],correct:0,
-why:'O repertório é produtivo quando se explicita a relação entre a obra, o mecanismo discutido e a tese. Uma analogia não é prova literal nem autoriza generalizações.',
-draft:'Além disso, a organização dos ambientes digitais pode influenciar a circulação de conteúdos enganosos. Em “O Show de Truman”, a percepção do protagonista é moldada por informações controladas. De modo análogo, plataformas que privilegiam o engajamento sem transparência podem limitar o contato com perspectivas diversas e favorecer a difusão de conteúdos distorcidos. Assim, a falta de critérios claros de circulação informacional agrava o problema.'},
-{title:'Monte uma intervenção completa',desc:'Conclusão • agente, ação, meio, finalidade e detalhamento',kind:'multi',
-prompt:'Selecione exatamente TRÊS medidas que, em conjunto, tornam a proposta mais concreta e coerente com os argumentos desenvolvidos.',
-options:[
-'O poder público deve resolver a desinformação para que ela deixe de existir.',
-'O Ministério da Educação, em parceria com redes de ensino, deve incorporar oficinas de verificação de fontes às atividades escolares, com formação docente e materiais práticos.',
-'As pessoas precisam pensar melhor antes de compartilhar mensagens.',
-'Órgãos reguladores competentes devem exigir transparência dos critérios de recomendação das plataformas, com relatórios públicos e fiscalização conforme a legislação.',
-'Essas medidas visam ampliar a leitura crítica e reduzir a circulação de conteúdos enganosos, respeitando a liberdade de expressão.',
-'É necessário proibir imediatamente qualquer conteúdo considerado duvidoso.'
-],correct:[1,3,4],
-why:'A proposta articula agentes, ações, meios e finalidades, com detalhamento e respeito aos direitos humanos. Medidas vagas ou censura indiscriminada não resolvem o problema.',
-draft:'Portanto, o Ministério da Educação, em parceria com redes de ensino, deve promover oficinas de verificação de fontes, mediante formação docente e materiais práticos. Paralelamente, órgãos reguladores competentes devem fiscalizar a transparência dos critérios de recomendação das plataformas, conforme a legislação. Essas ações buscam ampliar a leitura crítica e reduzir a circulação de conteúdos enganosos, respeitando a liberdade de expressão.'},
-{title:'Revisão crítica da redação',desc:'Revisão final • detectar falhas argumentativas',kind:'multi',
-prompt:'Leia as afirmações abaixo e selecione exatamente DUAS que representam problemas reais a evitar na revisão.',
-options:[
-'Um repertório pode ser pertinente sem mencionar diretamente o Brasil, desde que a relação com o tema seja explicada.',
-'Uma conclusão com agente e ação é sempre completa, mesmo sem indicar meios ou finalidade.',
-'Usar conectivos garante, por si só, que os argumentos tenham coerência lógica.',
-'Uma tese que antecipa dois eixos argumentativos pode orientar a progressão do texto.',
-'Uma analogia cultural deve ser interpretada, não tratada como prova estatística.'
-],correct:[1,2],
-why:'Agente e ação não bastam necessariamente para uma intervenção completa; e conectivos não corrigem lacunas de raciocínio. Coerência depende das relações de sentido.',
-draft:''}
-];
+
+const bancoTemas=[{"ano": "2025", "titulo": "Perspectivas acerca do envelhecimento na sociedade brasileira", "assunto": "o envelhecimento na sociedade brasileira", "eixo1": "o preconceito etário", "eixo2": "a insuficiência de políticas de cuidado", "mecanismo": "a naturalização de estereótipos sobre idosos", "consequencia": "o afastamento de pessoas idosas de espaços de decisão", "acao": "campanhas intergeracionais em escolas e centros comunitários", "finalidade": "ampliar a participação social das pessoas idosas", "repertorio": "a Constituição Federal e a garantia da dignidade humana", "valor": "a dignidade e a inclusão de pessoas idosas"}, {"ano": "2024", "titulo": "Desafios para a valorização da herança africana no Brasil", "assunto": "a valorização da herança africana", "eixo1": "a invisibilização de contribuições afro-brasileiras", "eixo2": "a aplicação desigual da educação para as relações étnico-raciais", "mecanismo": "a apresentação superficial da história africana", "consequencia": "a reprodução de estereótipos culturais", "acao": "projetos escolares com artistas e pesquisadores afro-brasileiros", "finalidade": "ampliar o reconhecimento da herança africana", "repertorio": "a Lei 10.639/2003 e o ensino de história e cultura afro-brasileira", "valor": "a formação de uma memória cultural plural"}, {"ano": "2023", "titulo": "Desafios para o enfrentamento da invisibilidade do trabalho de cuidado realizado pela mulher no Brasil", "assunto": "a invisibilidade do trabalho de cuidado realizado pela mulher", "eixo1": "a divisão desigual das tarefas domésticas", "eixo2": "a baixa valorização social do cuidado", "mecanismo": "a associação histórica do cuidado ao papel feminino", "consequencia": "a sobrecarga de tempo e oportunidades para mulheres", "acao": "campanhas educativas sobre divisão de tarefas e serviços de apoio ao cuidado", "finalidade": "reconhecer e redistribuir o trabalho de cuidado", "repertorio": "a discussão sociológica sobre a divisão sexual do trabalho", "valor": "a igualdade de oportunidades entre mulheres e homens"}, {"ano": "2022", "titulo": "Desafios para a valorização de comunidades e povos tradicionais no Brasil", "assunto": "a valorização de comunidades e povos tradicionais", "eixo1": "a fragilidade da proteção territorial", "eixo2": "o apagamento de saberes tradicionais", "mecanismo": "a exclusão de comunidades dos processos decisórios", "consequencia": "a ameaça à transmissão de conhecimentos entre gerações", "acao": "consultas participativas e projetos de proteção de saberes comunitários", "finalidade": "assegurar voz e proteção a comunidades tradicionais", "repertorio": "a Constituição Federal e a proteção da diversidade cultural", "valor": "o respeito aos modos de vida tradicionais"}, {"ano": "2021", "titulo": "Invisibilidade e registro civil: garantia de acesso à cidadania no Brasil", "assunto": "o acesso ao registro civil", "eixo1": "as barreiras geográficas e burocráticas", "eixo2": "a falta de informação sobre serviços gratuitos", "mecanismo": "a distância de cartórios em regiões isoladas", "consequencia": "a dificuldade de exercer direitos sem documentação", "acao": "mutirões itinerantes de registro e orientação em comunidades distantes", "finalidade": "ampliar o acesso à documentação básica", "repertorio": "a Constituição Federal e o princípio da cidadania", "valor": "o exercício efetivo de direitos civis"}, {"ano": "2020", "titulo": "O estigma associado às doenças mentais na sociedade brasileira", "assunto": "o estigma associado às doenças mentais", "eixo1": "a desinformação sobre saúde mental", "eixo2": "o preconceito em ambientes sociais", "mecanismo": "a circulação de estereótipos sobre transtornos mentais", "consequencia": "o afastamento de pessoas do acolhimento e do tratamento", "acao": "campanhas de informação e formação de equipes de acolhimento", "finalidade": "reduzir o preconceito e facilitar o acesso a apoio", "repertorio": "a Organização Mundial da Saúde e a importância da saúde mental", "valor": "o cuidado sem discriminação"}, {"ano": "2019", "titulo": "Democratização do acesso ao cinema no Brasil", "assunto": "a democratização do acesso ao cinema", "eixo1": "a concentração de salas em centros urbanos", "eixo2": "as barreiras econômicas ao consumo cultural", "mecanismo": "a distribuição desigual de equipamentos culturais", "consequencia": "a exclusão de públicos de baixa renda das exibições", "acao": "circuitos de cinema itinerante e sessões gratuitas em espaços públicos", "finalidade": "ampliar o acesso territorial e econômico ao cinema", "repertorio": "a Constituição Federal e o direito à cultura", "valor": "a participação cultural de diferentes públicos"}, {"ano": "2018", "titulo": "Manipulação do comportamento do usuário pelo controle de dados na internet", "assunto": "a manipulação de usuários pelo controle de dados na internet", "eixo1": "a opacidade do uso de dados pessoais", "eixo2": "a baixa educação digital", "mecanismo": "a coleta pouco transparente de informações sobre usuários", "consequencia": "a influência de recomendações personalizadas sobre escolhas", "acao": "ações de educação digital e fiscalização da transparência no tratamento de dados", "finalidade": "fortalecer a autonomia dos usuários", "repertorio": "a reflexão sobre vigilância e poder em obras de ficção distópica", "valor": "a autonomia e a privacidade no ambiente digital"}, {"ano": "2017", "titulo": "Desafios para a formação educacional de surdos no Brasil", "assunto": "a formação educacional de surdos", "eixo1": "a falta de recursos acessíveis", "eixo2": "a formação insuficiente de profissionais para a educação bilíngue", "mecanismo": "a ausência de materiais adequados em parte das escolas", "consequencia": "a dificuldade de garantir participação plena de estudantes surdos", "acao": "formação continuada de docentes e produção de materiais acessíveis em Libras", "finalidade": "ampliar a acessibilidade e a aprendizagem", "repertorio": "a Lei Brasileira de Inclusão e o direito à educação", "valor": "a inclusão educacional de estudantes surdos"}, {"ano": "2016", "titulo": "Caminhos para combater a intolerância religiosa no Brasil", "assunto": "o combate à intolerância religiosa", "eixo1": "o desconhecimento sobre diversidade de crenças", "eixo2": "a reprodução de discriminações religiosas", "mecanismo": "a disseminação de estereótipos sobre tradições religiosas", "consequencia": "a violação da liberdade de crença e de culto", "acao": "ações escolares de respeito à diversidade e canais de denúncia acessíveis", "finalidade": "promover a convivência e a liberdade religiosa", "repertorio": "a Constituição Federal e a liberdade de crença", "valor": "o respeito à pluralidade religiosa"}];
+let temaAtual=null;
+let tasks=[];
+function gerarTarefas(t){
+ const cap=x=>x.charAt(0).toUpperCase()+x.slice(1);
+ const foco1=cap(t.eixo1),foco2=cap(t.eixo2);
+ const intro=`A discussão sobre ${t.assunto} evidencia obstáculos à efetivação de direitos no Brasil. Nesse contexto, ${t.eixo1} e ${t.eixo2} dificultam avanços consistentes.`;
+ const dev1=`${foco1} constitui um obstáculo relevante. Isso ocorre porque ${t.mecanismo}, situação que contribui para ${t.consequencia}. Assim, enfrentar esse fator é essencial para transformar o cenário.`;
+ const dev2=`Além disso, ${t.eixo2} aprofunda o problema. À luz de ${t.repertorio}, é possível discutir ${t.valor}. Essa referência ajuda a compreender a necessidade de medidas estruturais, sem substituir a análise da realidade brasileira.`;
+ const concl=`Portanto, órgãos públicos competentes, em parceria com instituições de ensino e organizações sociais, devem promover ${t.acao}, por meio de planejamento, recursos e acompanhamento público. A medida busca ${t.finalidade}, com respeito aos direitos fundamentais.`;
+ const seq=[`${foco1} constitui um obstáculo relevante.`,`Isso ocorre porque ${t.mecanismo}.`,`Como consequência, observa-se ${t.consequencia}.`,`Portanto, enfrentar esse fator é indispensável para avançar na questão.`];
+ return [
+ {title:'Construa uma tese defensável',desc:'Introdução • posicionamento e recorte',kind:'single',
+ prompt:`No tema do ENEM ${t.ano}, qual tese oferece dois eixos argumentativos específicos, que podem ser desenvolvidos?`,
+ options:[
+ `É necessário falar mais sobre ${t.assunto} para melhorar a sociedade.`,
+ `${cap(t.assunto)} representa uma questão importante para o Brasil.`,
+ `${foco1} e ${t.eixo2} dificultam o enfrentamento do problema.`,
+ `O assunto envolve desafios que precisam ser superados por todos.`
+ ],correct:2,
+ why:`Uma tese precisa recortar o problema. Aqui, os eixos são ${t.eixo1} e ${t.eixo2}; ambos podem orientar parágrafos próprios.`,draft:intro},
+ {title:'Organize o primeiro desenvolvimento',desc:'Desenvolvimento 1 • progressão lógica',kind:'sequence',
+ prompt:`Organize os trechos sobre ${t.assunto}: ideia central → explicação → consequência → síntese.`,
+ pieces:[seq[2],seq[0],seq[3],seq[1]],correct:[1,3,0,2],
+ why:`A ordem correta é: tópico frasal (${t.eixo1}), explicação do mecanismo, consequência e fechamento.`,draft:dev1},
+ {title:'Use repertório de modo produtivo',desc:'Desenvolvimento 2 • repertório e análise',kind:'single',
+ prompt:`Como utilizar "${t.repertorio}" de forma produtiva em um argumento sobre ${t.assunto}?`,
+ options:[
+ `Mencionar a referência no início do parágrafo e continuar sem relacioná-la ao tema.`,
+ `Usar a referência como prova definitiva de que todas as pessoas pensam da mesma forma.`,
+ `Apresentar a referência e explicar como ela ajuda a discutir ${t.valor}, conectando-a a ${t.eixo2}.`,
+ `Afirmar que a referência, por ser conhecida, substitui dados e explicações sobre o Brasil.`
+ ],correct:2,
+ why:'O repertório precisa ser legitimado e articulado ao raciocínio, não apenas citado. A referência sustenta uma reflexão, mas não comprova sozinha uma generalização.',draft:dev2},
+ {title:'Monte uma intervenção completa',desc:'Conclusão • proposta consistente',kind:'multi',
+ prompt:`Selecione exatamente TRÊS elementos que tornam a proposta de intervenção adequada ao tema "${t.titulo}".`,
+ options:[
+ `A sociedade precisa melhorar sua postura, sem necessidade de medidas concretas.`,
+ `Órgãos públicos competentes, em parceria com instituições sociais, devem coordenar ${t.acao}.`,
+ `A situação deve ser resolvida rapidamente, sem precisar indicar responsáveis.`,
+ `A iniciativa deve contar com planejamento, recursos definidos e acompanhamento dos resultados.`,
+ `A finalidade é ${t.finalidade}, com respeito aos direitos fundamentais.`,
+ `A melhor solução é restringir indiscriminadamente os direitos de quem discorda.`
+ ],correct:[1,3,4],
+ why:'Uma intervenção produtiva explicita responsáveis, ações, meios de execução, finalidade e detalhamento; também respeita os direitos humanos.',draft:concl},
+ {title:'Revisão crítica da redação',desc:'Revisão • identificar falhas de argumentação',kind:'multi',
+ prompt:`Na revisão de uma redação sobre ${t.assunto}, selecione exatamente DUAS práticas que devem ser corrigidas.`,
+ options:[
+ `Retomar ${t.eixo1} no desenvolvimento e explicar suas consequências.`,
+ `Apenas citar ${t.repertorio}, sem mostrar sua relação com o argumento.`,
+ `Definir agentes e meios para executar ${t.acao}.`,
+ `Usar expressões como "é um problema" sem demonstrar causas nem efeitos.`,
+ `Revisar se os parágrafos respondem à tese apresentada.`
+ ],correct:[1,3],
+ why:'Repertório sem conexão e afirmações vagas enfraquecem o texto. É preciso demonstrar relações entre causas, consequências e a tese.',draft:''}
+ ];
+}
 let stage=0,score=0,selection=[],confirmed=false,completed=[],finished=false,mode="learn",attempts=0,results=[];
-const total=tasks.length;
+const total=5;
 function shuffle(arr){for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
 function render(){
+ if(!temaAtual)return;
  const t=tasks[stage];confirmed=false;selection=[];
  $('kicker').textContent='ETAPA '+(stage+1)+' DE '+total;
  $('title').textContent=t.title;$('description').textContent=t.desc;$('task').textContent=t.prompt;
@@ -135,6 +139,7 @@ function updateSequence(){
 function renderAside(){
  $('points').textContent='⭐ '+score+' pontos';
  $('quality').textContent='🎯 Etapas concluídas: '+completed.length+'/'+total;
+ $('themeLabel').textContent='ENEM '+temaAtual.ano+' — '+temaAtual.titulo;
  $('draft').textContent=(mode==='exam'&&!finished)?'Sua redação-modelo será revelada após o resultado.':completed.length?completed.map(x=>tasks[x].draft).filter(Boolean).join('\n\n'):'Seu texto aparecerá aqui conforme você avança.';
  $('stages').innerHTML='';
  tasks.forEach((t,i)=>{const d=document.createElement('div');d.className='stage '+(completed.includes(i)?'done':i===stage?'active':'');const b=document.createElement('b');b.textContent=completed.includes(i)?'✓':i+1;d.append(b,document.createTextNode(t.title));$('stages').append(d)});
@@ -185,7 +190,7 @@ function finish(){
  $('answer').append(review);renderAside();
  $('stageCount').textContent='5/5 concluídas';$('quality').textContent='🏆 Resultado: '+score+'/1000';
 }
-function reset(){stage=0;score=0;selection=[];confirmed=false;completed=[];finished=false;attempts=0;results=[];render()}
+function reset(){if(!temaAtual)return;stage=0;score=0;selection=[];confirmed=false;completed=[];finished=false;attempts=0;results=[];render()}
 function setMode(m){mode=m;$('modeLearn').classList.toggle('active',m==='learn');$('modeExam').classList.toggle('active',m==='exam');reset()}
 $('modeLearn').addEventListener('click',()=>setMode('learn'));
 $('modeExam').addEventListener('click',()=>setMode('exam'));
@@ -193,6 +198,18 @@ $('showHint').addEventListener('click',()=>{
  const hints=['Procure uma tese que antecipe dois eixos de desenvolvimento.','Comece pela ideia central, explique o mecanismo, mostre a consequência e feche o raciocínio.','A melhor alternativa explica uma analogia sem fazer generalizações.','Procure agente, ação, meio e finalidade; desconfie de medidas vagas ou que violem direitos.','Pergunte-se: conectivo substitui raciocínio? E agente + ação bastam?'];
  $('hint').textContent='💡 '+hints[stage];$('hint').classList.remove('hidden');
 });
-$('check').addEventListener('click',check);$('next').addEventListener('click',next);$('reset').addEventListener('click',reset);render();
+$('drawTheme').addEventListener('click',()=>{
+ const pool=bancoTemas.filter(t=>!temaAtual||t.ano!==temaAtual.ano);
+ temaAtual=pool[Math.floor(Math.random()*pool.length)];
+ tasks=gerarTarefas(temaAtual);
+ const seq=tasks[1];const indexed=seq.pieces.map((text,i)=>({text,i}));
+ shuffle(indexed);seq.pieces=indexed.map(x=>x.text);
+ seq.correct=seq.correct.map(originalIndex=>indexed.findIndex(x=>x.i===originalIndex));
+ $('themePicked').textContent='ENEM '+temaAtual.ano+' — '+temaAtual.titulo;
+ $('gameLayout').classList.remove('hidden');$('gameToolbar').classList.remove('hidden');
+ reset();
+ $('gameLayout').scrollIntoView({behavior:'smooth',block:'start'});
+});
+$('check').addEventListener('click',check);$('next').addEventListener('click',next);$('reset').addEventListener('click',reset);
 })();
 </script></body></html>
