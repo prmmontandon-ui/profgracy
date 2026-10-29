@@ -1,7 +1,20 @@
 <!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tribunal das Ideias | Prof. Gracy</title>
 <style>
 :root{--wine:#682940;--wine2:#883d57;--gold:#c49b56;--cream:#fffaf5;--line:#e8d8d6;--ink:#352c30;--muted:#71666b;--green:#2e7755}*{box-sizing:border-box}body{margin:0;background:linear-gradient(130deg,#f8eee8,#fffaf5);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink)}header{background:var(--wine);color:#fff;padding:18px max(18px,calc((100vw - 1080px)/2));display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}header a{color:#f2d3a2;text-decoration:none}main{max-width:1080px;margin:auto;padding:30px 18px 55px}h1,h2{font-family:Georgia,serif;color:var(--wine)}h1{font-size:clamp(2rem,5vw,3.1rem);margin:8px 0}h2{margin:8px 0 13px}.eyebrow{font-size:.75rem;letter-spacing:.12em;font-weight:850;text-transform:uppercase;color:#94586a}.intro{max-width:790px;line-height:1.65;color:var(--muted)}.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;margin:20px 0;box-shadow:0 12px 36px #6729400b}.hidden{display:none!important}.btn{font:inherit;background:var(--wine);color:#fff;border:0;border-radius:12px;padding:13px 18px;font-weight:800;cursor:pointer}.btn:hover{background:var(--wine2)}.btn:disabled{opacity:.5;cursor:default}.btn.alt{background:#f7ede8;color:var(--wine);border:1px solid var(--line)}button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}.row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.pill{background:#f7e9e7;color:var(--wine);font-size:.82rem;border-radius:99px;padding:7px 12px;font-weight:800}.score{color:var(--wine);font-weight:900}.track{background:#f0e4e0;border-radius:99px;height:9px;margin:16px 0;overflow:hidden}.track div{height:100%;background:var(--gold);width:0;transition:width .3s}.court{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:18px 0}.speech{padding:18px;border-radius:16px;line-height:1.7;min-height:150px}.speech strong{display:block;margin-bottom:8px}.thesis{background:#f9f0e7;border:1px solid #e9d3b5}.objection{background:#f8edf0;border:1px solid #e7cbd3}.choices{display:grid;gap:10px}.choice{width:100%;text-align:left;border:1px solid #e4d5d1;border-radius:13px;background:#fffdfb;padding:14px 15px;font:inherit;line-height:1.55;color:var(--ink);cursor:pointer}.choice:hover:not(:disabled){border-color:var(--gold);background:#fff8ec}.choice.selected{border-color:var(--wine);box-shadow:inset 4px 0 var(--wine)}.choice.correct{background:#e9f4ed;border-color:#85b79a}.choice.wrong{background:#fcecec;border-color:#d5a1a1}.choice:disabled{cursor:default}.feedback{background:#f9f2e9;border-left:4px solid var(--gold);padding:14px;border-radius:12px;line-height:1.65;margin:15px 0}.muted{color:var(--muted);line-height:1.65}.small{font-size:.88rem}.jury{background:#fff9f1;border:1px solid #ecdcc6;border-radius:14px;padding:15px;margin-top:18px}.jury h3{margin:0 0 7px;color:var(--wine)}.jury p{margin:0}.scorebig{font-size:3.5rem;color:var(--wine);font-weight:900}.report{border-bottom:1px solid var(--line);padding:13px 0;line-height:1.6}.report:last-child{border:0}footer{text-align:center;color:#8b7b7d;font-size:.82rem;padding:12px}@media(max-width:700px){.court{grid-template-columns:1fr}.speech{min-height:auto}.panel{padding:18px}}
-</style></head><body>
+</style><!-- Google Analytics 4 — Prof. Gracy -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YRHK4PG7V"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0YRHK4PG7V');
+function registrarJogo(acao, jogo, extras) {
+  if (typeof gtag === 'function') gtag('event', acao, Object.assign({
+    jogo_nome: jogo
+  }, extras || {}));
+}
+</script>
+</head><body>
 <header><strong>✦ Prof. Gracy <span style="color:#f0cf9d">| Central de Jogos</span></strong><a href="jogos.html">← Voltar aos jogos</a></header>
 <main><div class="eyebrow">Novo jogo · defesa de argumentos</div><h1>⚖️ Tribunal das Ideias</h1><p class="intro">Você é a defesa de uma tese. A acusação apresenta uma objeção e você precisa escolher a <strong>réplica que melhor enfrenta o argumento</strong>, sem fugir do tema, generalizar ou confundir causa e consequência.</p>
 <section class="panel" id="intro"><h2>O tribunal está aberto!</h2><p class="muted">Serão cinco audiências, com temas sorteados entre os dez últimos temas do ENEM regular (2016–2025). Cada réplica vale <strong>200 pontos</strong>. O juiz explica a decisão após cada rodada.</p><p class="muted small">Atividade autoral de treino. A pontuação não é uma nota oficial do ENEM. O jogo não coleta nomes nem envia resultados.</p><button class="btn" id="start">⚖️ Iniciar julgamento</button></section>
@@ -14,7 +27,7 @@ const bank=[{"year": "2025", "title": "Envelhecimento na sociedade brasileira", 
 const $=id=>document.getElementById(id);
 const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 let cases=[],idx=0,points=0,selected=null,answered=false,choices=[],log=[];
-function start(){
+function start(){registrarJogo('jogo_iniciado','Tribunal das Ideias');
  cases=shuffle([...bank]).slice(0,5);idx=0;points=0;log=[];
  $('intro').classList.add('hidden');$('end').classList.add('hidden');$('game').classList.remove('hidden');render();window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -35,7 +48,7 @@ function confirm(){
  $('feedback').classList.remove('hidden');$('confirm').classList.add('hidden');$('next').classList.remove('hidden');$('next').textContent=idx===4?'Ver veredito final →':'Próxima audiência →';
 }
 function next(){if(idx<4){idx++;render()}else finish();window.scrollTo({top:0,behavior:'smooth'})}
-function finish(){
+function finish(){registrarJogo('jogo_concluido','Tribunal das Ideias',{pontuacao:points});
  $('game').classList.add('hidden');$('end').classList.remove('hidden');$('finalScore').textContent=`${points} / 1000`;
  $('verdict').textContent=points===1000?'🏆 Defesa impecável! Você respondeu às cinco objeções de modo coerente.':points>=600?'Boa atuação! Reveja as objeções que exigiram mais cuidado.':'Seu raciocínio pode ficar mais sólido. Compare as objeções com as melhores réplicas.';
  $('report').replaceChildren();log.forEach((r,i)=>{const d=document.createElement('div');d.className='report';const h=document.createElement('strong');h.textContent=`${i+1}. ENEM ${r.year} — ${r.title} · ${r.ok?'200':'0'} pontos`;const p=document.createElement('p');p.className='muted small';p.textContent=`Objeção: ${r.objection} Melhor réplica: ${r.answer}`;d.append(h,p);$('report').append(d)});

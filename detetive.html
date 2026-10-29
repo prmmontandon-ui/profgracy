@@ -13,7 +13,20 @@ h2{font-family:Georgia,serif;color:var(--wine);font-size:1.55rem;margin:8px 0 10
 button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}.primary,.secondary{border:0;border-radius:12px;padding:13px 18px;font-weight:800}.primary{background:var(--wine);color:white}.primary:hover{background:var(--wine2)}.secondary{background:#f6ede7;color:var(--wine);border:1px solid #e8d8d2}.primary:disabled,.secondary:disabled{opacity:.48;cursor:not-allowed}
 .grid{display:grid;grid-template-columns:1fr 310px;gap:18px}.paper{background:#fffdf9;border:1px solid #e9dfd1;border-radius:14px;padding:20px;line-height:1.85}.paper .paper-label{font-size:.75rem;letter-spacing:.08em;font-weight:800;color:#9c755b}.passage{border:1px solid transparent;display:block;width:100%;text-align:left;background:transparent;color:var(--ink);padding:12px 13px;border-radius:10px;line-height:1.75;margin:4px 0}.passage:hover:not(:disabled){background:#faf0e9;border-color:#e6c7ae}.passage.selected{background:#fff0d6;border-color:#bc8e42;box-shadow:inset 4px 0 var(--gold)}.passage.correct{background:#eaf5ef;border-color:#a1ceb5}.passage.wrong{background:#fcebea;border-color:#e6aba6}.passage:disabled{cursor:default}.reasons{display:grid;gap:9px;margin-top:12px}.reason{padding:12px 14px;text-align:left;background:#fff;border:1px solid var(--line);border-radius:12px;color:var(--ink);line-height:1.5}.reason:hover:not(:disabled){border-color:var(--gold)}.reason.selected{background:#fff0d6;border-color:#bc8e42}.reason.correct{background:#eaf5ef;border-color:#6cad88}.reason.wrong{background:#fcebea;border-color:#d38b83}.reason:disabled{cursor:default}.feedback{margin-top:14px;padding:14px;border-radius:12px;background:#f8f1e8;line-height:1.6;border-left:4px solid var(--gold)}.tip{background:#f7f0e8;border:1px solid #eadacb;padding:14px;border-radius:12px;line-height:1.6}.case-list{display:grid;gap:9px}.case-row{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding:8px 0;font-size:.9rem}.case-row:last-child{border:0}.good{color:var(--green);font-weight:800}.bad{color:#ad4b48;font-weight:800}.result{font-size:3.6rem;font-weight:900;color:var(--wine);line-height:1.2}.result-card{padding:12px 0;border-bottom:1px solid var(--line);line-height:1.6}.result-card:last-child{border:0}footer{text-align:center;color:var(--muted);font-size:.8rem;padding:14px}
 @media(max-width:760px){.hero{grid-template-columns:1fr}.seal{display:none}.grid{grid-template-columns:1fr}.panel{padding:18px}.paper{padding:12px}.passage{padding:11px 9px}header{padding:16px 18px}}
-</style></head>
+</style><!-- Google Analytics 4 — Prof. Gracy -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YRHK4PG7V"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0YRHK4PG7V');
+function registrarJogo(acao, jogo, extras) {
+  if (typeof gtag === 'function') gtag('event', acao, Object.assign({
+    jogo_nome: jogo
+  }, extras || {}));
+}
+</script>
+</head>
 <body>
 <header><strong>✦ Prof. Gracy <span style="color:#e6c389">| Central de Jogos</span></strong><a href="jogos.html">← Voltar aos jogos</a></header>
 <main>
@@ -108,7 +121,7 @@ pieces:[
 const $=id=>document.getElementById(id);
 const shuffle=arr=>{for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr};
 let order=[],index=0,points=0,selectedPiece=null,selectedReason=null,phase='piece',log=[],view=null;
-function newGame(){
+function newGame(){registrarJogo('jogo_iniciado','Detetive da Redação');
  order=shuffle([...cases]).slice(0,5);index=0;points=0;log=[];
  $('intro').classList.add('hidden');$('end').classList.add('hidden');$('game').classList.remove('hidden');render();
 }
@@ -150,7 +163,7 @@ function confirm(){
  }
 }
 function next(){if(index<4){index++;render();window.scrollTo({top:0,behavior:'smooth'})}else finish()}
-function finish(){
+function finish(){registrarJogo('jogo_concluido','Detetive da Redação',{pontuacao:points});
  $('game').classList.add('hidden');$('end').classList.remove('hidden');$('finalScore').textContent=`${points} / 1000`;
  $('verdict').textContent=points===1000?'Investigação impecável! Você identificou e explicou todas as falhas.':points>=700?'Boa investigação! Revise os diagnósticos em que houve dúvida.':points>=400?'Você encontrou algumas pistas. Releia as justificativas para aprimorar sua análise.':'A investigação está começando. Use as explicações para reconhecer os tipos de falha.';
  $('report').replaceChildren();

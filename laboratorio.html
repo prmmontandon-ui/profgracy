@@ -31,7 +31,20 @@ textarea{width:100%;min-height:170px;resize:vertical;border:1px solid #d9c6cd;bo
 .stage.active{font-weight:900;color:var(--wine)}.stage.done b{background:#e0f2e9;color:var(--green)}
 .score{font-size:30px;font-weight:900;color:var(--wine)}.hidden{display:none!important}.mode-picker{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}.mode{border:2px solid var(--line);background:#fff;border-radius:16px;padding:15px;text-align:left;flex:1;min-width:230px}.mode strong{display:block;color:var(--wine);font-size:18px}.mode small{display:block;color:var(--muted);margin-top:4px}.mode.active{border-color:var(--wine);background:#fff3f6}.hint{background:#fff8e8;border:1px solid #efd59d;border-radius:12px;padding:13px;margin:12px 0}.review-item{border-bottom:1px solid var(--line);padding:13px 0}.review-item strong{color:var(--wine)}
 @media(max-width:800px){.layout{grid-template-columns:1fr}.hero .emoji{display:none}.panel{padding:18px}}
-</style></head>
+</style><!-- Google Analytics 4 — Prof. Gracy -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YRHK4PG7V"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0YRHK4PG7V');
+function registrarJogo(acao, jogo, extras) {
+  if (typeof gtag === 'function') gtag('event', acao, Object.assign({
+    jogo_nome: jogo
+  }, extras || {}));
+}
+</script>
+</head>
 <body>
 <header><div class="brand">Prof. Gracy<small>Português • Redação • ENEM</small></div><div><a class="back" href="jogos.html">← Central de Jogos</a> <a class="back" href="index.html">Voltar ao site</a></div></header>
 <main>
@@ -225,7 +238,7 @@ function next(){
  if(stage<total-1){stage++;render();return}
  finish();
 }
-function finish(){
+function finish(){registrarJogo('jogo_concluido','Laboratório da Redação',{pontuacao:score,modo:mode});
  finished=true;$('bar').style.width='100%';$('kicker').textContent='LABORATÓRIO CONCLUÍDO';
  $('title').textContent=score>=800?'Excelente trabalho!':'Sua redação está em evolução!';
  $('description').textContent='Você concluiu as cinco etapas do laboratório.';
@@ -260,7 +273,7 @@ $('drawTheme').addEventListener('click',()=>{
  $('startGame').classList.remove('hidden');
  $('gameLayout').classList.add('hidden');$('gameToolbar').classList.add('hidden');
 });
-$('startGame').addEventListener('click',()=>{
+$('startGame').addEventListener('click',()=>{registrarJogo('jogo_iniciado','Laboratório da Redação',{modo:mode});
  if(!temaAtual)return;
  $('gameLayout').classList.remove('hidden');$('gameToolbar').classList.remove('hidden');
  reset();$('gameLayout').scrollIntoView({behavior:'smooth',block:'start'});

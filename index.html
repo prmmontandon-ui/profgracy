@@ -347,6 +347,19 @@ footer{background:#2e171d;color:#eadde0;padding:34px 0}
 .materiais-baixar:hover{transform:translateY(-2px)}
 @media(max-width:600px){.materiais-cartao{flex-direction:column;align-items:flex-start;padding:22px}.materiais-icone{height:70px;width:70px;flex-basis:auto}}
 </style>
+<!-- Google Analytics 4 — Prof. Gracy -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YRHK4PG7V"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-0YRHK4PG7V');
+function registrarJogo(acao, jogo, extras) {
+  if (typeof gtag === 'function') gtag('event', acao, Object.assign({
+    jogo_nome: jogo
+  }, extras || {}));
+}
+</script>
 </head>
 
 <body>
