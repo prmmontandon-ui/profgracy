@@ -36,8 +36,9 @@ textarea{width:100%;min-height:170px;resize:vertical;border:1px solid #d9c6cd;bo
 <header><div class="brand">Prof. Gracy<small>Português • Redação • ENEM</small></div><div><a class="back" href="jogos.html">← Central de Jogos</a> <a class="back" href="index.html">Voltar ao site</a></div></header>
 <main>
 <div class="hero"><div><div class="badge">Novo desafio • nível avançado</div><h1>🧪 Laboratório da Redação</h1><p>Construa uma redação argumentativa, etapa por etapa. Aqui não adianta escolher a resposta mais comprida. 😉</p></div><div class="emoji">📝🔬</div></div>
-<section class="panel" style="margin-top:20px;background:#fffdf9"><div class="step">BANCO DE TEMAS OFICIAIS • ENEM REGULAR 2016–2025</div><h2 style="margin:7px 0">🎲 Sorteio do tema</h2><p class="muted">Cada sorteio escolhe um tema real do ENEM. As cinco etapas são adaptadas ao assunto escolhido.</p><div id="themePicked" class="task" aria-live="polite">Clique para descobrir seu tema!</div><button class="primary" type="button" id="drawTheme">🎲 Sortear tema e iniciar</button><p class="mini">Novo sorteio reinicia a partida. As atividades são autorais e não reproduzem questões oficiais.</p></section>
-<div class="mode-picker" role="group" aria-label="Escolha o modo de jogo"><button type="button" class="mode active" id="modeLearn"><strong>🌱 Modo Aprendiz</strong><small>Dicas, novas tentativas e explicação a cada desafio.</small></button><button type="button" class="mode" id="modeExam"><strong>🎓 Modo ENEM</strong><small>Sem dicas e sem respostas durante a partida. Correção no final.</small></button></div><div class="toolbar hidden" id="gameToolbar"><span class="chip" id="points">⭐ 0 pontos</span><span class="chip" id="stageCount">Etapa 1/5</span><span class="chip" id="quality">🎯 Qualidade: em construção</span></div>
+<div class="mode-picker" role="group" aria-label="Escolha o modo de jogo"><button type="button" class="mode active" id="modeLearn"><strong>🌱 Modo Aprendiz</strong><small>Dicas, novas tentativas e explicação a cada desafio.</small></button><button type="button" class="mode" id="modeExam"><strong>🎓 Modo ENEM</strong><small>Sem dicas e sem respostas durante a partida. Correção no final.</small></button></div>
+<section class="panel" style="margin-top:20px;background:#fffdf9" id="themePanel"><div class="step">BANCO DE TEMAS OFICIAIS • ENEM REGULAR 2016–2025</div><h2 style="margin:7px 0">🎲 Sorteio do tema</h2><p class="muted">Primeiro escolha seu modo de jogo. Depois sorteie um tema real do ENEM e comece sua redação.</p><div id="themePicked" class="task" aria-live="polite">Clique em “Sortear tema” para descobrir seu desafio!</div><div class="controls"><button class="secondary" type="button" id="drawTheme">🎲 Sortear tema</button><button class="primary hidden" type="button" id="startGame">✍️ Começar desafio →</button></div><p class="mini">Você pode sortear novamente antes de começar. Durante a partida, um novo sorteio reinicia o progresso. As atividades são autorais e não reproduzem questões oficiais.</p></section>
+<div class="toolbar hidden" id="gameToolbar"><span class="chip" id="points">⭐ 0 pontos</span><span class="chip" id="stageCount">Etapa 1/5</span><span class="chip" id="quality">🎯 Qualidade: em construção</span></div>
 <div class="layout hidden" id="gameLayout"><section class="panel">
 <div class="step" id="kicker">Etapa 1</div><h2 id="title"></h2><p class="muted" id="description"></p><div class="progress"><div id="bar"></div></div>
 <div class="task" id="task"></div><div id="answer"></div><div class="hint hidden" id="hint"></div>
@@ -205,10 +206,15 @@ $('drawTheme').addEventListener('click',()=>{
  const seq=tasks[1];const indexed=seq.pieces.map((text,i)=>({text,i}));
  shuffle(indexed);seq.pieces=indexed.map(x=>x.text);
  seq.correct=seq.correct.map(originalIndex=>indexed.findIndex(x=>x.i===originalIndex));
- $('themePicked').textContent='ENEM '+temaAtual.ano+' — '+temaAtual.titulo;
+ $('themePicked').textContent='📚 ENEM '+temaAtual.ano+' — '+temaAtual.titulo;
+ $('drawTheme').textContent='🔀 Sortear outro tema';
+ $('startGame').classList.remove('hidden');
+ $('gameLayout').classList.add('hidden');$('gameToolbar').classList.add('hidden');
+});
+$('startGame').addEventListener('click',()=>{
+ if(!temaAtual)return;
  $('gameLayout').classList.remove('hidden');$('gameToolbar').classList.remove('hidden');
- reset();
- $('gameLayout').scrollIntoView({behavior:'smooth',block:'start'});
+ reset();$('gameLayout').scrollIntoView({behavior:'smooth',block:'start'});
 });
 $('check').addEventListener('click',check);$('next').addEventListener('click',next);$('reset').addEventListener('click',reset);
 })();
