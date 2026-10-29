@@ -35,15 +35,15 @@ textarea{width:100%;min-height:170px;resize:vertical;border:1px solid #d9c6cd;bo
 <body>
 <header><div class="brand">Prof. Gracy<small>Português • Redação • ENEM</small></div><div><a class="back" href="jogos.html">← Central de Jogos</a> <a class="back" href="index.html">Voltar ao site</a></div></header>
 <main>
-<div class="hero"><div><div class="badge">Novo desafio • nível avançado</div><h1>🧪 Laboratório da Redação</h1><p>Construa uma redação argumentativa, etapa por etapa. Aqui não adianta escolher a resposta mais comprida. 😉</p></div><div class="emoji">📝🔬</div></div>
+<div class="hero"><div><div class="badge">Novo desafio • nível avançado</div><h1>🧪 Laboratório da Redação</h1><p>Analise teses, organize argumentos e revise propostas. Os desafios mudam a cada partida — decorar a posição não basta. 😉</p></div><div class="emoji">📝🔬</div></div>
 <div class="mode-picker" role="group" aria-label="Escolha o modo de jogo"><button type="button" class="mode active" id="modeLearn"><strong>🌱 Modo Aprendiz</strong><small>Dicas, novas tentativas e explicação a cada desafio.</small></button><button type="button" class="mode" id="modeExam"><strong>🎓 Modo ENEM</strong><small>Sem dicas e sem respostas durante a partida. Correção no final.</small></button></div>
-<section class="panel" style="margin-top:20px;background:#fffdf9" id="themePanel"><div class="step">BANCO DE TEMAS OFICIAIS • ENEM REGULAR 2016–2025</div><h2 style="margin:7px 0">🎲 Sorteio do tema</h2><p class="muted">Primeiro escolha seu modo de jogo. Depois sorteie um tema real do ENEM e comece sua redação.</p><div id="themePicked" class="task" aria-live="polite">Clique em “Sortear tema” para descobrir seu desafio!</div><div class="controls"><button class="secondary" type="button" id="drawTheme">🎲 Sortear tema</button><button class="primary hidden" type="button" id="startGame">✍️ Começar desafio →</button></div><p class="mini">Você pode sortear novamente antes de começar. Durante a partida, um novo sorteio reinicia o progresso. As atividades são autorais e não reproduzem questões oficiais.</p></section>
+<section class="panel" style="margin-top:20px;background:#fffdf9" id="themePanel"><div class="step">LABORATÓRIO 4.0 • TEMAS DO ENEM 2016–2025</div><h2 style="margin:7px 0">🎲 Sorteio do tema</h2><p class="muted">Primeiro escolha seu modo de jogo. Depois sorteie um tema real do ENEM e comece sua redação.</p><div id="themePicked" class="task" aria-live="polite">Clique em “Sortear tema” para descobrir seu desafio!</div><div class="controls"><button class="secondary" type="button" id="drawTheme">🎲 Sortear tema</button><button class="primary hidden" type="button" id="startGame">✍️ Começar desafio →</button></div><p class="mini">Você pode sortear novamente antes de começar. Durante a partida, um novo sorteio reinicia o progresso. As atividades são autorais, com diferentes tipos de desafios sorteados a cada tema, e não reproduzem questões oficiais.</p></section>
 <div class="toolbar hidden" id="gameToolbar"><span class="chip" id="points">⭐ 0 pontos</span><span class="chip" id="stageCount">Etapa 1/5</span><span class="chip" id="quality">🎯 Qualidade: em construção</span></div>
 <div class="layout hidden" id="gameLayout"><section class="panel">
 <div class="step" id="kicker">Etapa 1</div><h2 id="title"></h2><p class="muted" id="description"></p><div class="progress"><div id="bar"></div></div>
 <div class="task" id="task"></div><div id="answer"></div><div class="hint hidden" id="hint"></div>
 <div class="feedback hidden" id="feedback" role="status" aria-live="polite"></div>
-<div class="controls"><button class="secondary" id="showHint">💡 Pedir dica</button><button class="primary" id="check">Analisar decisão</button><button class="primary hidden" id="next">Próxima etapa →</button><button class="secondary" id="reset">Reiniciar laboratório</button></div>
+<div class="controls"><button class="secondary" id="showHint">💡 Pedir dica</button><button class="primary" id="check">Analisar decisão</button><button class="primary hidden" id="next">Próxima etapa →</button><button class="secondary" id="reset">Reiniciar esta partida</button><button class="secondary" id="newChallenges">🔀 Novos desafios do mesmo tema</button></div>
 </section><aside class="panel"><h3>📄 Sua redação em construção</h3><div class="preview" id="draft">Seu texto aparecerá aqui conforme você avança.</div><p class="mini"><strong id="themeLabel">Tema ainda não sorteado.</strong></p><h3>Trilha de aprendizagem</h3><div id="stages"></div><p class="mini">As análises são pedagógicas e baseadas em critérios definidos para este jogo. Não substituem a correção humana da Prof. Gracy.</p></aside></div>
 </main>
 <script>
@@ -55,58 +55,104 @@ let temaAtual=null;
 let tasks=[];
 function gerarTarefas(t){
  const cap=x=>x.charAt(0).toUpperCase()+x.slice(1);
- const foco1=cap(t.eixo1),foco2=cap(t.eixo2);
+ const pick=arr=>arr[Math.floor(Math.random()*arr.length)];
  const intro=`A discussão sobre ${t.assunto} evidencia obstáculos à efetivação de direitos no Brasil. Nesse contexto, ${t.eixo1} e ${t.eixo2} dificultam avanços consistentes.`;
- const dev1=`${foco1} constitui um obstáculo relevante. Isso ocorre porque ${t.mecanismo}, situação que contribui para ${t.consequencia}. Assim, enfrentar esse fator é essencial para transformar o cenário.`;
+ const dev1=`${cap(t.eixo1)} constitui um obstáculo relevante. Isso ocorre porque ${t.mecanismo}, situação que contribui para ${t.consequencia}. Assim, enfrentar esse fator é essencial para transformar o cenário.`;
  const dev2=`Além disso, ${t.eixo2} aprofunda o problema. À luz de ${t.repertorio}, é possível discutir ${t.valor}. Essa referência ajuda a compreender a necessidade de medidas estruturais, sem substituir a análise da realidade brasileira.`;
  const concl=`Portanto, órgãos públicos competentes, em parceria com instituições de ensino e organizações sociais, devem promover ${t.acao}, por meio de planejamento, recursos e acompanhamento público. A medida busca ${t.finalidade}, com respeito aos direitos fundamentais.`;
- const seq=[`${foco1} constitui um obstáculo relevante.`,`Isso ocorre porque ${t.mecanismo}.`,`Como consequência, observa-se ${t.consequencia}.`,`Portanto, enfrentar esse fator é indispensável para avançar na questão.`];
- return [
- {title:'Construa uma tese defensável',desc:'Introdução • posicionamento e recorte',kind:'single',
- prompt:`No tema do ENEM ${t.ano}, qual tese oferece dois eixos argumentativos específicos, que podem ser desenvolvidos?`,
- options:[
- `É necessário falar mais sobre ${t.assunto} para melhorar a sociedade.`,
- `${cap(t.assunto)} representa uma questão importante para o Brasil.`,
- `${foco1} e ${t.eixo2} dificultam o enfrentamento do problema.`,
- `O assunto envolve desafios que precisam ser superados por todos.`
- ],correct:2,
- why:`Uma tese precisa recortar o problema. Aqui, os eixos são ${t.eixo1} e ${t.eixo2}; ambos podem orientar parágrafos próprios.`,draft:intro},
- {title:'Organize o primeiro desenvolvimento',desc:'Desenvolvimento 1 • progressão lógica',kind:'sequence',
- prompt:`Organize os trechos sobre ${t.assunto}: ideia central → explicação → consequência → síntese.`,
- pieces:[seq[2],seq[0],seq[3],seq[1]],correct:[1,3,0,2],
- why:`A ordem correta é: tópico frasal (${t.eixo1}), explicação do mecanismo, consequência e fechamento.`,draft:dev1},
- {title:'Use repertório de modo produtivo',desc:'Desenvolvimento 2 • repertório e análise',kind:'single',
- prompt:`Como utilizar "${t.repertorio}" de forma produtiva em um argumento sobre ${t.assunto}?`,
- options:[
- `Mencionar a referência no início do parágrafo e continuar sem relacioná-la ao tema.`,
- `Usar a referência como prova definitiva de que todas as pessoas pensam da mesma forma.`,
- `Apresentar a referência e explicar como ela ajuda a discutir ${t.valor}, conectando-a a ${t.eixo2}.`,
- `Afirmar que a referência, por ser conhecida, substitui dados e explicações sobre o Brasil.`
- ],correct:2,
- why:'O repertório precisa ser legitimado e articulado ao raciocínio, não apenas citado. A referência sustenta uma reflexão, mas não comprova sozinha uma generalização.',draft:dev2},
- {title:'Monte uma intervenção completa',desc:'Conclusão • proposta consistente',kind:'multi',
- prompt:`Selecione exatamente TRÊS elementos que tornam a proposta de intervenção adequada ao tema "${t.titulo}".`,
- options:[
- `A sociedade precisa melhorar sua postura, sem necessidade de medidas concretas.`,
- `Órgãos públicos competentes, em parceria com instituições sociais, devem coordenar ${t.acao}.`,
- `A situação deve ser resolvida rapidamente, sem precisar indicar responsáveis.`,
- `A iniciativa deve contar com planejamento, recursos definidos e acompanhamento dos resultados.`,
- `A finalidade é ${t.finalidade}, com respeito aos direitos fundamentais.`,
- `A melhor solução é restringir indiscriminadamente os direitos de quem discorda.`
- ],correct:[1,3,4],
- why:'Uma intervenção produtiva explicita responsáveis, ações, meios de execução, finalidade e detalhamento; também respeita os direitos humanos.',draft:concl},
- {title:'Revisão crítica da redação',desc:'Revisão • identificar falhas de argumentação',kind:'multi',
- prompt:`Na revisão de uma redação sobre ${t.assunto}, selecione exatamente DUAS práticas que devem ser corrigidas.`,
- options:[
- `Retomar ${t.eixo1} no desenvolvimento e explicar suas consequências.`,
- `Apenas citar ${t.repertorio}, sem mostrar sua relação com o argumento.`,
- `Definir agentes e meios para executar ${t.acao}.`,
- `Usar expressões como "é um problema" sem demonstrar causas nem efeitos.`,
- `Revisar se os parágrafos respondem à tese apresentada.`
- ],correct:[1,3],
- why:'Repertório sem conexão e afirmações vagas enfraquecem o texto. É preciso demonstrar relações entre causas, consequências e a tese.',draft:''}
- ];
+ const single=(title,desc,prompt,options,correct,why,draft,hint)=>({title,desc,kind:'single',prompt,options,correct,why,draft,hint});
+ const multi=(title,desc,prompt,options,correct,why,draft,hint)=>({title,desc,kind:'multi',prompt,options,correct,why,draft,hint});
+ const sequence=(title,desc,prompt,pieces,why,draft,hint)=>({title,desc,kind:'sequence',prompt,pieces,correct:pieces.map((_,i)=>i),why,draft,hint});
+ const thesis=pick([
+ single('Avalie a força de uma tese','Introdução • recorte argumentativo',`Quatro propostas tratam de "${t.titulo}". Qual tese apresenta um recorte defensável SEM confundir causa com consequência?`,[
+ `A ocorrência de ${t.consequencia} explica, por si só, ${t.eixo1} e ${t.eixo2}.`,
+ `${cap(t.eixo1)} e ${t.eixo2} constituem entraves que precisam ser analisados em conjunto.`,
+ `${cap(t.eixo1)} é a única explicação possível para ${t.assunto}.`,
+ `${cap(t.eixo2)} deve ser discutida, mas a argumentação pode ignorar outros fatores.`
+ ],1,`A tese escolhida articula dois eixos sem reduzir o problema a uma causa única nem inverter a relação entre mecanismo e consequência.`,intro,'Identifique quais opções generalizam, invertem a causalidade ou abandonam um dos eixos.'),
+ single('Encontre a falha na tese','Introdução • precisão e coerência',`Um estudante escreveu: "O problema de ${t.assunto} decorre exclusivamente de ${t.eixo1}." Qual revisão melhora MAIS a precisão da tese?`,[
+ `Trocar "exclusivamente" por "principalmente", mantendo a ideia de que não há outros fatores.`,
+ `Retirar a referência a ${t.eixo1} para evitar assumir um posicionamento.`,
+ `Articular ${t.eixo1} e ${t.eixo2} como fatores relevantes, sem afirmar que são os únicos.`,
+ `Acrescentar uma proposta de intervenção antes de apresentar os argumentos.`
+ ],2,'Uma boa tese delimita os fatores que serão defendidos, mas não transforma uma análise complexa em explicação exclusiva sem sustentação.',intro,'A palavra “exclusivamente” exige uma prova muito forte. Pense em como preservar o recorte sem exagerar.'),
+ single('Escolha um recorte sustentável','Introdução • tese e desenvolvimento',`Você pretende escrever um parágrafo sobre ${t.mecanismo} e outro sobre ${t.eixo2}. Qual tese combina MELHOR com esse plano?`,[
+ `O tema merece atenção, pois há aspectos históricos, culturais e políticos envolvidos.`,
+ `O desafio pode ser enfrentado com conscientização, ainda que suas causas não sejam identificadas.`,
+ `A questão se explica apenas pela falta de iniciativa individual.`,
+ `A persistência de ${t.eixo1} e ${t.eixo2} ajuda a compreender os obstáculos relacionados a ${t.assunto}.`
+ ],3,'A tese antecipa os dois eixos efetivamente desenvolvidos; as demais não sustentam o plano ou fazem afirmações vagas.',intro,'Compare o plano dos parágrafos com os fatores explicitamente anunciados na tese.')
+ ]);
+ const seqA=[`${cap(t.eixo1)} contribui para a permanência do problema.`,`Isso se manifesta quando ocorre ${t.mecanismo}.`,`Como consequência, intensifica-se ${t.consequencia}.`,`Logo, a superação desse entrave requer ações que enfrentem suas causas.`];
+ const seqB=[`Outro obstáculo é ${t.eixo2}.`,`Esse fator se torna relevante porque limita respostas efetivas ao problema.`,`Nesse cenário, ${t.consequencia} demonstra a gravidade da questão.`,`Assim, a análise exige medidas que ultrapassem soluções superficiais.`];
+ const seqC=[`A discussão de ${t.assunto} demanda observar suas causas concretas.`,`Entre elas, destaca-se ${t.eixo1}.`,`O mecanismo de ${t.mecanismo} ajuda a explicar essa dificuldade.`,`O resultado é ${t.consequencia}, o que reforça a urgência de enfrentamento.`];
+ const seq=pick([seqA,seqB,seqC]);
+ const development=sequence('Construa a progressão do argumento','Desenvolvimento 1 • relações lógicas',`Coloque os quatro trechos na ordem que produz o encadeamento argumentativo MAIS coerente. Leia os conectivos e as relações de causa e consequência.`,seq,'A progressão organiza a ideia central, explica sua causa ou mecanismo, explicita efeitos e apresenta uma síntese coerente.',dev1,'Identifique a frase que apresenta o assunto; depois procure o que a explica, o efeito e a conclusão.');
+ const repertoire=pick([
+ single('Repertório: analogia ou prova?','Desenvolvimento 2 • pertinência',`Um aluno cita ${t.repertorio}. Qual uso da referência evita transformá-la em prova automática de uma afirmação?`,[
+ `A referência confirma que ${t.eixo2} é a única causa de ${t.assunto}.`,
+ `A referência pode iluminar ${t.valor}, desde que a relação com ${t.eixo2} seja explicada.`,
+ `Como a referência é reconhecida, basta mencioná-la para validar o parágrafo.`,
+ `A referência substitui a necessidade de analisar situações concretas relacionadas ao tema.`
+ ],1,'Repertório produtivo exige ligação explícita com o argumento; sua existência não comprova causalidades por si só.',dev2,'Procure a alternativa que usa a referência como apoio interpretativo, e não como prova absoluta.'),
+ single('Diagnostique o repertório','Desenvolvimento 2 • análise crítica',`Leia: "Segundo ${t.repertorio}, ${t.valor} importa. Portanto, ${t.assunto} será resolvido automaticamente." Qual é o problema CENTRAL desse raciocínio?`,[
+ `A referência é inadequada porque qualquer menção a direitos é proibida na redação.`,
+ `O trecho apresenta duas causas, mas deveria apresentar apenas uma.`,
+ `A conclusão não decorre da referência: faltam mecanismos e argumentos que justifiquem a solução.`,
+ `O trecho está correto, pois toda referência reconhecida garante uma conclusão verdadeira.`
+ ],2,'A passagem dá um salto lógico: de um princípio geral para uma solução automática, sem explicar como a transformação ocorreria.',dev2,'Uma fonte pode fundamentar um valor, mas não garante que uma solução ocorrerá sozinha.'),
+ single('Repertório em diálogo com a tese','Desenvolvimento 2 • articulação',`Seu segundo argumento trata de ${t.eixo2}. Qual frase integra melhor a referência ao raciocínio?`,[
+ `A referência a ${t.repertorio} permite discutir ${t.valor}; entretanto, é preciso analisar como ${t.eixo2} dificulta avanços nesse campo.`,
+ `A referência a ${t.repertorio} prova que toda política pública já fracassou.`,
+ `A referência é famosa e, por isso, demonstra que não é necessário discutir ${t.eixo2}.`,
+ `A referência deve aparecer no texto, mas não precisa ter relação com a tese.`
+ ],0,'A alternativa articula referência, valor e eixo argumentativo sem atribuir à fonte uma conclusão que ela não sustenta.',dev2,'A melhor opção liga explicitamente a fonte ao eixo discutido.')
+ ]);
+ const intervention=pick([
+ single('Intervenção: identifique a lacuna','Conclusão • elementos da proposta',`Leia: "Instituições responsáveis devem promover ${t.acao} para ${t.finalidade}." Qual informação tornaria a execução MAIS verificável?`,[
+ `Uma afirmação de que todas as pessoas precisam colaborar.`,
+ `Uma repetição do tema na última frase.`,
+ `Uma promessa de que o problema desaparecerá em pouco tempo.`,
+ `A indicação de meios de implementação, recursos e formas de acompanhamento.`
+ ],3,'A ação e a finalidade já aparecem; faltam informações sobre como a medida será realizada e acompanhada.',concl,'Veja quais elementos já estão presentes e qual ainda torna a execução concreta.'),
+ multi('Intervenção: escolha medidas consistentes','Conclusão • agente, meio e finalidade',`Escolha exatamente DUAS decisões que fortalecem uma proposta para ${t.assunto}.`,[
+ `Indicar responsáveis capazes de coordenar ${t.acao}.`,
+ `Prometer resolver o problema integralmente, sem prazo nem avaliação.`,
+ `Prever acompanhamento dos resultados e ajustes na implementação.`,
+ `Substituir a ação por um pedido genérico de conscientização.`,
+ `Retirar a finalidade para não limitar a proposta.`
+ ],[0,2],'Agente compatível e monitoramento concreto tornam a proposta executável; promessas absolutas e formulações genéricas não.',concl,'Procure uma decisão sobre quem faz e outra sobre como acompanhar.'),
+ single('Intervenção: agente e atribuição','Conclusão • viabilidade',`Uma proposta prevê ${t.acao}. Qual justificativa é MAIS sólida para escolher órgãos públicos e instituições parceiras como agentes?`,[
+ `Porque qualquer instituição pode realizar qualquer medida, independentemente de sua função.`,
+ `Porque agentes com atribuições e recursos pertinentes podem coordenar a execução e responder pelos resultados.`,
+ `Porque a presença de muitos agentes dispensa a descrição de ações.`,
+ `Porque nomear um órgão garante que ${t.finalidade} ocorrerá imediatamente.`
+ ],1,'A escolha do agente deve ser compatível com a competência e com os meios disponíveis, sem prometer resultados automáticos.',concl,'Agente adequado não é apenas um nome: precisa ter condições e responsabilidade pela execução.')
+ ]);
+ const review=pick([
+ single('Revisão: causalidade','Revisão • precisão argumentativa',`No texto aparece: "Há ${t.consequencia}; portanto, isso demonstra que ${t.eixo1} é a única causa." Qual correção é MAIS apropriada?`,[
+ `Manter a frase, pois uma consequência comprova uma causa exclusiva.`,
+ `Eliminar toda referência à consequência e deixar apenas a tese.`,
+ `Explicar como ${t.mecanismo} se relaciona à consequência, evitando afirmar exclusividade sem prova.`,
+ `Trocar "única" por "inevitável", preservando o mesmo raciocínio.`
+ ],2,'O vínculo causal precisa ser explicado; a existência de um efeito não comprova uma causa exclusiva.', '', 'Procure a alternativa que explica o mecanismo e evita exageros.'),
+ multi('Revisão: encontre dois problemas','Revisão • leitura crítica',`Selecione exatamente DUAS falhas que exigem correção em uma redação sobre ${t.assunto}.`,[
+ `Usar ${t.eixo1} como eixo do primeiro desenvolvimento.`,
+ `Apresentar ${t.repertorio} sem explicar sua pertinência ao argumento.`,
+ `Explicitar como ${t.mecanismo} produz efeitos sociais.`,
+ `Afirmar que ${t.eixo2} explica tudo, sem justificar a exclusividade.`,
+ `Retomar a tese na conclusão de modo sintético.`
+ ],[1,3],'A citação solta e a generalização sem justificativa são problemas; os demais procedimentos podem contribuir para a argumentação.', '', 'Busque uma falha de repertório e uma falha de generalização.'),
+ single('Revisão: coerência entre parágrafos','Revisão • unidade textual',`A introdução anuncia ${t.eixo1} e ${t.eixo2}, mas os dois desenvolvimentos tratam somente de ${t.eixo1}. Qual revisão é MAIS eficaz?`,[
+ `Acrescentar conectivos ao segundo parágrafo, mantendo o mesmo conteúdo.`,
+ `Substituir a tese por uma frase vaga que não assuma nenhum recorte.`,
+ `Remover a conclusão para não destacar a repetição.`,
+ `Reorganizar o segundo desenvolvimento para analisar ${t.eixo2}, articulando-o à tese.`
+ ],3,'A progressão precisa cumprir o plano argumentativo anunciado; conectivos não resolvem repetição de conteúdo.', '', 'Confira se o segundo desenvolvimento corresponde ao segundo eixo anunciado.')
+ ]);
+ return [thesis,development,repertoire,intervention,review];
 }
+
 let stage=0,score=0,selection=[],confirmed=false,completed=[],finished=false,mode="learn",attempts=0,results=[];
 const total=5;
 function shuffle(arr){for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr}
@@ -196,16 +242,19 @@ function setMode(m){mode=m;$('modeLearn').classList.toggle('active',m==='learn')
 $('modeLearn').addEventListener('click',()=>setMode('learn'));
 $('modeExam').addEventListener('click',()=>setMode('exam'));
 $('showHint').addEventListener('click',()=>{
- const hints=['Procure uma tese que antecipe dois eixos de desenvolvimento.','Comece pela ideia central, explique o mecanismo, mostre a consequência e feche o raciocínio.','A melhor alternativa explica uma analogia sem fazer generalizações.','Procure agente, ação, meio e finalidade; desconfie de medidas vagas ou que violem direitos.','Pergunte-se: conectivo substitui raciocínio? E agente + ação bastam?'];
- $('hint').textContent='💡 '+hints[stage];$('hint').classList.remove('hidden');
+ $('hint').textContent='💡 '+tasks[stage].hint;$('hint').classList.remove('hidden');
 });
 $('drawTheme').addEventListener('click',()=>{
  const pool=bancoTemas.filter(t=>!temaAtual||t.ano!==temaAtual.ano);
  temaAtual=pool[Math.floor(Math.random()*pool.length)];
  tasks=gerarTarefas(temaAtual);
- const seq=tasks[1];const indexed=seq.pieces.map((text,i)=>({text,i}));
- shuffle(indexed);seq.pieces=indexed.map(x=>x.text);
- seq.correct=seq.correct.map(originalIndex=>indexed.findIndex(x=>x.i===originalIndex));
+ tasks.forEach(task=>{
+  if(task.kind!=='sequence')return;
+  const indexed=task.pieces.map((text,i)=>({text,i}));
+  shuffle(indexed);
+  task.pieces=indexed.map(x=>x.text);
+  task.correct=task.correct.map(originalIndex=>indexed.findIndex(x=>x.i===originalIndex));
+ });
  $('themePicked').textContent='📚 ENEM '+temaAtual.ano+' — '+temaAtual.titulo;
  $('drawTheme').textContent='🔀 Sortear outro tema';
  $('startGame').classList.remove('hidden');
@@ -216,6 +265,7 @@ $('startGame').addEventListener('click',()=>{
  $('gameLayout').classList.remove('hidden');$('gameToolbar').classList.remove('hidden');
  reset();$('gameLayout').scrollIntoView({behavior:'smooth',block:'start'});
 });
+$('newChallenges').addEventListener('click',()=>{if(!temaAtual)return;tasks=gerarTarefas(temaAtual);tasks.forEach(task=>{if(task.kind!=='sequence')return;const indexed=task.pieces.map((text,i)=>({text,i}));shuffle(indexed);task.pieces=indexed.map(x=>x.text);task.correct=task.correct.map(old=>indexed.findIndex(x=>x.i===old));});reset();});
 $('check').addEventListener('click',check);$('next').addEventListener('click',next);$('reset').addEventListener('click',reset);
 })();
 </script></body></html>
