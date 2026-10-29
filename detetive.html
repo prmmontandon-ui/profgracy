@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Detetive da Redação | Prof. Gracy</title>
+<style>
+:root{--wine:#63243b;--wine2:#832e4c;--gold:#c59b54;--ink:#342c32;--muted:#70676b;--cream:#fbf7f1;--line:#e7d9d8;--green:#2d7554}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(140deg,#f8f0e9,#fffaf6 55%,#f7e9e7);font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink)}
+header{background:var(--wine);color:#fff;padding:18px max(20px,calc((100vw - 1060px)/2));display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap}header strong{font-size:1.15rem}header a{color:#fff4d6;text-decoration:none;font-size:.9rem}
+main{max-width:1060px;margin:auto;padding:28px 18px 60px}.eyebrow{font-size:.73rem;font-weight:800;letter-spacing:.12em;color:var(--wine2);text-transform:uppercase}.hero{display:grid;grid-template-columns:1.4fr .6fr;gap:20px;align-items:center;margin-bottom:20px}.hero h1{font-family:Georgia,serif;font-size:clamp(2rem,5vw,3.2rem);margin:7px 0;color:var(--wine)}.hero p{line-height:1.65;color:var(--muted);margin:0}.seal{font-size:4.5rem;text-align:center;background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:0 12px 35px #54203c0b;margin-bottom:18px}.hidden{display:none!important}.bar{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}.pill{background:#f5e8e7;color:var(--wine);border-radius:99px;padding:7px 12px;font-size:.83rem;font-weight:750}.score{font-size:1.15rem;font-weight:850;color:var(--wine)}.progress{height:9px;background:#eee4e0;border-radius:99px;overflow:hidden;margin:15px 0 0}.progress>div{height:100%;width:0;background:var(--gold);transition:width .25s}
+h2{font-family:Georgia,serif;color:var(--wine);font-size:1.55rem;margin:8px 0 10px}h3{margin:0 0 10px;font-size:1rem}.muted{color:var(--muted);line-height:1.6}.small{font-size:.87rem}
+button{font:inherit;cursor:pointer}button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}.primary,.secondary{border:0;border-radius:12px;padding:13px 18px;font-weight:800}.primary{background:var(--wine);color:white}.primary:hover{background:var(--wine2)}.secondary{background:#f6ede7;color:var(--wine);border:1px solid #e8d8d2}.primary:disabled,.secondary:disabled{opacity:.48;cursor:not-allowed}
+.grid{display:grid;grid-template-columns:1fr 310px;gap:18px}.paper{background:#fffdf9;border:1px solid #e9dfd1;border-radius:14px;padding:20px;line-height:1.85}.paper .paper-label{font-size:.75rem;letter-spacing:.08em;font-weight:800;color:#9c755b}.passage{border:1px solid transparent;display:block;width:100%;text-align:left;background:transparent;color:var(--ink);padding:12px 13px;border-radius:10px;line-height:1.75;margin:4px 0}.passage:hover:not(:disabled){background:#faf0e9;border-color:#e6c7ae}.passage.selected{background:#fff0d6;border-color:#bc8e42;box-shadow:inset 4px 0 var(--gold)}.passage.correct{background:#eaf5ef;border-color:#a1ceb5}.passage.wrong{background:#fcebea;border-color:#e6aba6}.passage:disabled{cursor:default}.reasons{display:grid;gap:9px;margin-top:12px}.reason{padding:12px 14px;text-align:left;background:#fff;border:1px solid var(--line);border-radius:12px;color:var(--ink);line-height:1.5}.reason:hover:not(:disabled){border-color:var(--gold)}.reason.selected{background:#fff0d6;border-color:#bc8e42}.reason.correct{background:#eaf5ef;border-color:#6cad88}.reason.wrong{background:#fcebea;border-color:#d38b83}.reason:disabled{cursor:default}.feedback{margin-top:14px;padding:14px;border-radius:12px;background:#f8f1e8;line-height:1.6;border-left:4px solid var(--gold)}.tip{background:#f7f0e8;border:1px solid #eadacb;padding:14px;border-radius:12px;line-height:1.6}.case-list{display:grid;gap:9px}.case-row{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding:8px 0;font-size:.9rem}.case-row:last-child{border:0}.good{color:var(--green);font-weight:800}.bad{color:#ad4b48;font-weight:800}.result{font-size:3.6rem;font-weight:900;color:var(--wine);line-height:1.2}.result-card{padding:12px 0;border-bottom:1px solid var(--line);line-height:1.6}.result-card:last-child{border:0}footer{text-align:center;color:var(--muted);font-size:.8rem;padding:14px}
+@media(max-width:760px){.hero{grid-template-columns:1fr}.seal{display:none}.grid{grid-template-columns:1fr}.panel{padding:18px}.paper{padding:12px}.passage{padding:11px 9px}header{padding:16px 18px}}
+</style></head>
+<body>
+<header><strong>✦ Prof. Gracy <span style="color:#e6c389">| Central de Jogos</span></strong><a href="jogos.html">← Voltar aos jogos</a></header>
+<main>
+<div class="hero"><div><div class="eyebrow">Novo jogo · investigação textual</div><h1>🔎 Detetive da Redação</h1><p>Nem todo erro aparece na gramática. Investigue cinco redações, encontre o trecho com falha argumentativa e identifique <strong>por que</strong> ele compromete o texto.</p></div><div class="seal" aria-hidden="true">🕵️‍♀️📜</div></div>
+<section class="panel" id="intro">
+ <div class="eyebrow">Seu primeiro caso</div><h2>Você consegue encontrar a falha?</h2>
+ <p class="muted">Em cada caso, há <strong>três trechos</strong>. Apenas um apresenta a falha investigada. Clique nele e depois escolha o diagnóstico. Você ganha até <strong>200 pontos por caso</strong>: 100 pela identificação e 100 pela explicação. São cinco casos, totalizando 1.000 pontos.</p>
+ <div class="tip">💡 Os trechos corretos também podem ser complexos. Leia o argumento, não procure simplesmente a frase mais curta ou mais longa.</div>
+ <p class="muted small">Esta é uma atividade autoral de treino. A pontuação não equivale à nota oficial do ENEM. Não há envio de dados nem ranking online nesta versão.</p>
+ <button class="primary" id="start">🔎 Abrir primeiro caso</button>
+</section>
+<section class="panel hidden" id="game">
+ <div class="bar"><span class="pill" id="counter">CASO 1 DE 5</span><span class="score" id="score">0 / 1000 pontos</span></div>
+ <div class="progress"><div id="progress"></div></div>
+ <div class="grid" style="margin-top:20px">
+ <div><div class="eyebrow" id="year">ENEM</div><h2 id="title"></h2><p class="muted" id="mission"></p>
+ <div class="paper"><div class="paper-label">📄 FRAGMENTOS DO TEXTO — CLIQUE NO TRECHO SUSPEITO</div><div id="passages"></div></div>
+ <div id="diagnosis" class="hidden"><h3 style="margin-top:22px">🧩 Qual é o diagnóstico?</h3><p class="muted small">Escolha a explicação que melhor descreve o problema encontrado.</p><div class="reasons" id="reasons"></div></div>
+ <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+ <div class="bar" style="margin-top:18px"><button class="secondary" id="confirm" disabled>Confirmar trecho</button><button class="primary hidden" id="next">Próximo caso →</button></div></div>
+ <aside><div class="tip"><strong>🕵️ Dica de investigação</strong><p class="muted small" style="margin-bottom:0">Pergunte: o argumento explica o que afirma? A conclusão decorre das premissas? O repertório foi realmente relacionado ao tema? A proposta é executável?</p></div>
+ <div class="panel" style="box-shadow:none;margin-top:14px;padding:16px"><h3>📁 Arquivo da investigação</h3><div id="history" class="case-list"><span class="muted small">Nenhum caso concluído.</span></div></div></aside>
+ </div>
+</section>
+<section class="panel hidden" id="end"><div class="eyebrow">Investigação encerrada</div><h2>Relatório do detetive</h2><div class="result" id="finalScore"></div><p class="muted" id="verdict"></p><div id="report"></div><div class="bar" style="margin-top:22px"><button class="primary" id="again">🔄 Investigar novos casos</button><a href="jogos.html" style="color:var(--wine)">Voltar à Central de Jogos</a></div></section>
+<footer>Prof. Gracy · Aprender a argumentar também é aprender a investigar.</footer>
+</main>
+<script>
+'use strict';
+const cases=[
+{year:'ENEM 2025',title:'Envelhecimento na sociedade brasileira',mission:'Investigue uma conclusão que não é sustentada pelo argumento.',
+pieces:[
+'Embora a expectativa de vida tenha aumentado, políticas de acessibilidade e participação social ainda precisam acompanhar as necessidades de diferentes grupos de idosos.',
+'A existência de programas de convivência em algumas cidades comprova que todas as pessoas idosas brasileiras já têm acesso adequado a espaços de participação.',
+'O preconceito etário pode dificultar a contratação de trabalhadores mais velhos, especialmente quando empregadores associam idade a incapacidade sem avaliar competências individuais.'
+],bad:1,reason:'Generalização indevida: exemplos localizados são usados para afirmar uma realidade universal.',reasons:['O trecho confunde a existência de iniciativas pontuais com acesso garantido a toda a população.','O trecho deixa de indicar o nome de uma lei, embora toda afirmação exija citação legal.','O trecho emprega um conectivo adversativo onde seria obrigatório um conclusivo.'],correctReason:0,explain:'A existência de programas em algumas cidades não permite concluir que todas as pessoas idosas tenham acesso adequado. A conclusão extrapola a evidência.'},
+{year:'ENEM 2024',title:'Valorização da herança africana',mission:'Encontre a referência citada sem articulação argumentativa.',
+pieces:[
+'O ensino de história e cultura afro-brasileira, previsto na Lei 10.639/2003, pode contribuir para reconhecer contribuições frequentemente marginalizadas no currículo escolar.',
+'A presença de manifestações culturais de origem africana no cotidiano brasileiro evidencia sua relevância, mas não elimina a necessidade de enfrentar estereótipos e desigualdades.',
+'A Constituição Federal de 1988 é um marco jurídico relevante. Ela foi promulgada em outubro e possui diversos dispositivos. Portanto, a valorização da herança africana está assegurada.'
+],bad:2,reason:'Repertório decorativo: a referência é mencionada, mas a ligação com a conclusão não é demonstrada.',reasons:['O trecho usa um repertório jurídico, e referências jurídicas nunca podem aparecer no desenvolvimento.','O trecho apresenta informações sobre a Constituição sem explicar como elas sustentam a valorização cultural afirmada.','O trecho deveria eliminar toda menção histórica para manter um tom exclusivamente opinativo.'],correctReason:1,explain:'Citar a Constituição e sua data não explica por que a herança africana estaria valorizada. Faltou conectar a referência ao argumento e evitar uma conclusão automática.'},
+{year:'ENEM 2023',title:'Invisibilidade do trabalho de cuidado',mission:'Localize a inversão de causa e consequência.',
+pieces:[
+'A associação histórica entre cuidado e papéis femininos contribui para distribuir de forma desigual tarefas domésticas, restringindo o tempo disponível para outras atividades.',
+'A sobrecarga de cuidado pode reduzir oportunidades de formação e trabalho remunerado, especialmente quando não há serviços públicos e divisão doméstica equilibrada.',
+'A diminuição das oportunidades profissionais das mulheres é a causa que, por si só, criou historicamente a associação do cuidado ao papel feminino.'
+],bad:2,reason:'Inversão causal e explicação única: um efeito é apresentado como origem exclusiva de um processo histórico.',reasons:['O trecho usa uma palavra abstrata, o que torna a frase automaticamente incoerente.','O trecho afirma que o trabalho de cuidado não existe fora do ambiente familiar.','O trecho trata a restrição de oportunidades como origem exclusiva de uma associação histórica, sem sustentar essa causalidade.'],correctReason:2,explain:'A relação pode ser complexa e circular. O trecho transforma uma consequência possível em causa única de um fenômeno histórico sem justificativa.'},
+{year:'ENEM 2022',title:'Povos e comunidades tradicionais',mission:'Identifique uma solução que não enfrenta a causa apresentada.',
+pieces:[
+'A proteção de territórios e o respeito à participação comunitária podem fortalecer a continuidade de modos de vida e de conhecimentos tradicionais.',
+'A invisibilidade de saberes tradicionais em espaços de decisão dificulta o reconhecimento de demandas específicas e reduz a efetividade de políticas públicas.',
+'Para enfrentar a falta de participação comunitária nas decisões públicas, basta promover uma campanha de divulgação turística, sem consultar as comunidades envolvidas.'
+],bad:2,reason:'Intervenção desconectada: a ação não enfrenta o problema e exclui os sujeitos afetados.',reasons:['A medida propõe publicidade turística sem garantir participação das comunidades nos processos decisórios.','A medida menciona turismo, e esse tema é proibido em qualquer proposta de intervenção.','A medida não apresenta uma estatística, o que invalida automaticamente toda conclusão.'],correctReason:0,explain:'Se o problema é a ausência de participação, uma campanha turística sem consulta não resolve a causa e ainda reproduz a exclusão.'},
+{year:'ENEM 2021',title:'Registro civil e cidadania',mission:'Descubra o salto lógico entre uma condição necessária e um resultado garantido.',
+pieces:[
+'O registro civil é fundamental para o exercício de diversos direitos, mas sua emissão não elimina, sozinha, barreiras econômicas e institucionais.',
+'Uma pessoa que obtém a certidão de nascimento passa imediatamente a ter acesso efetivo a todos os serviços públicos, independentemente de sua localização e de outras barreiras.',
+'Mutirões itinerantes de documentação podem reduzir obstáculos geográficos, sobretudo quando acompanhados de informação acessível sobre serviços gratuitos.'
+],bad:1,reason:'Conclusão absoluta: possuir documentação é importante, mas não garante automaticamente acesso efetivo a todos os serviços.',reasons:['O trecho menciona serviços públicos sem listar todos os órgãos existentes no país.','O trecho confunde um requisito relevante com a garantia de resultados que dependem de outros fatores.','O trecho emprega a expressão “certidão de nascimento”, que deveria ser substituída por “identidade”.'],correctReason:1,explain:'O documento viabiliza direitos, mas distância, renda e oferta de serviços também podem afetar o acesso real.'},
+{year:'ENEM 2020',title:'Estigma associado às doenças mentais',mission:'Investigue um argumento que confunde correlação e causalidade.',
+pieces:[
+'A circulação de estereótipos pode afastar pessoas da busca por apoio, sobretudo quando o medo de julgamento é reforçado em espaços de convivência.',
+'O aumento de conversas públicas sobre saúde mental ocorreu no mesmo período em que cresceram relatos de sofrimento psicológico; logo, falar sobre o assunto é a causa desse sofrimento.',
+'A informação qualificada e o acolhimento podem reduzir o preconceito, desde que sejam acompanhados de acesso a serviços adequados.'
+],bad:1,reason:'Falsa causalidade: a coincidência temporal não comprova que um fenômeno causou o outro.',reasons:['O trecho deveria citar uma personalidade famosa para que qualquer relação entre eventos fosse aceita.','O trecho usa dois fatos simultâneos como se a simultaneidade, por si só, provasse uma relação causal.','O trecho deveria excluir a referência ao tempo, pois toda análise temporal é inadequada.'],correctReason:1,explain:'Dois acontecimentos no mesmo período não provam que um causou o outro. Seria necessário apresentar evidências e explicar o mecanismo.'},
+{year:'ENEM 2019',title:'Acesso ao cinema no Brasil',mission:'Encontre uma tese que se contradiz dentro do próprio trecho.',
+pieces:[
+'A concentração de salas em grandes centros urbanos pode dificultar o acesso de moradores de municípios menores às exibições comerciais.',
+'A democratização cultural envolve condições de acesso, como distribuição territorial, custo e diversidade de programação.',
+'O acesso ao cinema já é igualmente garantido em todo o território brasileiro; por isso, é necessário combater a desigualdade territorial que impede esse acesso.'
+],bad:2,reason:'Contradição interna: o trecho afirma igualdade de acesso e, em seguida, desigualdade impeditiva.',reasons:['O trecho apresenta duas afirmações incompatíveis sem explicar uma distinção que permita conciliá-las.','O trecho menciona território brasileiro, expressão que não pode ser usada em uma tese.','O trecho inclui uma conclusão, mas conclusões só podem aparecer no último parágrafo.'],correctReason:0,explain:'Se o acesso já fosse igualmente garantido em todo o território, seria incoerente afirmar, sem qualificação, que a desigualdade territorial impede esse mesmo acesso.'},
+{year:'ENEM 2018',title:'Controle de dados na internet',mission:'Identifique uma generalização que não se sustenta.',
+pieces:[
+'A coleta e o tratamento de dados podem influenciar a personalização de conteúdos, o que exige transparência e capacidade de escolha dos usuários.',
+'Como algumas plataformas recomendam conteúdos com base em dados, todos os usuários recebem exatamente as mesmas informações e tomam decisões idênticas.',
+'A educação digital pode ajudar pessoas a reconhecer estratégias de persuasão e avaliar com mais autonomia as informações que recebem.'
+],bad:1,reason:'Generalização e conclusão incompatível: personalização não implica uniformidade de conteúdo ou decisão.',reasons:['O trecho apresenta um exemplo particular e conclui, sem sustentação, que todos recebem e decidem exatamente da mesma forma.','O trecho usa o termo “plataformas”, que é informal e inviabiliza a argumentação.','O trecho fala de dados sem mencionar um aplicativo específico, o que o torna obrigatoriamente inválido.'],correctReason:0,explain:'A personalização tende a diferenciar experiências. Não há base para concluir que todas as pessoas recebem conteúdos idênticos ou decidem da mesma maneira.'},
+{year:'ENEM 2017',title:'Formação educacional de surdos',mission:'Encontre uma proposta que confunde inclusão com mera presença.',
+pieces:[
+'A presença de estudantes surdos na escola não garante, por si só, acessibilidade comunicacional e condições adequadas de aprendizagem.',
+'A formação docente e a oferta de recursos acessíveis podem contribuir para que estudantes surdos participem de atividades escolares em igualdade de condições.',
+'Para garantir a inclusão, é suficiente matricular estudantes surdos em qualquer turma, dispensando avaliação das necessidades de acessibilidade e apoio pedagógico.'
+],bad:2,reason:'Solução insuficiente: matrícula não substitui recursos, acessibilidade e apoio educacional.',reasons:['O trecho não apresenta uma data, embora toda intervenção deva conter um ano específico.','O trecho usa o verbo “matricular”, que não pertence ao vocabulário educacional.','O trecho reduz a inclusão à matrícula e dispensa medidas necessárias à participação e aprendizagem.'],correctReason:2,explain:'Incluir envolve acesso, permanência, participação e aprendizagem. Apenas matricular não assegura essas condições.'},
+{year:'ENEM 2016',title:'Intolerância religiosa no Brasil',mission:'Descubra uma solução que viola o princípio que pretende defender.',
+pieces:[
+'O respeito à liberdade de crença exige proteção contra discriminação, inclusive para quem não segue uma religião.',
+'A educação para a convivência pode favorecer o reconhecimento da diversidade de crenças e o enfrentamento de estereótipos.',
+'Para acabar com a intolerância religiosa, o Estado deve obrigar todos os cidadãos a adotar a mesma crença, eliminando divergências.'
+],bad:2,reason:'Contradição ética e jurídica: a medida viola a liberdade de crença que deveria proteger.',reasons:['O trecho é inadequado porque propõe restringir a liberdade religiosa como suposta solução para a intolerância.','O trecho está errado somente porque não informa o nome de um órgão governamental.','O trecho é inválido porque usa uma frase conclusiva em vez de uma pergunta.'],correctReason:0,explain:'Impor uma crença contraria a liberdade religiosa e não representa uma intervenção compatível com os direitos humanos.'}
+];
+const $=id=>document.getElementById(id);
+const shuffle=arr=>{for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}return arr};
+let order=[],index=0,points=0,selectedPiece=null,selectedReason=null,phase='piece',log=[],view=null;
+function newGame(){
+ order=shuffle([...cases]).slice(0,5);index=0;points=0;log=[];
+ $('intro').classList.add('hidden');$('end').classList.add('hidden');$('game').classList.remove('hidden');render();
+}
+function render(){
+ const c=order[index];phase='piece';selectedPiece=null;selectedReason=null;
+ const passageOrder=shuffle(c.pieces.map((text,i)=>({text,original:i})));
+ const reasonOrder=shuffle(c.reasons.map((text,i)=>({text,original:i})));
+ view={passageOrder,reasonOrder};
+ $('counter').textContent=`CASO ${index+1} DE 5`;$('score').textContent=`${points} / 1000 pontos`;
+ $('progress').style.width=`${index*20}%`;$('year').textContent=c.year;$('title').textContent=c.title;$('mission').textContent=c.mission;
+ $('passages').replaceChildren();
+ passageOrder.forEach((item,i)=>{const b=document.createElement('button');b.className='passage';b.type='button';b.textContent=item.text;b.addEventListener('click',()=>{if(phase!=='piece')return;selectedPiece=i;document.querySelectorAll('.passage').forEach((el,j)=>el.classList.toggle('selected',j===i));$('confirm').disabled=false});$('passages').append(b)});
+ $('reasons').replaceChildren();
+ reasonOrder.forEach((item,i)=>{const b=document.createElement('button');b.type='button';b.className='reason';b.textContent=item.text;b.addEventListener('click',()=>{if(phase!=='reason')return;selectedReason=i;document.querySelectorAll('.reason').forEach((el,j)=>el.classList.toggle('selected',j===i));$('confirm').disabled=false});$('reasons').append(b)});
+ $('diagnosis').classList.add('hidden');$('feedback').classList.add('hidden');$('next').classList.add('hidden');$('confirm').classList.remove('hidden');$('confirm').textContent='Confirmar trecho';$('confirm').disabled=true;
+ $('history').replaceChildren();
+ if(!log.length)$('history').textContent='Nenhum caso concluído.';
+ log.forEach((item,i)=>{const div=document.createElement('div');div.className='case-row';const left=document.createElement('span');left.textContent=`Caso ${i+1} · ${item.year}`;const right=document.createElement('strong');right.textContent=`${item.earned}/200`;div.append(left,right);$('history').append(div)});
+}
+function confirm(){
+ const c=order[index];
+ if(phase==='piece'){
+  if(selectedPiece===null)return;
+  const ok=view.passageOrder[selectedPiece].original===c.bad;
+  if(ok)points+=100;
+  log.push({year:c.year,earned:ok?100:0,pieceOk:ok,reasonOk:false,title:c.title,explain:c.explain});
+  document.querySelectorAll('.passage').forEach((b,i)=>{b.disabled=true;b.classList.remove('selected');if(view.passageOrder[i].original===c.bad)b.classList.add('correct');else if(i===selectedPiece)b.classList.add('wrong')});
+  phase='reason';$('diagnosis').classList.remove('hidden');$('confirm').textContent='Confirmar diagnóstico';$('confirm').disabled=true;
+  $('feedback').classList.remove('hidden');$('feedback').textContent=ok?'✓ Você encontrou o trecho suspeito! Agora explique o erro.':'✕ O trecho destacado em verde contém a falha. Agora tente identificar o tipo de erro.';
+ }else if(phase==='reason'){
+  if(selectedReason===null)return;
+  const ok=view.reasonOrder[selectedReason].original===c.correctReason;
+  if(ok)points+=100;
+  log[log.length-1].reasonOk=ok;if(ok)log[log.length-1].earned+=100;
+  document.querySelectorAll('.reason').forEach((b,i)=>{b.disabled=true;b.classList.remove('selected');if(view.reasonOrder[i].original===c.correctReason)b.classList.add('correct');else if(i===selectedReason)b.classList.add('wrong')});
+  phase='done';$('score').textContent=`${points} / 1000 pontos`;
+  $('feedback').textContent=`${ok?'✓ Diagnóstico correto!':'✕ Diagnóstico incorreto.'} ${c.reason} ${c.explain}`;
+  $('confirm').classList.add('hidden');$('next').classList.remove('hidden');$('next').textContent=index===4?'Ver relatório final →':'Próximo caso →';
+ }
+}
+function next(){if(index<4){index++;render();window.scrollTo({top:0,behavior:'smooth'})}else finish()}
+function finish(){
+ $('game').classList.add('hidden');$('end').classList.remove('hidden');$('finalScore').textContent=`${points} / 1000`;
+ $('verdict').textContent=points===1000?'Investigação impecável! Você identificou e explicou todas as falhas.':points>=700?'Boa investigação! Revise os diagnósticos em que houve dúvida.':points>=400?'Você encontrou algumas pistas. Releia as justificativas para aprimorar sua análise.':'A investigação está começando. Use as explicações para reconhecer os tipos de falha.';
+ $('report').replaceChildren();
+ log.forEach((r,i)=>{const d=document.createElement('div');d.className='result-card';const h=document.createElement('strong');h.textContent=`Caso ${i+1} — ${r.title} · ${r.earned}/200`;const p=document.createElement('p');p.className='muted small';p.textContent=`Trecho: ${r.pieceOk?'acertou':'errou'} · Diagnóstico: ${r.reasonOk?'acertou':'errou'}. ${r.explain}`;d.append(h,p);$('report').append(d)});
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+$('start').addEventListener('click',newGame);$('again').addEventListener('click',newGame);$('confirm').addEventListener('click',confirm);$('next').addEventListener('click',next);
+</script></body></html>
