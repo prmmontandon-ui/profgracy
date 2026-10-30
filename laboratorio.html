@@ -96,7 +96,7 @@ function gerarTarefas(t){
  `A persistência de ${t.eixo1} e ${t.eixo2} ajuda a compreender os obstáculos relacionados a ${t.assunto}.`
  ],3,'A tese antecipa os dois eixos efetivamente desenvolvidos; as demais não sustentam o plano ou fazem afirmações vagas.',intro,'Compare o plano dos parágrafos com os fatores explicitamente anunciados na tese.')
  ]);
- const seqA=[`${cap(t.eixo1)} contribui para a permanência do problema.`,`Isso se manifesta quando ocorre ${t.mecanismo}.`,`Como consequência, intensifica-se ${t.consequencia}.`,`Logo, a superação desse entrave requer ações que enfrentem suas causas.`];
+ const seqA=[`${cap(t.eixo1)} dificulta avanços relacionados a ${t.assunto}.`,`Esse obstáculo se manifesta por meio de ${t.mecanismo}.`,`Como consequência desse mecanismo, intensifica-se ${t.consequencia}.`,`Portanto, enfrentar esse obstáculo exige medidas voltadas às suas causas.`];
  const seqB=[`Outro obstáculo é ${t.eixo2}.`,`Esse fator se torna relevante porque limita respostas efetivas ao problema.`,`Nesse cenário, ${t.consequencia} demonstra a gravidade da questão.`,`Assim, a análise exige medidas que ultrapassem soluções superficiais.`];
  const seqC=[`A discussão de ${t.assunto} demanda observar suas causas concretas.`,`Entre elas, destaca-se ${t.eixo1}.`,`O mecanismo de ${t.mecanismo} ajuda a explicar essa dificuldade.`,`O resultado é ${t.consequencia}, o que reforça a urgência de enfrentamento.`];
  const seq=pick([seqA,seqB,seqC]);
@@ -228,7 +228,7 @@ function check(){
   $('feedback').className='feedback';$('feedback').textContent='Resposta registrada. A correção e as explicações serão mostradas somente no resultado final.';
  }else{
   $('feedback').className='feedback'+(correct?'':' bad');
-  $('feedback').textContent=(correct?'✓ Boa análise! +'+earned+' pontos. ':'✕ Você chegou ao limite de tentativas. +0 pontos. ')+t.why;
+  $('feedback').textContent=(correct?'✓ Boa análise! +'+earned+' pontos. ':'✕ Você chegou ao limite de tentativas. +0 pontos. ')+t.why+(!correct&&t.kind==='sequence'?' Ordem esperada: '+t.correct.map(i=>t.pieces[i]).join(' → '):'');
  }
  $('check').classList.add('hidden');$('showHint').classList.add('hidden');$('next').classList.remove('hidden');$('next').textContent=stage===total-1?'Ver resultado →':'Próxima etapa →';
  renderAside();
@@ -246,7 +246,7 @@ function finish(){registrarJogo('jogo_concluido','Laboratório da Redação',{po
  $('answer').innerHTML='';$('feedback').classList.add('hidden');$('hint').classList.add('hidden');$('showHint').classList.add('hidden');$('check').classList.add('hidden');$('next').classList.add('hidden');
  const review=document.createElement('div');review.style.marginTop='20px';
  const heading=document.createElement('h3');heading.textContent='📋 Correção por etapa';review.append(heading);
- results.forEach(r=>{const d=document.createElement('div');d.className='review-item';const h=document.createElement('strong');h.textContent=(r.correct?'✓ ':'✕ ')+tasks[r.index].title+' — '+r.earned+' pontos';const p=document.createElement('p');p.textContent=tasks[r.index].why;d.append(h,p);review.append(d)});
+ results.forEach(r=>{const d=document.createElement('div');d.className='review-item';const h=document.createElement('strong');h.textContent=(r.correct?'✓ ':'✕ ')+tasks[r.index].title+' — '+r.earned+' pontos';const p=document.createElement('p');p.textContent=tasks[r.index].why+(!r.correct&&tasks[r.index].kind==='sequence'?' Ordem esperada: '+tasks[r.index].correct.map(i=>tasks[r.index].pieces[i]).join(' → '):'');d.append(h,p);review.append(d)});
  $('answer').append(review);renderAside();
  $('stageCount').textContent='5/5 concluídas';$('quality').textContent='🏆 Resultado: '+score+'/1000';
 }
